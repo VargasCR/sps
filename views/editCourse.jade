@@ -44,52 +44,78 @@ html(lang="en")
     br
     a(href=`/profile/admin/courses?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") BACK 
     div(style="display:flex;justify-content:center;aling-items:center;")
-      form.form_main(action=`/profile/admin/courses/edit`, method="POST")
+      form.form_main(action=`/profile/admin/courses/edit?ee11cbb19052e40b07aac0ca060c23ee=${id}`, method="POST", enctype="multipart/form-data")
         input(type="hidden", name="id" value=id)
         input(type="hidden", name="activo" value=`${curso.activo}`)
         input(type="hidden", name="cid" value=cid)
         input(type="hidden", name="inscritos" value=curso.inscritos)
         input(type="hidden", name="verificado" value=curso.verificado)
-        p.heading Open New Course
+        p.heading Edit Course
         if codigoError == 1
           div.alert.reject
             p COMPLETE TODOS LOS ESPACIOS
         if codigoError == 0
           div.alert.resolve
-            p CURSO REGISTRADO CORRECTAMENTE
+            p CURSO ACTUALIZADO CORRECTAMENTE
+
         // Campo para Nombre cursos
         div.inputContainer
-            label Curso:
-            select.inputField(name="curso")
-              each cursox in cursos
-                if cursox.id == curso.curso
-                  option(value=cursox.id selected) #{cursox.nombre}
-                else
-                  option(value=cursox.id) #{cursox.nombre}
-        div.inputContainer
-            label Titulo:
-            input.inputField(name="titulo" type="text" placeholder="Titulo" value=curso.titulo)
-        // Campo para Apellidos
-        div.inputContainer
-            label Instructor:
-            select.inputField(name="instructor")
-              each instructor in instructors
-                if instructor.id == curso.instructor
-                  option(value=instructor.id selected) #{instructor.nombre} #{instructor.apellidos}
-                else
-                  option(value=instructor.id) #{instructor.nombre} #{instructor.apellidos}
+          label Curso:
+          select.inputField(name="curso")
+            each cursox in cursos
+              if cursox.id == curso.curso
+                option(value=cursox.id selected) #{cursox.nombre}
+              else
+                option(value=cursox.id) #{cursox.nombre}
 
         div.inputContainer
-            label Fecha de Inicio:
-            input.inputField(name="inicio" type="date" value=curso.inicio)
+          label ¿Curso de Instructor?
+          select.inputField(name="isInstructor")
+            option(value="false" selected=curso.isInstructor == 'false') No
+            option(value="true" selected=curso.isInstructor == 'true') Sí
+
         div.inputContainer
-            label Fecha de Inicio:
-            input.inputField(name="final" type="date" value=curso.final)
-        // Campo para Sangre opcional
+          label ¿Curso Privado?
+          select.inputField(name="isPublic")
+            option(value="false" selected=curso.isPublic == 'false') No
+            option(value="true" selected=curso.isPublic == 'true') Sí
+
         div.inputContainer
-            label Ubicación:
-            input.inputField(value=curso.location name="location" type="text" placeholder="Ubicación")
-        // Botón de Envío
+          label Titulo:
+          input.inputField(name="titulo" type="text" placeholder="Titulo" value=curso.titulo)
+
+        div.inputContainer
+          label Imagen Actual:
+          if curso.file
+            img(src=`/uploads/${curso.file}`, alt="Imagen actual", style="width: 150px;")
+          else
+            p No hay imagen
+
+        div.inputContainer
+          label Cambiar Imagen:
+          input.inputField(type="file" name="file")
+
+        div.inputContainer
+          label Instructor:
+          select.inputField(name="instructor")
+            each instructor in instructors
+              if instructor.id == curso.instructor
+                option(value=instructor.id selected) #{instructor.nombre} #{instructor.apellidos}
+              else
+                option(value=instructor.id) #{instructor.nombre} #{instructor.apellidos}
+
+        div.inputContainer
+          label Fecha de Inicio:
+          input.inputField(name="inicio" type="date" value=curso.inicio)
+
+        div.inputContainer
+          label Fecha de Finalización:
+          input.inputField(name="final" type="date" value=curso.final)
+
+        div.inputContainer
+          label Ubicación:
+          input.inputField(name="location" type="text" placeholder="Ubicación" value=curso.location)
+
         button#button(type="submit") Guardar
 
     //- ====================== Footer Section started======================

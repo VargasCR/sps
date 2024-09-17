@@ -587,19 +587,7 @@ for (const matriculado of matriculados) {
     if (parseInt(infoCurso.curso.curso) === 15) {
       documentPDF = await carnetWFA(infoCurso);
     } else if (parseInt(infoCurso.curso.curso) === 7) {
-      try {
-        await fs.promises.writeFile('555.txt', 'consecutivoPagina', 'utf8');
-        console.log('Archivo guardado correctamente');
-      } catch (err) {
-        console.error('Error al escribir el archivo:', err);
-      }
       documentPDF = await carnetSWR(infoCurso);
-      try {
-        await fs.promises.writeFile('55.txt', 'consecutivoPagina', 'utf8');
-        console.log('Archivo guardado correctamente');
-      } catch (err) {
-        console.error('Error al escribir el archivo:', err);
-      }
     } else if (parseInt(infoCurso.curso.curso) > 12) {
       documentPDF = await carnet(infoCurso);
     } else {
@@ -949,7 +937,10 @@ router.get('/profile/student/courses/certificates', async function(req, res, nex
     if(element.finalizado == true) {
       const curso = cursos.filter(curso => curso.id ==element.courseID)[0];
       const evaluacion = evaluaciones.filter(evaluacion => evaluacion.courseID ==element.courseID)[0];
-      const courseName = findCourseName(curso.curso)
+
+      const courseName = findCourseName(curso.curso,evaluacion.points[0])
+console.log('evaluacion')
+console.log('evaluacion')
 console.log(evaluacion)
       const fechaVence = parseDate(evaluacion.vence);
 
@@ -1083,8 +1074,10 @@ router.post('/profile/student/unsubscribe', async function(req, res, next) {
 router.get('/', async function(req, res, next) {
   const cursosText = await findBD('cursos.json');
   const cursos = JSON.parse(cursosText);
-  const cursosActivos = cursos.filter(curso => curso.activo == 'true');
-
+  console.log(cursos[0].isPublic == 'true');
+  const cursosActivos = cursos.filter(curso => curso.activo == 'true' && curso.isPublic == 'true' 
+    || curso.activo == true && curso.isPublic == true);
+console.log(cursos)
   let headerCourses = findActiveCourses();
   for (const key in headerCourses) {
     if (Object.prototype.hasOwnProperty.call(headerCourses, key)) {
@@ -1095,6 +1088,8 @@ router.get('/', async function(req, res, next) {
       headerCourses[key] = element;
     }
   }
+  console.log('cursosActivos')
+  console.log(cursosActivos)
   //const courses = findActiveCourses();
   res.render('index', { 
     title: 'Express',
@@ -1321,83 +1316,97 @@ router.post('/profile/admin/users/delete', async function(req, res, next) {
   });
 });
 
-router.post('/profile/admin/courses/add', async function(req, res, next) {
-  const {curso,instructor,inicio,final,location,id,titulo} = req.body;
-  const cursoConsecutivoText = await findBD('cursoConsecutivo.txt');
-  let courseID = JSON.parse(cursoConsecutivoText);
-  courseID++;
-  const newCourse = {
-    id:courseID,
-    curso:curso,
-    instructor:instructor,
-    inicio:inicio,
-    final:final,
-    location:location,
-    titulo:titulo,
-    inscritos:0,
-    activo:true
-  }
-  const cursosText = await findBD('cursos.json');
-  const cursos = JSON.parse(cursosText);
-  cursos.unshift(newCourse);
-  
-  const certificadosText = await findBD('certificados.json');
-  let certificados = JSON.parse(certificadosText);
-  const certificadosConsecutivoText = await findBD('certificadoConsecutivo.txt');
-  let certificadoID = JSON.parse(certificadosConsecutivoText);
-  certificadoID++;
-  const newCertified = {
-    id:certificadoID,
-    courseID:courseID,
-    instructor:instructor,
-    estudiantes:[],
-    finalizado:false,
-    activo:true,
-    verificado:[]
-  }
-  certificados.unshift(newCertified);
-  await writeBD('certificadoConsecutivo.json',certificadoID);
-  await writeBD('certificados.json',certificados);
 
-  await writeBD('cursos.json',cursos);
-  await writeBD('cursoConsecutivo.txt',courseID);
-  const codigoError = 0;
-  const usersText = await findBD('users.json');
-  const users = JSON.parse(usersText);
-  let instructors = users.filter(user => user.tipo_cuenta != '2');
-  const courses = findActiveCourses();
-  let cursosArray = [];
-  for (const key in courses) {
-    if (courses.hasOwnProperty(key)) {
-      const curso = courses[key];
-      const cursoObj = {
-        id:key,
-        nombre:curso.name
+// Ruta para manejar la carga de archivos y agregar curso
+router.post('/profile/admin/courses/add', upload.single('file'), async function(req, res, next) {
+  try {
+    const { curso, instructor, inicio, final, location, id, titulo, isInstructor, isPublic } = req.body;
+    const file = req.file ? req.file.filename : null; // Obtén el nombre del archivo cargado
+    const cursoConsecutivoText = await findBD('cursoConsecutivo.txt');
+    let courseID = JSON.parse(cursoConsecutivoText);
+    courseID++;
+
+    const newCourse = {
+      id: courseID,
+      curso: curso,
+      instructor: instructor,
+      inicio: inicio,
+      final: final,
+      location: location,
+      titulo: titulo,
+      inscritos: 0,
+      activo: true,
+      isInstructor: isInstructor,
+      file: file, // Incluye el nombre del archivo aquí
+      isPublic: isPublic
+    };
+
+    const cursosText = await findBD('cursos.json');
+    const cursos = JSON.parse(cursosText);
+    cursos.unshift(newCourse);
+
+    const certificadosText = await findBD('certificados.json');
+    let certificados = JSON.parse(certificadosText);
+    const certificadosConsecutivoText = await findBD('certificadoConsecutivo.txt');
+    let certificadoID = JSON.parse(certificadosConsecutivoText);
+    certificadoID++;
+
+    const newCertified = {
+      id: certificadoID,
+      courseID: courseID,
+      instructor: instructor,
+      estudiantes: [],
+      finalizado: false,
+      activo: true,
+      verificado: []
+    };
+
+    certificados.unshift(newCertified);
+    await writeBD('certificadoConsecutivo.json', certificadoID);
+    await writeBD('certificados.json', certificados);
+    await writeBD('cursos.json', cursos);
+    await writeBD('cursoConsecutivo.txt', courseID);
+
+    const codigoError = 0;
+    const usersText = await findBD('users.json');
+    const users = JSON.parse(usersText);
+    let instructors = users.filter(user => user.tipo_cuenta != '2');
+    const courses = findActiveCourses();
+    let cursosArray = [];
+    for (const key in courses) {
+      if (courses.hasOwnProperty(key)) {
+        const curso = courses[key];
+        const cursoObj = {
+          id: key,
+          nombre: curso.name
+        };
+        cursosArray.push(cursoObj);
       }
-      cursosArray.push(cursoObj);
     }
+
+    let foto = '';
+    if (id) {
+      const usersText = await findBD('users.json');
+      const users = JSON.parse(usersText);
+      let user = users.find(user => user.id == id);
+      nombreCompleto = `${user.nombre} ${user.apellidos}`;
+      foto = user.foto === '' ? 'standard.png' : user.foto;
+    }
+
+    res.render('addCourse', {
+      title: 'Express',
+      id: id,
+      codigoError: codigoError,
+      instructors: instructors,
+      cursos: cursosArray,
+      foto: foto
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al procesar la carga de archivos o agregar el curso' });
   }
-  let foto = '';
-    if(id) {
-        const usersText = await findBD('users.json');
-        const users = JSON.parse(usersText);
-        let user = users.filter(user => user.id == id)[0];
-        nombreCompleto = `${user.nombre} ${user.apellidos}`;
-        if(user.foto == '') {
-          foto = 'standard.png';
-        } else {
-          foto = user.foto;
-        }
-    }
-  res.render('addCourse', { 
-    title: 'Express',
-    id:id,
-    codigoError:codigoError,
-    instructors:instructors,
-    cursos:cursosArray,
-    foto:foto
-  });
-})
+});
 
 
 router.post('/profile/admin/courses/delete', async function(req, res, next) {
@@ -1455,69 +1464,69 @@ router.post('/profile/admin/courses/delete', async function(req, res, next) {
   });
 })
 
-router.post('/profile/admin/courses/edit', async function(req, res, next) {
-  const {curso,instructor,inicio,final,location,id,cid,titulo,inscritos,activo,verificado} = req.body;
-  const newCourse = {
-    id:cid,
-    curso:curso,
-    instructor:instructor,
-    inicio:inicio,
-    final:final,
-    location:location,
-    titulo:titulo,
-    inscritos:inscritos,
-    activo:activo,
-    verificado:verificado
-  }
-  let newCourses = [];
-  const cursosText = await findBD('cursos.json');
-  const cursos = JSON.parse(cursosText);
-  cursos.forEach(element => {
-    if(element.id == cid) {
-      newCourses.push(newCourse);
-    } else {
-      newCourses.push(element);
+// Ruta para manejar la edición de un curso
+router.post('/profile/admin/courses/edit', upload.single('file'), async function(req, res, next) {
+  try {
+    const { curso, instructor, inicio, final, location, cid, titulo, inscritos, activo, verificado,isPublic,isInstructor} = req.body;
+    const file = req.file ? req.file.filename : null; // Captura el nombre del archivo si se ha subido uno nuevo
+    const id = req.query.ee11cbb19052e40b07aac0ca060c23ee;
+    // Crear el objeto del curso actualizado
+    const updatedCourse = {
+      id: cid,
+      curso,
+      instructor,
+      inicio,
+      final,
+      location,
+      titulo,
+      inscritos,
+      activo,
+      verificado,isPublic,isInstructor,
+      file: file ? file : ""// Solo actualizar el archivo si se ha subido uno nuevo
+    };
+console.log(updatedCourse)
+console.log(updatedCourse)
+console.log(updatedCourse)
+    // Leer y actualizar el archivo de cursos
+    const cursosText = await findBD('cursos.json');
+    const cursos = JSON.parse(cursosText);
+    const updatedCourses = cursos.map(element => element.id == cid ? updatedCourse : element);
+    await writeBD('cursos.json', updatedCourses);
+
+    // Obtener datos para renderizar la vista
+    const codigoError = 0;
+    const usersText = await findBD('users.json');
+    const users = JSON.parse(usersText);
+    const instructors = users.filter(user => user.tipo_cuenta != '2');
+
+    const courses = findActiveCourses(); // Suponiendo que esta función devuelve un objeto con los cursos activos
+    const cursosArray = Object.keys(courses).map(key => ({
+      id: key,
+      nombre: courses[key].name
+    }));
+
+    let foto = '';
+    console.log(cid)
+    if (id) {
+      const user = users.find(user => user.id == id);
+      //nombreCompleto = `${user.nombre} ${user.apellidos}`;
+      foto = user.foto || 'standard.png'; // Usa la foto del usuario o una por defecto
     }
-  });
-  await writeBD('cursos.json',newCourses);
-  const codigoError = 0;
-  const usersText = await findBD('users.json');
-  const users = JSON.parse(usersText);
-  let instructors = users.filter(user => user.tipo_cuenta != '2');
-  const courses = findActiveCourses();
-  let cursosArray = [];
-  for (const key in courses) {
-    if (courses.hasOwnProperty(key)) {
-      const curso = courses[key];
-      const cursoObj = {
-        id:key,
-        nombre:curso.name
-      }
-      cursosArray.push(cursoObj);
-    }
+
+    res.render('editCourse', { 
+      title: 'Express',
+      id,
+      codigoError,
+      instructors,
+      cursos: cursosArray,
+      curso: updatedCourse,
+      cid,
+      foto
+    });
+  } catch (error) {
+    next(error);
   }
-  let foto = '';
-  if(id) {
-      const usersText = await findBD('users.json');
-      const users = JSON.parse(usersText);
-      let user = users.filter(user => user.id == id)[0];
-      nombreCompleto = `${user.nombre} ${user.apellidos}`;
-      if(user.foto == '') {
-        foto = 'standard.png';
-      } else {
-        foto = user.foto;
-      }
-  }
-  res.render('editCourse', { 
-    title: 'Express',
-    id:id,
-    codigoError:codigoError,
-    instructors:instructors,
-    cursos:cursosArray,
-    curso:newCourse,
-    cid:cid,foto:foto
-  });
-})
+});
 
 router.post('/profile/admin/courses/students', async function(req, res, next) {
   const { id,cid } = req.body;

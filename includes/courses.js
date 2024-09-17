@@ -1,7 +1,8 @@
-const requerimentos = {
-    7:['Primeros auxilios'],
-    12:['Primeros auxilios', 'Swfit Water Rescue Update.'],
-    14:['First Aid', 'Swfit Water Rescue Update.','ACA RIVER GUIDE INTERNATIONAL'],
+var requerimentos = {
+    
+    7:['First Aid'],
+    14:['First Aid','RG', 'SWR Update'],
+    1:['First Aid', 'SWR Update'],
 }
 
 
@@ -2536,6 +2537,13 @@ const crearHtmlCarnet = () => {
 const findEvaluation = (id) => {
     return evaluations[id];
 };
+const findRequerimentos = (id) => {
+    if(id == 7 || id == 14) {
+        return requerimentos[id];
+    } else {
+        return requerimentos[1];
+    }
+};
 const findFlag = (codigo) => {
     return paises.filter[pais => pais.codigo == codigo][0];
 };
@@ -2581,5 +2589,5 @@ const findTourFromID = (id) => {
 
   
 module.exports={
-    findTourFromID,findCourseFromID,findActiveCourses,findEvaluation,findFlag,findAllFlag,findCourseName,findCourseMaterial
+    findRequerimentos,findTourFromID,findCourseFromID,findActiveCourses,findEvaluation,findFlag,findAllFlag,findCourseName,findCourseMaterial
 }

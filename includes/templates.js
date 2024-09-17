@@ -1,7 +1,7 @@
 const pdf = require('html-pdf-node');
 const path = require('path');
 const fs = require('fs');
-const {findActiveCourses,findEvaluation,findFlag,findAllFlag,findCourseName} = require('../includes/courses');
+const {findRequerimentos,findActiveCourses,findEvaluation,findFlag,findAllFlag,findCourseName} = require('../includes/courses');
 const bwipjs = require('bwip-js');
 const sharp = require('sharp');
 const {writeBD,findBD} = require('./database');
@@ -12,6 +12,7 @@ function base64Encode(file) {
 const carnet = (document) => {
   let evaluacion = document.evaluaciones.filter(eva => eva.userID == document.matriculados.id)[0]
   const courseName = findCourseName(document.curso.curso,evaluacion.points[0])
+  const requemientos = findRequerimentos(document.curso.curso); 
   let imagePathIco = '';
   if(document.curso.curso > 12) {
     imagePathIco = path.join(__dirname, '/certify/fecoraftlogo.png');
@@ -190,6 +191,19 @@ const carnet = (document) => {
       padding: 0px;
       border-radius: 5px;
     }
+      .text-overlay_valid {
+      position: absolute;
+      bottom: 7px;
+      left: 17px;
+      background-color: transparent;
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: left;
+      padding: 0px;
+      width: 260px;
+      border-radius: 5px;
+    }
     .text-overlay_dni {
       position: absolute;
       bottom: 40px;
@@ -219,6 +233,7 @@ const carnet = (document) => {
     <div class="text-overlay_date">EXP: ${document.curso.final}</div>
     <img src="data:image/png;base64,${base64ImageProfile}" alt="" class="img-profile-overlay">
     <div class="text-overlay_cname">${courseName}</div>
+    <div class="text-overlay_valid">Valid Only with: ${requemientos}</div>
     <div class="text-overlay_level">LEVEL ${level}</div>`
     if(document.matriculados.aca_codigo != '') {
       pdfContent += `<div class="text-overlay_acaNum">SPS ID: ${document.matriculados.id}</div>`
@@ -232,7 +247,6 @@ const carnet = (document) => {
     </div>
     <br>
     <div class="container">
-    
     <img src="data:image/png;base64,${base64ImageBarCode}" alt="" class="img-barcode">
     <img src="data:image/png;base64,${base64Image2}" alt="" class="image">
   </div>
@@ -244,96 +258,24 @@ const carnet = (document) => {
 }
 
 const carnetACA = async (document) => {
-  try {
-    await fs.promises.writeFile('999.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
-
   //await writeBD('consecutivoPagina.json',consecutivoPagina);
 
 
-  let evaluacion = document.evaluaciones.filter(eva => eva.userID == document.matriculados.id)[0]
-  try {
-    await fs.promises.writeFile('100imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
-  const courseName = findCourseName(document.curso.curso,evaluacion.points[0])
-  try {
-    await fs.promises.writeFile('1000imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
-	
+  let evaluacion = document.evaluaciones.filter(eva => eva.userID == document.matriculados.id)[0];
+  const courseName = findCourseName(document.curso.curso,evaluacion.points[0]);
+	const requemientos = findRequerimentos(document.curso.curso);
   const imagePath = path.join(__dirname, '/certify/carnet1swr.png');
   const imagePath2 = path.join(__dirname, '/certify/carnet2swr.png');
   const imagePathFlag = path.join(__dirname, `/flags/${document.matriculados.nacionalidad.toLowerCase()}.png`);
   const imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
-if (fs.existsSync(imagePathFlag)) {
-    console.log("El archivo existe.");
-    try {
-      await fs.promises.writeFile('imagePathFlag.txt', 'TREE', 'utf8');
-      console.log('Archivo guardado correctamente');
-    } catch (err) {
-      console.error('Error al escribir el archivo:', err);
-    }
-  } else {
-    console.log("El archivo no existe.");
-    try {
-      await fs.promises.writeFile('imagePathFlag.txt', 'FALSE', 'utf8');
-      console.log('Archivo guardado correctamente');
-    } catch (err) {
-      console.error('Error al escribir el archivo:', err);
-    }
-  }
-try {
-    await fs.promises.writeFile('01imagePath.txt', imagePathFlag, 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
-  const base64Image = base64Encode(imagePath);
-try {
-    await fs.promises.writeFile('010imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }  
-const base64Image2 = base64Encode(imagePath2);
-try {
-    await fs.promises.writeFile('0010imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
-  const base64ImageFlag = base64Encode(imagePathFlag);
-try {
-    await fs.promises.writeFile('00110imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }  
-const base64ImageProfile = base64Encode(imagePathProfile);
+  const base64Image = base64Encode(imagePath);  
+  const base64Image2 = base64Encode(imagePath2);
+  const base64ImageFlag = base64Encode(imagePathFlag);  
+  const base64ImageProfile = base64Encode(imagePathProfile);
   let level = 1;
-try {
-    await fs.promises.writeFile('11imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
   const url = `https://sarapiquipaddlesports.com/student-certified?id=${document.matriculados.id}&course=${document.curso.id}`;
   //console.log(document)
   const barcodeurl = path.join(__dirname, `/certify/barcode.png`);
-  try {
-    await fs.promises.writeFile('12imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
   bwipjs.toBuffer({
     bcid: 'code128',
     text: url,              
@@ -357,23 +299,11 @@ try {
 });
 const imageBarCode = path.join(__dirname, '/certify/barcode.png');
 const base64ImageBarCode = base64Encode(imageBarCode);
-try {
-  await fs.promises.writeFile('11imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-  console.log('Archivo guardado correctamente');
-} catch (err) {
-  console.error('Error al escribir el archivo:', err);
-}
   document.evaluaciones.forEach(element => {
     if(document.matriculados.id == element.userID) {
       level = element.points[0];
     }
   });
-  try {
-    await fs.promises.writeFile('12imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
   let pdfContent = `
   <!DOCTYPE html>
 <html>
@@ -392,6 +322,19 @@ try {
     }
     .image {
       width: 100%;
+    }
+      .text-overlay_valid {
+      position: absolute;
+      top: 13px;
+      left: 17px;
+      background-color: transparent;
+      color: rgb(0, 0, 0);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: left;
+      padding: 0px;
+      width: 260px;
+      border-radius: 5px;
     }
     .text-overlay {
       position: absolute;
@@ -513,6 +456,7 @@ try {
   </div>
   <br>
   <div class="container">
+  <div class="text-overlay_valid">Valid Only with: ${requemientos}</div>
   <img src="data:image/png;base64,${base64ImageBarCode}" alt="" class="img-barcode">
     <img src="data:image/png;base64,${base64Image2}" alt="" class="image">
   </div>
@@ -525,31 +469,13 @@ try {
 
 
 const carnetSWR = async (document) => {
-  try {
-    await fs.promises.writeFile('999.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
-
-  //await writeBD('consecutivoPagina.json',consecutivoPagina);
-
-
+  //await writeBD('consecutivoPagina.json',consecutivoPagina
   let evaluacion = document.evaluaciones.filter(eva => eva.userID == document.matriculados.id)[0]
-  try {
-    await fs.promises.writeFile('100imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
+  let courseName = findCourseName(document.curso.curso,evaluacion.points[0])
+  const requemientos = findRequerimentos(document.curso.curso);
+	if(document.curso.isInstructor == 'true' || document.curso.isInstructor == true) {
+    courseName+= ' Instructor'
   }
-  const courseName = findCourseName(document.curso.curso,evaluacion.points[0])
-  try {
-    await fs.promises.writeFile('1000imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
-	
   const imagePath = path.join(__dirname, '/certify/carnet1swr.png');
   const imagePath2 = path.join(__dirname, '/certify/carnet2swr.png');
   const imagePathFlag = path.join(__dirname, `/flags/${document.matriculados.nacionalidad.toLowerCase()}.png`);
@@ -571,20 +497,9 @@ if (fs.existsSync(imagePathFlag)) {
       console.error('Error al escribir el archivo:', err);
     }
   }
-try {
-    await fs.promises.writeFile('01imagePath.txt', imagePathFlag, 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
   const base64Image = base64Encode(imagePath);
-try {
-    await fs.promises.writeFile('010imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }  
-const base64Image2 = base64Encode(imagePath2);
+ 
+  const base64Image2 = base64Encode(imagePath2);
 try {
     await fs.promises.writeFile('0010imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
     console.log('Archivo guardado correctamente');
@@ -713,12 +628,26 @@ try {
       width: 200px;
       border-radius: 5px;
     }
+    .text-overlay_valid {
+      position: absolute;
+      top: 13px;
+      left: 17px;
+      background-color: transparent;
+      color: rgb(0, 0, 0);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: left;
+      padding: 0px;
+      width: 260px;
+      border-radius: 5px;
+    }
     .img-flag-overlay {
       position: absolute;
-      bottom: 39px;
-      left: 13px;
+      bottom: 55px;
+      right: 13px;
       padding: 0px;
       width: 28px;
+      
     }
     .img-profile-overlay {
       position: absolute;
@@ -730,34 +659,34 @@ try {
     }
     .text-overlay_date {
       position: absolute;
-      bottom: 18.5px;
+      bottom: 10px;
       right: 13px;
       color: rgb(0, 0, 0);
       font-size: 13px;
       font-weight: 700;
-      text-align: center;
+      text-align: right;
       padding: 0px;
       border-radius: 5px;
     }
     .text-overlay_acaNum {
       position: absolute;
-      bottom: 38px;
-      right: 30px;
+      bottom: 23px;
+      right: 13px;
       color: rgb(0, 0, 0);
       font-size: 10px;
       font-weight: 700;
-      text-align: center;
+      text-align: right;
       padding: 0px;
       border-radius: 5px;
       }
       .text-overlay_dni {
         position: absolute;
-        bottom: 23px;
-        left: 13px;
+        bottom: 33px;
+        right: 13px;
         color: rgb(0, 0, 0);
         font-size: 9px;
         font-weight: 700;
-        text-align: center;
+        text-align: right;
         padding: 0px;
         border-radius: 5px; 
       }
@@ -789,10 +718,12 @@ try {
     pdfContent += `
     <img src="data:image/png;base64,${base64ImageProfile}" alt="" class="img-profile-overlay">
     <div class="text-overlay_dni">ID Number: ${document.matriculados.cedula}</div>
+    
     <img src="data:image/png;base64,${base64ImageFlag}" alt="" class="img-flag-overlay">
   </div>
   <br>
   <div class="container">
+  <div class="text-overlay_valid">Valid Only with: ${requemientos}</div>
   <img src="data:image/png;base64,${base64ImageBarCode}" alt="" class="img-barcode">
     <img src="data:image/png;base64,${base64Image2}" alt="" class="image">
   </div>
@@ -804,8 +735,12 @@ try {
 }
 
 const carnetWFA = (document) => {
-  //console.log('eeeeeeeeeeeee')
-  const courseName = findCourseName(document.curso.curso)
+  console.log(document.curso)
+  let courseName = findCourseName(document.curso.curso)
+  if(document.curso.isInstructor == 'true' || document.curso.isInstructor == true) {
+    courseName+= ' Instructor'
+  }
+  const requemientos = findRequerimentos(document.curso.curso);
   let imagePathIco = '';
   if(document.curso.curso > 12) {
     imagePathIco = path.join(__dirname, '/certify/fecoraftlogo.png');
@@ -959,6 +894,19 @@ const base64ImageProfile = base64Encode(imagePathProfile);
         padding: 0px;
         border-radius: 5px;
       }
+        .text-overlay_valid {
+      position: absolute;
+      top: 13px;
+      left: 17px;
+      background-color: transparent;
+      color: rgb(0, 0, 0);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: left;
+      padding: 0px;
+      width: 260px;
+      border-radius: 5px;
+    }
       </style>
 </head>
 <body>
@@ -973,6 +921,7 @@ const base64ImageProfile = base64Encode(imagePathProfile);
     
     </div>
     <br>
+    <div class="text-overlay_valid">Valid Only with: ${requemientos}</div>
     <div class="container">
     
     <img src="data:image/png;base64,${base64Image2}" alt="" class="image">
@@ -3119,7 +3068,10 @@ const evaluacionACA = (document) => {
   let level = 1;
   let points = [];
 
-  const courseName = findCourseName(document.curso.curso)
+  let courseName = findCourseName(document.curso.curso)
+  if(document.curso.isInstructor == 'true' || document.curso.isInstructor == true) {
+    courseName+= ' Instructor'
+  }
   document.evaluaciones.forEach(element => {
     if(document.matriculados.id == element.userID) {
       level = element.points[0];
@@ -3803,7 +3755,10 @@ thead th {
 const evaluacionSK = (document) => {
   ////console.log(document);
   
-  const courseName = findCourseName(document.curso.curso);
+  let courseName = findCourseName(document.curso.curso)
+  if(document.curso.isInstructor == 'true' || document.curso.isInstructor == true) {
+    courseName+= ' Instructor'
+  };
   const imagePath = path.join(__dirname, '/certify/fecoraft.png');
   const base64Image = base64Encode(imagePath);
   const imagePathACA = path.join(__dirname, '/certify/acalogo2.png');

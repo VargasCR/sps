@@ -46,7 +46,7 @@ html(lang="en")
     
     a(href=`/profile/admin/courses?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") BACK 
     div(style="display:flex;justify-content:center;aling-items:center;")
-      form.form_main(action=`/profile/admin/courses/add`, method="POST")
+      form.form_main(enctype="multipart/form-data" action=`/profile/admin/courses/add`, method="POST")
         input(type="hidden", name="id" value=id)
         p.heading Open New Course
         if codigoError == 1
@@ -62,8 +62,21 @@ html(lang="en")
               each curso in cursos
                 option(value=curso.id) #{curso.nombre}
         div.inputContainer
+          label ¿Curso de Instructor?
+          select.inputField(name="isInstructor")
+            option(value="false") No
+            option(value="true") Sí
+        div.inputContainer
+          label ¿Curso Privado?
+          select.inputField(name="isPublic")
+            option(value="false") No
+            option(value="true") Sí
+        div.inputContainer
             label Titulo:
             input.inputField(name="titulo" type="text" placeholder="Titulo")
+        div.inputContainer
+            label Imagen:
+            input.inputField(type="file" name="file")
         // Campo para Apellidos
         div.inputContainer
             label Instructor:
