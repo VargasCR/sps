@@ -1,0 +1,325 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    title Sarapiqui Paddle Sports
+    link(rel="stylesheet", href="/assets/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/assets/css/all.min.css")
+    link(rel="stylesheet", href="/assets/css/owl.carousel.min.css")
+    link(rel="stylesheet", href="/assets/css/owl.carousel.css")
+    link(rel="stylesheet", href="/assets/css/style.css")
+    link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet")
+  body
+    //- ======================header started======================
+    header(style="background: rgba(0, 33, 71, 0.9) !important;")
+      .my-nav(style="background: rgba(0, 33, 71, 0.9) !important;")
+        .container
+          .row
+            .nav-items
+              .menu-toggle
+              .logo
+                img(src="/images/logo.png" style="width:5rem;")
+              .menu-items
+                .menu
+                  ul
+                    li
+                      a(href=`/profile/admin/courses?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Cursos
+                    li
+                      a(href=`/profile/admin/users?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Usuarios
+                    li
+                      a(href=`/login`) - Salir
+                    
+                    li.img-profile(style="")
+                      form(action="/upload", method="post", enctype="multipart/form-data" style="width:60px;")
+                        input(type="hidden", name="id", value=id)
+                        label.custom-file-upload(for="file-upload")
+                            input#file-upload(type="file" name="file" onchange="handleFileChange(this)")
+                            img(src=`/uploads/${foto}`, alt="Avatar" style="")
+                        button#guardar-btn(type="submit", style="display: none;width: 100%;") Guardar
+    br
+    br
+    br
+    br
+    br
+    
+    
+    a(href=`/profile/admin?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") BACK 
+    if instructorsVerified.length == 0
+      if instructorsNoVerified.length == 0
+        if studentsVerified.length == 0
+          if studentsNoVerified.length == 0
+            h1(style="text-align:center;color:black;") Vacio
+    if instructorsVerified.length > 0
+      div(class="")
+        .main-content(style="width:100%;")
+          br
+          h3 Instructores Verificados
+          br
+          table
+            thead
+              tr
+                th Nombre
+                th Tipo Cedula
+                th Cedula
+                th Nacionalidad
+                th Aca Codigo
+                th Email
+                th Telefono
+                th Sangre
+                th Acciones
+                  th.tableInfoField
+            tbody
+                each item in instructorsVerified
+                  tr
+                    td
+                      p.tableInfoField Nombre: 
+                      = item.nombre
+                    td
+                      p.tableInfoField Tipo Cedula: 
+                      = item.tipo_cedula
+                    td
+                      p.tableInfoField Cedula: 
+                      = item.cedula
+                    td
+                      p.tableInfoField Nacionalidad: 
+                      = item.nacionalidad
+                    td
+                      p.tableInfoField Aca Codigo: 
+                      = item.aca_codigo
+                    td
+                      p.tableInfoField Email: 
+                      = item.email
+                    td
+                      p.tableInfoField Telefono: 
+                      = item.telefono
+                    td
+                      p.tableInfoField Sangre: 
+                      = item.sangre
+                    td.actions
+                      if item.verified == '0'
+                        form(action="/profile/admin/users/verified", method="post")
+                          input(type="hidden", name="id" value=id)
+                          input(type="hidden", name="uid" value=item.id)
+                          button(type="submit") Verificar
+                      form(action="/profile/admin/users/delete", method="post")
+                        input(type="hidden", name="id" value=id)
+                        input(type="hidden", name="uid" value=item.id)
+                        button(type="submit") Borrar
+              
+    if instructorsNoVerified.length > 0
+      div(class="")
+        .main-content(style="width:100%;")
+          br
+          h3 Instructores No Verificados
+          br
+          table
+            thead
+              tr
+                th Nombre
+                th Tipo Cedula
+                th Cedula
+                th Nacionalidad
+                th Aca Codigo
+                th Email
+                th Telefono
+                th Sangre
+                th Acciones
+                  th.tableInfoField
+            tbody
+                each item in instructorsNoVerified
+                  tr
+                    td
+                      p.tableInfoField Nombre: 
+                      = item.nombre
+                    td
+                      p.tableInfoField Tipo Cedula: 
+                      = item.tipo_cedula
+                    td
+                      p.tableInfoField Cedula: 
+                      = item.cedula
+                    td
+                      p.tableInfoField Nacionalidad: 
+                      = item.nacionalidad
+                    td
+                      p.tableInfoField Aca Codigo: 
+                      = item.aca_codigo
+                    td
+                      p.tableInfoField Email: 
+                      = item.email
+                    td
+                      p.tableInfoField Telefono: 
+                      = item.telefono
+                    td
+                      p.tableInfoField Sangre: 
+                      = item.sangre
+                    td.actions
+                      if item.verified == '0'
+                        form(action="/profile/admin/users/verified", method="post")
+                          input(type="hidden", name="id" value=id)
+                          input(type="hidden", name="uid" value=item.id)
+                          button(type="submit") Verificar
+                      form(action="/profile/admin/users/delete", method="post")
+                        input(type="hidden", name="id" value=id)
+                        input(type="hidden", name="uid" value=item.id)
+                        button(type="submit") Borrar
+    
+    if studentsVerified.length > 0
+      div(class="")
+        .main-content(style="width:100%;")
+          br
+          h3 Estudiantes Verificados
+          br
+          table
+            thead
+              tr
+                th Nombre
+                th Tipo Cedula
+                th Cedula
+                th Nacionalidad
+                th Aca Codigo
+                th Email
+                th Telefono
+                th Sangre
+                th Acciones
+                  th.tableInfoField
+            tbody
+                each item in studentsVerified
+                  tr
+                    td
+                      p.tableInfoField Nombre: 
+                      = item.nombre
+                    td
+                      p.tableInfoField Tipo Cedula: 
+                      = item.tipo_cedula
+                    td
+                      p.tableInfoField Cedula: 
+                      = item.cedula
+                    td
+                      p.tableInfoField Nacionalidad: 
+                      = item.nacionalidad
+                    td
+                      p.tableInfoField Aca Codigo: 
+                      = item.aca_codigo
+                    td
+                      p.tableInfoField Email: 
+                      = item.email
+                    td
+                      p.tableInfoField Telefono: 
+                      = item.telefono
+                    td
+                      p.tableInfoField Sangre: 
+                      = item.sangre
+                    td.actions
+                      if item.verified == '0'
+                        form(action="/profile/admin/users/verified", method="post")
+                          input(type="hidden", name="id" value=id)
+                          input(type="hidden", name="uid" value=item.id)
+                          button(type="submit") Verificar
+                      form(action="/profile/admin/users/delete", method="post")
+                        input(type="hidden", name="id" value=id)
+                        input(type="hidden", name="uid" value=item.id)
+                        button(type="submit") Borrar
+
+
+    if studentsNoVerified.length > 0
+      div(class="")
+        .main-content(style="width:100%;")
+          br
+          h3 Estudiantes No Verificados
+          br
+          table
+            thead
+              tr
+                th Nombre
+                th Tipo Cedula
+                th Cedula
+                th Nacionalidad
+                th Aca Codigo
+                th Email
+                th Telefono
+                th Sangre
+                th Acciones
+                  th.tableInfoField
+            tbody
+                each item in studentsNoVerified
+                  tr
+                    td
+                      p.tableInfoField Nombre: 
+                      = item.nombre
+                    td
+                      p.tableInfoField Tipo Cedula: 
+                      = item.tipo_cedula
+                    td
+                      p.tableInfoField Cedula: 
+                      = item.cedula
+                    td
+                      p.tableInfoField Nacionalidad: 
+                      = item.nacionalidad
+                    td
+                      p.tableInfoField Aca Codigo: 
+                      = item.aca_codigo
+                    td
+                      p.tableInfoField Email: 
+                      = item.email
+                    td
+                      p.tableInfoField Telefono: 
+                      = item.telefono
+                    td
+                      p.tableInfoField Sangre: 
+                      = item.sangre
+                    td.actions
+                      if item.verified == '0'
+                        form(action="/profile/admin/users/verified", method="post")
+                          input(type="hidden", name="id" value=id)
+                          input(type="hidden", name="uid" value=item.id)
+                          button(type="submit") Verificar
+                      form(action="/profile/admin/users/delete", method="post")
+                        input(type="hidden", name="id" value=id)
+                        input(type="hidden", name="uid" value=item.id)
+                        button(type="submit") Borrar
+
+
+    //- ====================== Footer Section started======================
+    footer
+      .container
+        .row
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 SARAPIQUI PADDLE SPORT
+              p Come discover the best water adventures in Costa Rica with Sarapiquí Paddle Sports.
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 Quick Links
+              ol
+                li(style="text-align:center;margin-top:1rem;")
+                  i.fa-solid.fa-angle-right
+                    a(href=`/profile/admin/courses?ee11cbb19052e40b07aac0ca060c23ee=${id}` style="color:white;font-family:Font Awesome 6 Free;text-transform:none;font-size: 1rem;")  Cursos
+                li(style="text-align:center;margin-top:1rem;")
+                  i.fa-solid.fa-angle-right
+                    a(href=`/profile/admin/users?ee11cbb19052e40b07aac0ca060c23ee=${id}` style="color:white;font-family:Font Awesome 6 Free;text-transform:none;font-size: 1rem;")  Usuarios
+                li(style="text-align:center;margin-top:1rem;")
+                  i.fa-solid.fa-angle-right
+                    a(href=`/login` style="color:white;font-family:Font Awesome 6 Free;text-transform:none;font-size: 1rem;")  Salir
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 Contact Us
+              form#emailForm
+                .form-group
+                  input(type="email", name="email", placeholder="Your Email", required)
+                .form-group
+                  textarea(name="text", placeholder="Message")
+                .form-group  
+                  button(type="submit") Submit
+          .col-12
+            .copy-right
+              p © 2024 Sarapiqui Paddle Sports
+
+  script(src="/assets/js/jquery-3.2.1.min.js")
+  script(src="/assets/js/popper.min.js")
+  script(src="/assets/js/bootstrap.min.js")
+  script(src="/assets/js/owl.carousel.min.js")
+  script(src="/assets/js/owl.carousel.js")
+  script(src="/assets/js/script.js")
+  script(src="/javascripts/main.js")
+  script(src="/javascripts/alert.js")

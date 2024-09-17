@@ -1,0 +1,149 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    meta(http-equiv="x-ua-compatible" content="ie=edge")
+    title Material Design for Bootstrap
+    // Font Awesome
+    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css")
+    // Google Fonts Roboto
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap")
+    // MDB
+    link(rel="stylesheet" href="/coming/css/mdb.min.css")
+
+  body
+    // Main Navigation
+    header
+      // Intro settings
+      style
+        | #intro {
+        |   height: 100vh;
+        |   margin-top: 0px;
+        | }
+        | @media (max-width: 991px) {
+        |   #intro {
+        |     margin-top: 0px;
+        |   }
+        | }
+      
+      // Navbar
+      //nav.navbar.navbar-expand-lg.navbar-light.bg-white.fixed-top
+        .container-fluid
+          // Navbar brand
+          a.navbar-brand(target="_blank" href="https://mdbootstrap.com/docs/standard/")
+            img(src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="16" alt="" loading="lazy" style="margin-top: -3px;")
+          button.navbar-toggler(type="button" data-mdb-collapse-init data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation")
+            i.fas.fa-bars
+          .collapse.navbar-collapse(id="navbarExample01")
+            ul.navbar-nav.me-auto.mb-2.mb-lg-0
+              li.nav-item.active
+                a.nav-link(aria-current="page" href="#intro") Home
+              li.nav-item
+                a.nav-link(href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow" target="_blank") Learn Bootstrap 5
+              li.nav-item
+                a.nav-link(href="https://mdbootstrap.com/docs/standard/" target="_blank") Download MDB UI KIT
+            ul.navbar-nav.d-flex.flex-row
+              // Icons
+              li.nav-item.me-3.me-lg-0
+                a.nav-link(href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow" target="_blank")
+                  i.fab.fa-youtube
+              li.nav-item.me-3.me-lg-0
+                a.nav-link(href="https://www.facebook.com/mdbootstrap" rel="nofollow" target="_blank")
+                  i.fab.fa-facebook-f
+              li.nav-item.me-3.me-lg-0
+                a.nav-link(href="https://twitter.com/MDBootstrap" rel="nofollow" target="_blank")
+                  i.fab.fa-twitter
+              li.nav-item.me-3.me-lg-0
+                a.nav-link(href="https://github.com/mdbootstrap/mdb-ui-kit" rel="nofollow" target="_blank")
+                  i.fab.fa-github
+      
+      // Background image
+      #intro.p-5.text-center.bg-image.shadow-1-strong(style="background-image: url('/images/coming.png');")
+        .mask(style="background-color: rgba(0, 0, 0, 0.7);")
+          .d-flex.justify-content-center.align-items-center.h-100
+            .text-white.px-4(data-mdb-theme="dark")
+              h1.mb-3 Coming Soon!
+              // Time Counter
+              h3#time-counter.border.border-light.my-4.p-4
+              p We're working hard to finish the development of this site.
+    // Main layout
+    //main.mt-5
+      .container
+        // Section: Content
+        section
+          .row
+            .col-md-6.gx-5.mb-4.d-lg-flex.align-items-center
+              div
+                h4
+                  strong Subscribe to stay up to date
+                p.text-muted
+                  | Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequatur
+                  | eligendi quisquam doloremque vero ex debitis veritatis placeat unde animi laborum
+                  | sapiente illo possimus, commodi dignissimos obcaecati illum maiores corporis.
+            .col-md-6.gx-5.mb-4
+              form
+                // Name input
+                .form-outline.mb-4(data-mdb-input-init)
+                  input.form-control(type="text" id="form5Example1")
+                  label.form-label(for="form5Example1") Name
+                // Email input
+                .form-outline.mb-4(data-mdb-input-init)
+                  input.form-control(type="email" id="form5Example2")
+                  label.form-label(for="form5Example2") Email address
+                // Submit button
+                button.btn.btn-primary.btn-block.mb-4(type="submit" data-mdb-ripple-init) Subscribe
+
+    // Footer
+    //footer.bg-light.text-lg-start
+      .py-4.text-center
+        a.btn.btn-primary.btn-lg.m-2(data-mdb-ripple-init href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow" target="_blank") Learn Bootstrap 5
+        a.btn.btn-primary.btn-lg.m-2(data-mdb-ripple-init href="https://mdbootstrap.com/docs/standard/" target="_blank") Download MDB UI KIT
+      hr.m-0
+      .text-center.py-4.align-items-center
+        p Follow MDB on social media
+        a.btn.btn-primary.m-1(href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" role="button" data-mdb-ripple-init rel="nofollow" target="_blank")
+          i.fab.fa-youtube
+        a.btn.btn-primary.m-1(href="https://www.facebook.com/mdbootstrap" role="button" rel="nofollow" data-mdb-ripple-init target="_blank")
+          i.fab.fa-facebook-f
+        a.btn.btn-primary.m-1(href="https://twitter.com/MDBootstrap" role="button" rel="nofollow" data-mdb-ripple-init target="_blank")
+          i.fab.fa-twitter
+        a.btn.btn-primary.m-1(href="https://github.com/mdbootstrap/mdb-ui-kit" role="button" rel="nofollow" data-mdb-ripple-init target="_blank")
+          i.fab.fa-github
+      // Copyright
+      .text-center.p-3(style="background-color: rgba(0, 0, 0, 0.2);")
+        | © 2020 Copyright:
+        a.text-dark(href="https://mdbootstrap.com/") MDBootstrap.com
+
+    // Time Counter
+    script(type="text/javascript").
+      // Set the date we're counting down to
+      var countDownDate = new Date('August 30, 2024 00:00:00 GMT-0600');
+      countDownDate.setDate(countDownDate.getDate());
+      ////console.log(new Date())
+      // Update the count down every 1 second
+      var x = setInterval(function () {
+        // Get todays date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now an the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById('time-counter').innerHTML =
+          days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById('time-counter').innerHTML = 'EXPIRED';
+        }
+      }, 1000);
+    // MDB
+    script(type="text/javascript" src="/coming/js/mdb.umd.min.js")

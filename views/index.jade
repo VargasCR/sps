@@ -1,0 +1,342 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    title Sarapiqui Paddle Sports
+    link(rel="stylesheet", href="/assets/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/assets/css/all.min.css")
+    link(rel="stylesheet", href="/assets/css/owl.carousel.min.css")
+    link(rel="stylesheet", href="/assets/css/owl.carousel.css")
+    link(rel="stylesheet", href="/assets/css/style.css")
+    link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet")
+  body
+    //- ======================header started======================
+    header
+      .my-nav
+        .container
+          .row
+            .nav-items
+              .menu-toggle
+              .logo
+                img(src="images/logo.png" style="width:5rem;")
+              .menu-items
+                .menu
+                  ul
+                    li
+                      a(href="/") Home
+                    li
+                      .dropdown
+                        button(onclick="myFunction('myDropdown')" class="dropbtn") Education
+                        #myDropdown.dropdown-content
+                          button(class="subDropdown dropbtn" onclick="openSubDropdown('instructors')") Instructors
+                          
+                          
+                          button(class="subDropdown dropbtn" onclick="openSubDropdown('students')") Students
+                          #students.subdropdowm.hidden
+                            a(class="subDropdown dropbtn" href="/login") Login
+                            a(class="dropbtn subdropbtn" href=`/student-list`) List
+                          button(class="subDropdown dropbtn" onclick="openSubDropdown('sport')") Sport
+                          //#sport.subdropdowm.hidden1111111111
+                            button(class="dropbtn subdropbtn" onclick="") Sport #1
+                            button(class="dropbtn subdropbtn" onclick="") Sport #2
+                            button(class="dropbtn subdropbtn" onclick="") Sport #3
+
+                    li
+                      .dropdown
+                        button(onclick="myFunction('myDropdown2')" class="dropbtn") Trips
+                        #myDropdown2.dropdown-content
+                          button(class="subDropdown dropbtn" onclick="") One Day Tour
+                          button(class="subDropdown dropbtn" onclick="") One Week Tour
+                          button(class="subDropdown dropbtn" onclick="") One Month Tour
+                    li
+                      a(href="/about") About Us
+                    li
+                      a(href="/staff") Our Staff
+                    li
+                      a(href="/gallery") Gallery
+                    li
+                      a(href="/contact") Contact Us
+
+    //- ======================slider section started======================
+    section#carouselExampleFade.carousel.slide.carousel-fade.slider(data-ride="carousel")
+      .carousel-inner
+        .carousel-item.active
+          img.d-block.img-slider(src="images/index/img-80.png", alt="..." style="width:100%;")
+          .carousel-caption
+            div
+              img(src="images/logo.png", alt="", sizes="", srcset="" style="width:15rem")
+            h2 Unleash Your Potential with Premier Education
+            p Embark on a transformative learning journey with courses designed to elevate your skills and knowledge.
+            .button-01
+              ul
+                li
+                  a(href="/contact") Get Started Now
+                //li
+                  a(href="#") View Courses
+          br
+          br
+          br
+          br
+        .carousel-item
+          img.d-block.img-slider(src="images/index/img-81.png", alt="..." style="width:100%;")
+          .carousel-caption
+            div 
+              img(src="/images/header/header-img.png", alt="", sizes="", srcset="" style="width:15rem")
+            h2 Advance Your Career with Expert Training
+            p Our tailored programs are designed to equip you with the tools you need to succeed in your chosen field.
+            .button-01
+              ul
+                li
+                  a(href="/contact") Get Started Now
+                //li
+                  a(href="#") View Courses
+          br
+          br
+          br
+          br
+        .carousel-item
+          img.d-block.img-slider(src="images/index/img-82.png", alt="..." style="width:100%;")
+          .carousel-caption
+            div 
+              img(src="/images/header/header-img4.png", alt="", sizes="", srcset="" style="width:15rem")
+            h2 Achieve Excellence with Our Programs
+            p Join us to master new skills and gain the confidence to thrive in any environment.
+            .button-01
+              ul
+                li
+                  a(href="/contact") Get Started Now
+                //li
+                  a(href="#") View Courses
+          br
+          br
+          br
+          br
+        .carousel-item
+          img.d-block.img-slider(src="images/index/img-83.png", alt="..." style="width:100%;")
+          .carousel-caption
+            div 
+              img(src="/images/header/header-img1.png", alt="", sizes="", srcset="" style="width:15rem")
+            br
+            br
+            br
+            br
+            h2(style="color:#ffc107;font-weight:700;") Celebrate Success with EPS Master Team
+            h2(style="color:#ffc107;font-weight:700;") Argentina 2018 Down River Champions
+            //.button-01
+              ul
+                li
+                  a(href="#") Learn More
+                li
+                  a(href="#") Explore Our Team
+          br
+          br
+          br
+          br
+
+      a.carousel-control-prev(href="#carouselExampleFade", role="button", data-slide="prev")
+        span.carousel-control-prev-icon(aria-hidden="true")
+        span.sr-only Previous
+      a.carousel-control-next(href="#carouselExampleFade", role="button", data-slide="next")
+        span.carousel-control-next-icon(aria-hidden="true")
+        span.sr-only Next
+
+
+
+    section.bg-04
+      .container
+        .row
+          .col-12
+            .heading
+              h2 Soon Courses
+              p Learn new skills and improve your techniques in our upcoming courses! All taught by certified instructors.
+        .row.curso-container
+          each curso in cursos
+            .col-lg-4.col-md-4.col-sm-6.col-xs-12.curso
+              article._lk_bg_sd_we(style="padding:1rem;")
+                .__bv_xs_we
+                .__xs_we_er
+                  .__he_w
+                    h3(style="color:black;text-align:center;margin:0") #{curso.titulo}
+                    ol
+                      li
+                        p._mn_cd_xs(style="color:black;") Inicia: #{curso.inicio}
+                        p._mn_cd_xs(style="color:black;") Finaliza: #{curso.final}
+                        p._mn_cd_xs(style="color:black;") Lugar: #{curso.location}
+                    div(style="margin-top:1rem;width:100%;display:flex;justify-content:center;align-items:center;")
+                      a(style="color:black;background-color:gray;padding:0.5rem;") Learn More
+    section.section-concern
+      h2 About Us
+      div(class="about-container")
+        div(style="width:100%;")
+          //p At Sarapiquí Paddle Sports, our mission is to provide top-tier education and training in water sports, ensuring safe and thrilling experiences for all. We emphasize respect for nature, teamwork, and personal growth, helping participants discover their potential while enjoying Costa Rica's natural beauty.
+          //p Our founder, Stanley Esquivel Mesen, is an internationally certified instructor with extensive experience in rafting, kayaking, and swift water rescue. His passion and expertise have guided hundreds of enthusiasts, from beginners to professionals, bringing a deep understanding of water safety and environmental preservation to Sarapiquí.
+          //p We offer a wide range of courses and tours for all skill levels, from peaceful river rides to challenging whitewater adventures. Our programs, led by experienced instructors, include rigorous swift water rescue courses designed to prepare participants for emergency situations in aquatic environments.
+
+        div(class="about-text-container" style="padding:1rem;width:100%;")
+          img(src="images/index/img-18.jpg", alt="")
+
+    
+
+    section.section-concern
+      h2 Location
+      div(class="about-container")
+        div(class="about-text-container" style="padding:1rem;")
+          iframe(src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15701.040371756966!2d-83.9487646!3d10.3210579!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa09bbdda1defff%3A0x9f86185d7288e516!2sSarapiqui%20Paddle%20Sports%2C%20Education%20and%20Exploration!5e0!3m2!1sen!2scr!4v1721180831096!5m2!1sen!2scr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade")
+        div 
+          p We are located in the heart of Sarapiquí, Costa Rica, surrounded by breathtaking nature that transforms every activity into a unique and unforgettable experience. The lush rainforests, winding rivers, and diverse wildlife create a backdrop that enhances the thrill of adventure and the serenity of exploration.
+          p Our prime location provides easy access to some of the best rafting and kayaking routes in the country. Whether you're navigating the exhilarating rapids of the Sarapiquí River or enjoying a peaceful paddle through calm waters, our surroundings offer the perfect setting for both adrenaline-fueled challenges and tranquil moments of connection with nature.
+          p Come and discover the natural beauty of Costa Rica as you embark on unparalleled water adventures. Whether you're seeking a heart-pounding whitewater experience or a leisurely exploration of Costa Rica's stunning landscapes, Sarapiquí Paddle Sports promises an adventure like no other.
+
+    section.team
+      .container
+        .heading
+          h2 OUR TEAM
+        .item
+          .team-card
+            .image-team
+              img(src="images/index/img-21.jpg")
+            .team-content
+              h3 Stanley Esquivel
+              p(style="padding: 0;margin: 0;") Lead Instructor
+              //ol
+                li(style="margin:0 0.5rem;")
+                  i.fab.fa-facebook-f(style="font-size:1rem;")
+                li(style="margin:0 0.5rem;")
+                  i.fab.fa-instagram(style="font-size:1rem;")
+                li(style="margin:0 0.5rem;")
+                  i.fab.fa-linkedin-in(style="font-size:1rem;")
+                li(style="margin:0 0.5rem;")
+                  i.fab.fa-pinterest-p(style="font-size:1rem;")
+              p Stanley Esquivel Mesen is a highly experienced and internationally certified instructor in swiftwater rescue, whitewater rafting, and kayaking. With numerous certifications from the American Canoe Association and extensive experience guiding and instructing in Costa Rica and abroad, Stanley brings unparalleled expertise to Sarapiquí Paddle Sports.
+              // "Show More" Button
+              // Hidden Details Section
+              .details(style="display:none;" id="stanley-details")
+                ul
+                  li(style="color: #444444;") Swiftwater Rescue Level 4 Instructor, American Canoe Association
+                  li(style="color: #444444;") Whitewater Rafting-Paddle Level 4 Instructor, American Canoe Association
+                  li(style="color: #444444;") Chair holder of Safety Educational Instructional Committee-Rescue, American Canoe Association
+                  li(style="color: #444444;") Director of Education, Federacion Costarricense de Rafting
+                  li(style="color: #444444;") First Aid and CPR Certifications, Up to Date
+                p His accomplishments include:
+                ul
+                  li(style="color: #444444;") First Place, Chorro Race 2018 (Master Men)
+                  li(style="color: #444444;") 3rd Place Overall, World Championships, Neuquén, Argentina 2018 (Master Mens, R4)
+                  li(style="color: #444444;") Multiple National Championships in Freestyle and Extreme Kayak
+                p Stanley has also participated in over 200 freestyle kayaking events worldwide and contributed to the book *Chasing Jaguars*, which highlights Costa Rica's whitewater options.
+                p For more details, contact Stanley:
+                ul
+                  li(style="color: #444444;") Email: sarapiquipaddless@gmail.com
+                  li(style="color: #444444;") Phone: +(506) 6043 7366
+                  li(style="color: #444444;") Location: Sarapiquí, Costa Rica
+              button.btn.btn-primary(onclick="toggleDetails('stanley-details')") Show More
+          .team-card
+            .image-team
+              img(src="images/index/img-79.jpg", alt="Cecelia Van Arnam")
+            .team-content
+              h3 Cecelia Van Arnam
+              p(style="padding: 0;margin: 0;") Director and Coordinator
+              p Cecelia Van Arnam combines her diverse background in Psychology, Art History, and Patisserie with extensive experience in high-profile roles across NY and Wisconsin. Her expertise in creating memorable experiences and her dedication to excellent service ensure that every guest at Sarapiquí Paddle Sports finds the perfect adventure or learning opportunity.
+              // "Show More" Button
+              // Hidden Details Section
+              .details(style="display:none;" id="cecilia-details")
+                p My Background:
+                ul
+                  li(style="color:#444444") Bachelor of Arts, Psychology and Art History (U of MN, Morris)
+                  li(style="color:#444444") Associates Degree, Patisserie and Baking (Le Cordon Bleu, MN)
+                p I have worked in various restaurants while living in NYC, as well as a retail supervisor at the World Trade Center. While in Wisconsin, I have worked as the Floral Department Manager at Dick's Fresh Market. All of the various skills learned from these experiences have and will continue to encourage me to provide the best for our guests!
+              button.btn.btn-primary(onclick="toggleDetails('cecilia-details')") Show More
+
+
+    section.bg-01
+      h2.title Our Partners
+      .container.ourPartners(style="")
+        .col-lg-3.col-md-3.col-sm-6.col-xs-12
+          .se-box
+            .icon
+              img(src="/images/header/header-img.png", alt="")
+            .content
+              h3 ACA
+              a(href="#") Learn More
+        .col-lg-3.col-md-3.col-sm-6.col-xs-12
+          .se-box
+            .icon
+              img(src="/images/header/header-img3.png", alt="")
+            .content
+              h3 WRA
+              a(href="https://worldraftingfederation.com/structure/commissions") Learn More
+        .col-lg-3.col-md-3.col-sm-6.col-xs-12
+          .se-box
+            .icon
+              img(src="/images/parnerts.png", alt="")
+            .content
+              h3 FECORAFT
+              a(href="#") Learn More
+    section.section-concern(style="margin:0 0 2rem 0;")
+      h2 Gallery
+      div(style="display:flex;align-items:center;justify-content:center;")
+        .slideshow-container
+            .mySlides
+                img(src="/images/index/img-5.jpg", style="max-height: 600px !important;width:100%")
+            .mySlides
+                img(src="images/index/img-6.jpg", style="max-height: 600px !important;width:100%")
+            .mySlides
+                img(src="images/index/img-4.jpg", style="max-height: 600px !important;width:100%")
+            a.prevx(onclick="plusSlides(-1)") ❮
+            a.nextx(onclick="plusSlides(1)") ❯
+
+    footer
+      .container
+        .row
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 SARAPIQUI PADDLE SPORT
+              p Come discover the best water adventures in Costa Rica with Sarapiquí Paddle Sports.
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 Quick Links
+              ol
+                li(style="text-align:center;")
+                  a(href="/") Home
+                li(style="text-align:center;")
+                  a(href="/about") About Us
+                li(style="text-align:center;")
+                  a(href="/staff") Our Staff
+                li(style="text-align:center;")
+                  a(href="/gallery") Gallery
+                li(style="text-align:center;")
+                  a(href="/contact") Contact Us
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 Contact Us
+              form#emailForm
+                .form-group
+                  input(type="email", name="email", placeholder="Your Email", required)
+                .form-group
+                  textarea(name="text", placeholder="Message")
+                .form-group  
+                  button(type="submit") Submit
+          .col-12
+            .copy-right
+              p © 2024 Sarapiqui Paddle Sports
+
+
+  script(src="/assets/js/jquery-3.2.1.min.js")
+  script(src="/assets/js/popper.min.js")
+  script(src="/assets/js/bootstrap.min.js")
+  script(src="/assets/js/owl.carousel.min.js")
+  script(src="/assets/js/owl.carousel.js")
+  script(src="/assets/js/script.js")
+  script(src="/javascripts/main.js")
+  script(src="/javascripts/alert.js")
+  script(type="text/javascript").
+    function toggleDetails(detailId) {
+      var details = document.getElementById(detailId);
+      if (details.style.display === 'none') {
+        details.style.display = 'block';
+        event.target.textContent = 'Show Less';
+      } else {
+        details.style.display = 'none';
+        event.target.textContent = 'Show More';
+      }
+    }

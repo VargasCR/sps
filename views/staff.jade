@@ -1,0 +1,178 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    title Sarapiqui Paddle Sports
+    link(rel="stylesheet", href="/assets/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/assets/css/all.min.css")
+    link(rel="stylesheet", href="/assets/css/owl.carousel.min.css")
+    link(rel="stylesheet", href="/assets/css/owl.carousel.css")
+    link(rel="stylesheet", href="/assets/css/style.css")
+    link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet")
+  body
+    //- ======================header started======================
+    header
+      .my-nav(style="background:rgba(0, 33, 71, 0.9);")
+        .container
+          .row
+            .nav-items
+              .menu-toggle
+              .logo
+                img(src="images/logo.png" style="width:5rem;")
+              .menu-items
+                .menu
+                  ul
+                    li
+                      a(href="/") Home
+                    li
+                      .dropdown
+                        button(onclick="myFunction('myDropdown')" class="dropbtn") Education
+                        #myDropdown.dropdown-content
+                          button(class="subDropdown dropbtn" onclick="openSubDropdown('instructors')") Instructors
+                          
+                          
+                          button(class="subDropdown dropbtn" onclick="openSubDropdown('students')") Students
+                          #students.subdropdowm.hidden
+                            a(class="subDropdown dropbtn" href="/login") Login
+                            each headerCourse in headerCourses
+                              a(class="dropbtn subdropbtn" href=`/student-course?id=${headerCourse.index}`) #{headerCourse.name}
+                          button(class="subDropdown dropbtn" onclick="openSubDropdown('sport')") Sport
+                          #sport.subdropdowm.hidden
+                            button(class="dropbtn subdropbtn" onclick="") Sport #1
+                            button(class="dropbtn subdropbtn" onclick="") Sport #2
+                            button(class="dropbtn subdropbtn" onclick="") Sport #3
+
+                    li
+                      .dropdown
+                        button(onclick="myFunction('myDropdown2')" class="dropbtn") Trips
+                        #myDropdown2.dropdown-content
+                          button(class="subDropdown dropbtn" onclick="") One Day Tour
+                          button(class="subDropdown dropbtn" onclick="") One Week Tour
+                          button(class="subDropdown dropbtn" onclick="") One Month Tour
+                    li
+                      a(href="/about") About Us
+                    li
+                      a(href="/staff") Our Staff
+                    li
+                      a(href="/gallery") Gallery
+                    li
+                      a(href="/contact") Contact Us
+    br
+    br
+    br
+    br
+    br
+    section.team
+      .container
+        .heading
+          h2 OUR TEAM
+        .item
+          .team-card
+            .image-team
+              img(src="/images/test.png")
+            .team-content
+              h3 Stanley Esquivel
+              p(style="padding: 0;margin: 0;") Lead Instructor
+              //ol
+                li(style="margin:0 0.5rem;")
+                  i.fab.fa-facebook-f(style="font-size:1rem;")
+                li(style="margin:0 0.5rem;")
+                  i.fab.fa-instagram(style="font-size:1rem;")
+                li(style="margin:0 0.5rem;")
+                  i.fab.fa-linkedin-in(style="font-size:1rem;")
+                li(style="margin:0 0.5rem;")
+                  i.fab.fa-pinterest-p(style="font-size:1rem;")
+              p Stanley Esquivel Mesen is a highly experienced and internationally certified instructor in swiftwater rescue, whitewater rafting, and kayaking. With numerous certifications from the American Canoe Association and extensive experience guiding and instructing in Costa Rica and abroad, Stanley brings unparalleled expertise to Sarapiquí Paddle Sports.
+              // "Show More" Button
+              // Hidden Details Section
+              .details(style="display:none;" id="stanley-details")
+                ul
+                  li(style="color: #444444;") Swiftwater Rescue Level 4 Instructor, American Canoe Association
+                  li(style="color: #444444;") Whitewater Rafting-Paddle Level 4 Instructor, American Canoe Association
+                  li(style="color: #444444;") Chair holder of Safety Educational Instructional Committee-Rescue, American Canoe Association
+                  li(style="color: #444444;") Director of Education, Federacion Costarricense de Rafting
+                  li(style="color: #444444;") First Aid and CPR Certifications, Up to Date
+                p His accomplishments include:
+                ul
+                  li(style="color: #444444;") First Place, Chorro Race 2018 (Master Men)
+                  li(style="color: #444444;") 3rd Place Overall, World Championships, Neuquén, Argentina 2018 (Master Mens, R4)
+                  li(style="color: #444444;") Multiple National Championships in Freestyle and Extreme Kayak
+                p Stanley has also participated in over 200 freestyle kayaking events worldwide and contributed to the book *Chasing Jaguars*, which highlights Costa Rica's whitewater options.
+                p For more details, contact Stanley:
+                ul
+                  li(style="color: #444444;") Email: sarapiquipaddless@gmail.com
+                  li(style="color: #444444;") Phone: +(506) 6043 7366
+                  li(style="color: #444444;") Location: Sarapiquí, Costa Rica
+              button.btn.btn-primary(onclick="toggleDetails('stanley-details')") Show More
+          .team-card
+            .image-team
+              img(src="/images/test.png", alt="Cecelia Van Arnam")
+            .team-content
+              h3 Cecelia Van Arnam
+              p(style="padding: 0;margin: 0;") Director and Coordinator
+              p Cecelia Van Arnam combines her diverse background in Psychology, Art History, and Patisserie with extensive experience in high-profile roles across NY and Wisconsin. Her expertise in creating memorable experiences and her dedication to excellent service ensure that every guest at Sarapiquí Paddle Sports finds the perfect adventure or learning opportunity.
+              // "Show More" Button
+              // Hidden Details Section
+              .details(style="display:none;" id="cecilia-details")
+                p My Background:
+                ul
+                  li(style="color:#444444") Bachelor of Arts, Psychology and Art History (U of MN, Morris)
+                  li(style="color:#444444") Associates Degree, Patisserie and Baking (Le Cordon Bleu, MN)
+                p I have worked in various restaurants while living in NYC, as well as a retail supervisor at the World Trade Center. While in Wisconsin, I have worked as the Floral Department Manager at Dick's Fresh Market. All of the various skills learned from these experiences have and will continue to encourage me to provide the best for our guests!
+              button.btn.btn-primary(onclick="toggleDetails('cecilia-details')") Show More
+    footer
+      .container
+        .row
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 SARAPIQUI PADDLE SPORT
+              p Come discover the best water adventures in Costa Rica with Sarapiquí Paddle Sports.
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 Quick Links
+              ol
+                li(style="text-align:center;")
+                  a(href="/") Home
+                li(style="text-align:center;")
+                  a(href="/about") About Us
+                li(style="text-align:center;")
+                  a(href="/staff") Our Staff
+                li(style="text-align:center;")
+                  a(href="/gallery") Gallery
+                li(style="text-align:center;")
+                  a(href="/contact") Contact Us
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 Contact Us
+              form#emailForm
+                .form-group
+                  input(type="email", name="email", placeholder="Your Email", required)
+                .form-group
+                  textarea(name="text", placeholder="Message")
+                .form-group  
+                  button(type="submit") Submit
+          .col-12
+            .copy-right
+              p © 2024 Sarapiqui Paddle Sports
+
+
+  script(src="/assets/js/jquery-3.2.1.min.js")
+  script(src="/assets/js/popper.min.js")
+  script(src="/assets/js/bootstrap.min.js")
+  script(src="/assets/js/owl.carousel.min.js")
+  script(src="/assets/js/owl.carousel.js")
+  script(src="/assets/js/script.js")
+  script(src="/javascripts/main.js")
+  script(src="/javascripts/alert.js")
+  script(type="text/javascript").
+    function toggleDetails(detailId) {
+      var details = document.getElementById(detailId);
+      if (details.style.display === 'none') {
+        details.style.display = 'block';
+        event.target.textContent = 'Show Less';
+      } else {
+        details.style.display = 'none';
+        event.target.textContent = 'Show More';
+      }
+    }

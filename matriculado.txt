@@ -1,0 +1,1 @@
+{"id":1109,"nombre":"karla","apellidos":"vazques","tipo_cedula":"dni","tipo_cuenta":"2","cedula":"22","dob":"2024-09-12","nacionalidad":"AD","fecha":"","aca_codigo":"123456","email":"correo@correo.com","telefono":"5555555","sangre":"A+","foto":"file-1725263733040-540538549.webp","pass":"$2b$10$fSVm2cMFoMvBB8R3wwVzeuzwpKQVUl.CLcMM6uOxOpLAFzdk0OAGC","admin":"0","verified":1}

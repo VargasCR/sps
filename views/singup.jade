@@ -1,0 +1,187 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    title Sarapiqui Paddle Sports
+    link(rel="stylesheet", href="/assets/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/assets/css/all.min.css")
+    link(rel="stylesheet", href="/assets/css/owl.carousel.min.css")
+    link(rel="stylesheet", href="/assets/css/owl.carousel.css")
+    link(rel="stylesheet", href="/assets/css/style.css")
+    link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet")
+  body
+    br
+    br
+    br
+
+    //- ======================header started======================
+    //header(style="background: rgba(0, 33, 71, 0.9) !important;")
+      .my-nav(style="background: rgba(0, 33, 71, 0.9) !important;")
+        .container
+          .row
+            .nav-items
+              .menu-toggle
+              .logo
+                img(src="assets/images/logo-01.png")
+              .menu-items
+                .menu
+                  ul
+                    li
+                      a(href="/") Home
+                    li
+                      a(href="/about") About Us
+                    li
+                      a(href="services.html") Services
+                    li
+                      a(href="blog.html") Blog
+                    li
+                      a(href="/contact") Contact Us
+
+    div(style="display:flex;justify-content:center;aling-items:center;")
+      form.form_main(action="/singup", method="POST")
+        p.heading Sign Up
+        if codigoError == 2
+          div.alert.reject
+            p COMPLETE TODOS LOS ESPACIOS
+        if codigoError == 1
+          div.alert.reject
+            p USUARIO YA REGISTRADO
+        if codigoError == 0
+          div.alert.resolve
+            p USUARIO REGISTRADO CORRECTAMENTE
+        // Campo para Nombre
+        div.inputContainer
+            label Nombre:
+            input.inputField(name="nombre" type="text" placeholder="Nombre")
+        // Campo para Apellidos
+        div.inputContainer
+            label Apellidos:
+            input.inputField(name="apellidos" type="text" placeholder="Apellidos")
+        div.inputContainer
+            label Fecha de Nacimiento:
+            input.inputField(name="dob" type="date")
+        div.inputContainer
+            label Tipo de Cuenta:
+            select.inputField(name="tipo_cuenta")
+              option(value="2") Estudiante
+              option(value="1") Instructor
+        // Campo para Tipo de Cédula
+        div.inputContainer
+            label Tipo de Cédula:
+            select.inputField(name="tipo_cedula")
+              option(value="dni") Nacional
+              option(value="pasaporte") Pasaporte
+              option(value="otro") Otro
+        // Campo para Cédula (DNI)
+        div.inputContainer
+            label DNI:
+            input.inputField(name="cedula" type="text" placeholder="Cédula")
+        // Campo para Nacionalidad
+        div.inputContainer
+            label Nacionalidad:
+            select.inputField(name="nacionalidad")
+              each flag in flags
+                option(value=flag.codigo) #{flag.nombre}
+              
+        // Campo para Foto
+        //div.inputContainer
+            label Foto:
+            input.inputField(name="foto" type="file")
+        // Campo para Estudiante código
+        div.inputContainer
+            label Código Estudiante o Instructor:
+            input.inputField(name="aca_codigo" type="text" placeholder="Estudiante código")
+        // Campo para Fecha
+        input.inputField(name="fecha" type="hidden")
+        // Campo para Correo Electrónico
+        div.inputContainer
+            label Correo:
+            input.inputField(name="email" type="email" placeholder="Correo Electrónico")
+        div.inputContainer
+            label Contraseña:
+            input.inputField(name="contra" type="text" placeholder="Contraseña")
+        // Campo para Teléfono
+        div.inputContainer
+            label Teléfono:
+            input.inputField(name="telefono" type="tel" placeholder="Teléfono")
+        // Campo para Sangre opcional
+        div.inputContainer
+            label Sangre opcional:
+            input.inputField(name="sangre" type="text" placeholder="Sangre opcional")
+        // Botón de Envío
+        button#button(type="submit") Sign Up
+
+        // Sección para Registrarse si no tiene cuenta
+        div.signupContainer
+            p ¿Ya tienes una cuenta?
+            a(href="/login") Iniciar Sesion
+
+   // footer
+      .container
+        .row
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 SARAPIQUI PADDLE SPORT
+              p Come discover the best water adventures in Costa Rica with Sarapiquí Paddle Sports.
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 Quick Links
+              ol
+                li
+                  i.fa-solid.fa-angle-right
+                  |  home
+                li
+                  i.fa-solid.fa-angle-right
+                  |  About Us
+                li
+                  i.fa-solid.fa-angle-right
+                  |  Services
+                li
+                  i.fa-solid.fa-angle-right
+                  |  Blog
+                li.last
+                  i.fa-solid.fa-angle-right
+                  |  Contact Us
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 Courses
+              ol
+                li
+                  i.fa-solid.fa-angle-right
+                  |  MBA
+                li
+                  i.fa-solid.fa-angle-right
+                  |  ME
+                li
+                  i.fa-solid.fa-angle-right
+                  |  BE
+                li
+                  i.fa-solid.fa-angle-right
+                  |  MBBS
+                li.last
+                  i.fa-solid.fa-angle-right
+                  |  MA
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            .__kl_de_w
+              h3 Contact Us
+              form#emailForm
+                .form-group
+                  input(type="email", name="email", placeholder="Your Email", required)
+                .form-group
+                  textarea(name="text", placeholder="Message")
+                .form-group  
+                  button(type="submit") Submit
+          .col-12
+            .copy-right
+              p © 2020 All Rights Reserved by
+                a(href="https://www.smarteyeapps.com/") Smarteyeapps.com
+
+  script(src="/assets/js/jquery-3.2.1.min.js")
+  script(src="/assets/js/popper.min.js")
+  script(src="/assets/js/bootstrap.min.js")
+  script(src="/assets/js/owl.carousel.min.js")
+  script(src="/assets/js/owl.carousel.js")
+  script(src="/assets/js/script.js")
+  script(src="/javascripts/main.js")
+  script(src="/javascripts/alert.js")

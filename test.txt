@@ -1,0 +1,61 @@
+router.post('/profile/admin/courses/delete', async function(req, res, next) {
+  const {id,cid} = req.body;
+  const cursosText = await findBD('cursos.json');
+  const cursos = JSON.parse(cursosText);
+  await writeBD('cursos.json',cursos);
+  let Newcursos = [];
+  cursos.forEach(element => {
+    if(cid != element.id) {
+      Newcursos.push(element);
+    }
+  });
+  const usersText = await findBD('users.json');
+  const users = JSON.parse(usersText);
+  let user = users.filter(user => user.id == id)[0];
+  nombreCompleto = `${user.nombre} ${user.apellidos}`;
+  const courses = findActiveCourses();
+  const certificadosText = await findBD('certificados.json');
+  const certificados = JSON.parse(certificadosText);
+  Newcursos.forEach(element => {
+    let inscritos = 0;
+    certificados.forEach(element_0 => {
+      if(element.id == element_0.cursoID) {
+        inscritos++;
+      }
+    });
+    element.inscritos = inscritos;
+    user = users.filter(user => user.id == element.instructor)[0];
+    if(user) {
+      element.instructor = user.nombre +' '+ user.apellidos;
+    } else {
+      element.instructor = '';
+    }
+    for (const key in courses) {
+      if (courses.hasOwnProperty(key)) {
+        const curso = courses[key];
+        if(key == element.id) {
+          element.nombre = curso.name;
+        }
+      }
+    }
+  });
+  let foto = '';
+    if(id) {
+        const usersText = await findBD('users.json');
+        const users = JSON.parse(usersText);
+        let user = users.filter(user => user.id == id)[0];
+        nombreCompleto = `${user.nombre} ${user.apellidos}`;
+        if(user.foto == '') {
+          foto = 'standard.png';
+        } else {
+          foto = user.foto;
+        }
+    }
+  //await writeBD('cursos.json',Newcursos);
+  res.render('accountAdminCourses', { 
+    title: 'Express',
+    nombreCompleto:nombreCompleto,
+    cursos:Newcursos,
+    id:id,foto:foto
+  });
+})
