@@ -1,0 +1,228 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    title Sarapiqui Paddle Sports
+    link(rel="stylesheet", href="/assets/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/assets/css/all.min.css")
+    link(rel="stylesheet", href="/assets/css/owl.carousel.min.css")
+    link(rel="stylesheet", href="/assets/css/owl.carousel.css")
+    link(rel="stylesheet", href="/assets/css/style.css")
+    link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet")
+  body
+    //- ======================header started======================
+    header
+      .my-nav(style="background:rgba(0, 33, 71, 0.9);")
+        .container
+          .row
+            .nav-items
+              .menu-toggle
+              .logo
+                img(src="images/logo.png" style="width:5rem;")
+              .menu-items
+                .menu
+                  ul
+                    li
+                      a(href="/") Home
+                    li
+                      .dropdown
+                        button(onclick="myFunction('myDropdown')" class="dropbtn") Education
+                        #myDropdown.dropdown-content
+                          //button(class="subDropdown dropbtn" onclick="openSubDropdown('instructors')") Instructors
+                          
+                          
+                          button(class="subDropdown dropbtn" onclick="openSubDropdown('students')") Students
+                          #students.subdropdowm.hidden
+
+                            a(class="subDropdown dropbtn" href="/login") Login
+                            a(class="dropbtn subdropbtn" href=`/student-list`) List
+                          button(class="subDropdown dropbtn" onclick="openSubDropdown('sport')") Sport
+                          //#sport.subdropdowm.hidden1111111111
+
+                    li
+                      .dropdown
+                        button(onclick="myFunction('myDropdown2')" class="dropbtn") Trips
+                        #myDropdown2.dropdown-content
+                          a(class="subDropdown dropbtn" href="#") One Day Tour
+                          a(class="subDropdown dropbtn" href="/oneweek") One Week Tour
+                          a(class="subDropdown dropbtn" href="#") One Month Tour
+                    li
+                      a(href="/about") About Us
+                    li
+                      a(href="/staff") Our Staff
+                    li
+                      a(href="/gallery") Gallery
+                    li
+                      a(href="/contact") Contact Us
+    br
+    br
+    br
+    br
+    section.section-concern.tour-section(style="margin:2rem 0;")
+      h1.tourText SPS Costa Rica White Water Week
+      h2 Trip Includes:
+      ul
+        li All Meals from Dinner on Day 1 through Breakfast on Day 8
+        li 7 Nights accommodation, Sarapiquí paddle sports base including 1 night at Jungle Camp on the Pacuare River
+        li 6 Days of whitewater kayaking or rafting (weather/water level dependent)
+        li Raft support along the white water week (in case you get tired or want to experience the river without having to kayak on Class II +IV rapids)
+        li Airport Transfers + All Ground Transportation
+        li All guides
+      h2 What’s Not Included?
+      ul
+        li Airfare
+        li Tips and Gratuities
+        li Alcohol
+
+    section.rio-sarapiqui.tour-section
+      h2 Río Sarapiquí
+      p The Río Sarapiqui (sarah-PIH-key), which originates between the slopes of volcanoes Poas and Barva, freefalls over a long series of cataracts and waterfalls before entering the Sarapiqui River Valley. Just east of San Miguel, the Sarapiqui's gradient becomes a manageable 92 feet per mile...
+      h3 From San Miguel to La Virgen
+      p Length: 7 miles
+      p Grade: 92 feet per mile
+      p Class: IV (IV+)
+      p Suitable levels: 700-1,700 cubic feet per second
+      p Season: Year-round
+      p If you like to ride long, continuous Class IV rapids that demand precise eddy jumps and strong countercurrent moves, you'll have a blast on the San Miguel section of the Sarapiquí...
+
+    section.lower-sarapiqui.tour-section
+      h2 Lower Sarapiqui
+      p La Virgen to El Roble
+      p Length: 6 miles
+      p Gradient: 58 feet per mile
+      p Class: II-III+
+      p Suitable levels: 800 - 2,500 C.F.S.
+      p Season: All year
+      p The Lower Sarapiqui offers the best of many worlds and has much to offer paddlers of all ability levels...
+
+    section.rio-toro.tour-section(style="margin:2rem 0;")
+      h1.tourText Río Toro
+      p A fascinating blend of regional river characteristics merge to create the exceptional river experience that is the Río Toro (TOR-oh). The Toro rampages off the western slope of Volcano Poas and unloads the bulk of its fury as it laces through a massive gorge...
+      
+      h2 Casa Maquinas
+      p Length: 3.6 miles
+      p Grade: 163 feet per mile
+      p Class: IV-V
+      p Suitable levels: 450-1000 cubic feet per second
+      p Season: Year-round (depending on dam releases)
+      p Absolutely committed and simply magnificent, this may be the most impressive run in all of Costa Rica...
+
+      h2 Recreo Verde
+      p From Recreo Verde to Highway 162
+      p Length: 3 miles
+      p Grade: 110 feet per mile
+      p Class: III+ to IV
+      p Suitable levels: 600-2000 cubic feet per second
+      p Season: Year-round (depending on dam releases)
+      p The starting point for this section is within Recreo Verde...
+
+      h2 Upper Toro
+      p Highway 162 to Pital
+      p Length: 7.5 miles
+      p Grade: 84 feet per mile
+      p Class: III+ (IV)
+      p Suitable levels: 550-1700 cubic feet per second
+      p Season: Year-round (depending on dam releases)
+      p The Upper Toro begins in the same beautiful, deep gorge as the two sections upstream...
+
+    section.rio-puerto-viejo.tour-section(style="margin:2rem 0;")
+      h1.tourText Upper Puerto Viejo
+      p Few boaters have heard of the Puerto Viejo River, but those who have traveled it have no doubt that this beautiful stretch of rapids is destined to take its place among Costa Rican classics...
+
+      h2 Cubujuqui Sector B to Cubujuqui Sector A
+      p Length: 2.2 miles
+      p Grade: 137 feet per mile
+      p Class: IV+
+      p Suitable levels: 700-1,700 cubic feet per second
+      p Season: May to January
+      p If you've run the San Miguel del Sarapiquí section before, you'll feel right at home...
+
+      h2 Lower Puerto Viejo
+      p From Cubujuqui A to Horquetas
+      p Length: 5 miles
+      p Grade: 38 feet per mile
+      p Class: II-III+
+      p Suitable water levels: 700-2,500 cfs
+      p Season: Year-round
+      p Lower Puerto Viejo cuts a rugged course that parallels the eastern flank of Braulio Carrillo National Park...
+    section.rio-sucio.tour-section(style="margin:2rem 0;")
+      h1.tourText Río Sucio
+      p Length: 6 miles
+      p Slope: 132 feet per mile
+      p Class: IV (IV+)
+      p Suitable levels: 0-2200 cubic feet per second
+      p Season: Year-round
+      p Since rainforests are among the best water filtration systems in the world, you might expect only the purest water to flow from Braulio Carrillo. However, the reality you'll find at the edge of the Rio Sucio is quite different...
+      
+    section.rio-toro-amarillo.tour-section(style="margin:2rem 0;")
+      h1.tourText Río Toro Amarillo
+      p Length: 4 miles
+      p Grade: 131 feet per mile
+      p Class: IV+ (V)
+      p Navigable levels: 700 - 1,500 cubic feet per second
+      p Season: May through February
+      p Don't be fooled by the names. Beyond regional proximity, the Rio Toro and the Toro Amarillo River don't have much in common...
+
+    section.pacuare-river.tour-section(style="margin:2rem 0;")
+      h1.tourText Pacuare River
+      p The Pacuare River is wild and wonderful. Frequently featured on lists of the world's most spectacular whitewater rivers, the five sections of the Pacuare River make up more than 60 miles of truly unforgettable whitewater...
+      
+      h2 Lower Pacuare
+      p Tres Equuis Highway to Braulio Carrillo
+      p Length: 16 miles
+      p Grade: 50 feet per mile
+      p Class: III+ (IV)
+      p Navigable Levels: 800 - 2200 cubic feet per second
+      p Season: Year-round
+      p When people talk about the magnificent Pacuare River, they are usually referring to this section...
+
+    section.pejibaye-river.tour-section(style="margin:2rem 0;")
+      h1.tourText Pejibaye River
+      p The Pejibaye River is a scenically charming river that runs parallel to a small sugarcane farming community that shares the same name...
+      p The two popular sections of the Pejibaye are linked by their excellent water quality and beautiful scenery, although they have very different personalities...
+
+    a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
+    a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
+      img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
+      
+    footer
+      .container
+        .row
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            h3 SARAPIQUI PADDLE SPORT
+            p Come discover the best water adventures in Costa Rica with Sarapiquí Paddle Sports.
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            h3 Quick Links
+            ol
+              li(style="text-align:center;")
+                a(href="/") Home
+              li(style="text-align:center;")
+                a(href="/about") About Us
+              li(style="text-align:center;")
+                a(href="/staff") Our Staff
+              li(style="text-align:center;")
+                a(href="/gallery") Gallery
+              li(style="text-align:center;")
+                a(href="/contact") Contact Us
+          .col-lg-3.col-md-3.col-sm-6.col-12
+            h3 Contact Us
+            form#emailForm
+              .form-group
+                input(type="email", name="email", placeholder="Your Email", required)
+              .form-group
+                textarea(name="text", placeholder="Message")
+              .form-group  
+                button(type="submit") Submit
+          .col-12
+            .copy-right
+              p © 2024 Sarapiqui Paddle Sports
+
+    script(src="/assets/js/jquery-3.2.1.min.js")
+    script(src="/assets/js/popper.min.js")
+    script(src="/assets/js/bootstrap.min.js")
+    script(src="/assets/js/owl.carousel.min.js")
+    script(src="/assets/js/owl.carousel.js")
+    script(src="/assets/js/script.js")
+    script(src="/javascripts/main.js")
+    script(src="/javascripts/alert.js")

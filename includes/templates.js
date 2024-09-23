@@ -22,7 +22,12 @@ const carnet = (document) => {
   const imagePath = path.join(__dirname, '/certify/carnet1.png');
   const imagePath2 = path.join(__dirname, '/certify/carnet2.png');
   const imagePathFlag = path.join(__dirname, `/flags/${document.matriculados.nacionalidad.toLowerCase()}.png`);
-  const imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  let imagePathProfile = '';
+  if(document.matriculados.foto == '') {
+    imagePathProfile = path.join(__dirname, `../public/uploads/standard.png`);
+  } else {
+    imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  }  
   const base64Image = base64Encode(imagePath);
   const base64ImageIco = base64Encode(imagePathIco);
   const base64Image2 = base64Encode(imagePath2);
@@ -267,7 +272,12 @@ const carnetACA = async (document) => {
   const imagePath = path.join(__dirname, '/certify/carnet1swr.png');
   const imagePath2 = path.join(__dirname, '/certify/carnet2swr.png');
   const imagePathFlag = path.join(__dirname, `/flags/${document.matriculados.nacionalidad.toLowerCase()}.png`);
-  const imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  let imagePathProfile = '';
+  if(document.matriculados.foto == '') {
+    imagePathProfile = path.join(__dirname, `../public/uploads/standard.png`);
+  } else {
+    imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  }
   const base64Image = base64Encode(imagePath);  
   const base64Image2 = base64Encode(imagePath2);
   const base64ImageFlag = base64Encode(imagePathFlag);  
@@ -479,7 +489,12 @@ const carnetSWR = async (document) => {
   const imagePath = path.join(__dirname, '/certify/carnet1swr.png');
   const imagePath2 = path.join(__dirname, '/certify/carnet2swr.png');
   const imagePathFlag = path.join(__dirname, `/flags/${document.matriculados.nacionalidad.toLowerCase()}.png`);
-  const imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  let imagePathProfile = '';
+  if(document.matriculados.foto == '') {
+    imagePathProfile = path.join(__dirname, `../public/uploads/standard.png`);
+  } else {
+    imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  }
 if (fs.existsSync(imagePathFlag)) {
     console.log("El archivo existe.");
     try {
@@ -753,7 +768,12 @@ const base64ImageProfile = base64Encode(imagePathProfile);
   const imagePath = path.join(__dirname, '/certify/carnet3.png');
   const imagePath2 = path.join(__dirname, '/certify/carnet4.png');
   const imagePathFlag = path.join(__dirname, `/flags/${document.matriculados.nacionalidad.toLowerCase()}.png`);
-  const imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  let imagePathProfile = '';
+  if(document.matriculados.foto == '') {
+    imagePathProfile = path.join(__dirname, `../public/uploads/standard.png`);
+  } else {
+    imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  }
   const base64Image = base64Encode(imagePath);
   const base64ImageIco = base64Encode(imagePathIco);
   const base64Image2 = base64Encode(imagePath2);
@@ -2772,7 +2792,12 @@ const evaluationACASWR = async (document) => {
     console.error('Error al escribir el archivo:', err);
   }
   const imagePathFlag = path.join(__dirname, `/flags/${document.matriculados.nacionalidad}.png`);
-  const imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  let imagePathProfile = '';
+  if(document.matriculados.foto == '') {
+    imagePathProfile = path.join(__dirname, `../public/uploads/standard.png`);
+  } else {
+    imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  }
   try {
     await fs.promises.writeFile('imagePath5.txt', 'JSON.stringify(imagePath)', 'utf8');
     console.log('Archivo guardado correctamente');
@@ -3059,12 +3084,17 @@ const evaluacionACA = (document) => {
   const imagePathFeco = path.join(__dirname, '/certify/fecoraftlogo.png');
   const imagePath2 = path.join(__dirname, '/certify/carnet2.png');
   const imagePathFlag = path.join(__dirname, `/flags/${document.matriculados.nacionalidad}.png`);
-  const imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  let imagePathProfile = '';
+  if(document.matriculados.foto == '') {
+    imagePathProfile = path.join(__dirname, `../public/uploads/standard.png`);
+  } else {
+    imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  }
   const base64Image = base64Encode(imagePath);
   const base64Image2 = base64Encode(imagePathEscudo);
   const base64Image3 = base64Encode(imagePathFeco);
   const base64ImageFlag = base64Encode(imagePathFlag);
-  const base64ImageProfile = base64Encode(imagePathProfile);
+  //const base64ImageProfile = base64Encode(imagePathProfile);
   let level = 1;
   let points = [];
 
@@ -3766,8 +3796,12 @@ const evaluacionSK = (document) => {
   const imagePathFeco = path.join(__dirname, '/certify/fecoraftlogo.png');
   const imagePath2 = path.join(__dirname, '/certify/carnet2.png');
   const imagePathFlag = path.join(__dirname, `/flags/${document.matriculados.nacionalidad.toLowerCase()}.png`);
-  const imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
-  
+  let imagePathProfile = '';
+  if(document.matriculados.foto == '') {
+    imagePathProfile = path.join(__dirname, `../public/uploads/standard.png`);
+  } else {
+    imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
+  }  
   const base64Image2 = base64Encode(imagePathEscudo);
   const base64Image3 = base64Encode(imagePathACA);
   const base64ImageFlag = base64Encode(imagePathFlag);

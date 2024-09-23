@@ -2572,14 +2572,17 @@ const findCourseName = (id,lv) => {
         return result.name;
     }
   };
+
 const findCourseMaterial = (id) => {
        result = courses[id]; // Asigna el curso activo al resultado
         return result.material;
   };
+
 const findCourseFromID = (id) => {
        result = courses[id]; // Asigna el curso activo al resultado
         return result;
   };
+  
 const findTourFromID = (id) => {
     result = tours[id]; // Asigna el curso activo al resultado
     //console.log(tours)

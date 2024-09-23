@@ -29,27 +29,27 @@ html(lang="en")
                       .dropdown
                         button(onclick="myFunction('myDropdown')" class="dropbtn") Education
                         #myDropdown.dropdown-content
-                          button(class="subDropdown dropbtn" onclick="openSubDropdown('instructors')") Instructors
+                          //button(class="subDropdown dropbtn" onclick="openSubDropdown('instructors')") Instructors
                           
                           
                           button(class="subDropdown dropbtn" onclick="openSubDropdown('students')") Students
                           #students.subdropdowm.hidden
                             a(class="subDropdown dropbtn" href="/login") Login
-                            each headerCourse in headerCourses
-                              a(class="dropbtn subdropbtn" href=`/student-course?id=${headerCourse.index}`) #{headerCourse.name}
+                            a(class="dropbtn subdropbtn" href=`/student-list`) List
+                            
                           button(class="subDropdown dropbtn" onclick="openSubDropdown('sport')") Sport
                           #sport.subdropdowm.hidden
-                            button(class="dropbtn subdropbtn" onclick="") Sport #1
-                            button(class="dropbtn subdropbtn" onclick="") Sport #2
-                            button(class="dropbtn subdropbtn" onclick="") Sport #3
+                            //button(class="dropbtn subdropbtn" onclick="") Sport #1
+                            //button(class="dropbtn subdropbtn" onclick="") Sport #2
+                            //button(class="dropbtn subdropbtn" onclick="") Sport #3
 
                     li
                       .dropdown
                         button(onclick="myFunction('myDropdown2')" class="dropbtn") Trips
                         #myDropdown2.dropdown-content
-                          button(class="subDropdown dropbtn" onclick="") One Day Tour
-                          button(class="subDropdown dropbtn" onclick="") One Week Tour
-                          button(class="subDropdown dropbtn" onclick="") One Month Tour
+                          a(class="subDropdown dropbtn" href="#") One Day Tour
+                          a(class="subDropdown dropbtn" href="/oneweek") One Week Tour
+                          a(class="subDropdown dropbtn" href="#") One Month Tour
                     li
                       a(href="/about") About Us
                     li
@@ -70,7 +70,7 @@ html(lang="en")
         .item
           .team-card
             .image-team
-              img(src="/images/test.png")
+              img(src="images/index/img-21.jpg")
             .team-content
               h3 Stanley Esquivel
               p(style="padding: 0;margin: 0;") Lead Instructor
@@ -105,22 +105,8 @@ html(lang="en")
                   li(style="color: #444444;") Phone: +(506) 6043 7366
                   li(style="color: #444444;") Location: Sarapiquí, Costa Rica
               button.btn.btn-primary(onclick="toggleDetails('stanley-details')") Show More
-          .team-card
-            .image-team
-              img(src="/images/test.png", alt="Cecelia Van Arnam")
-            .team-content
-              h3 Cecelia Van Arnam
-              p(style="padding: 0;margin: 0;") Director and Coordinator
-              p Cecelia Van Arnam combines her diverse background in Psychology, Art History, and Patisserie with extensive experience in high-profile roles across NY and Wisconsin. Her expertise in creating memorable experiences and her dedication to excellent service ensure that every guest at Sarapiquí Paddle Sports finds the perfect adventure or learning opportunity.
-              // "Show More" Button
-              // Hidden Details Section
-              .details(style="display:none;" id="cecilia-details")
-                p My Background:
-                ul
-                  li(style="color:#444444") Bachelor of Arts, Psychology and Art History (U of MN, Morris)
-                  li(style="color:#444444") Associates Degree, Patisserie and Baking (Le Cordon Bleu, MN)
-                p I have worked in various restaurants while living in NYC, as well as a retail supervisor at the World Trade Center. While in Wisconsin, I have worked as the Floral Department Manager at Dick's Fresh Market. All of the various skills learned from these experiences have and will continue to encourage me to provide the best for our guests!
-              button.btn.btn-primary(onclick="toggleDetails('cecilia-details')") Show More
+    a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
+      img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
     footer
       .container
         .row

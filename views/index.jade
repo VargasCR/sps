@@ -29,26 +29,27 @@ html(lang="en")
                       .dropdown
                         button(onclick="myFunction('myDropdown')" class="dropbtn") Education
                         #myDropdown.dropdown-content
-                          button(class="subDropdown dropbtn" onclick="openSubDropdown('instructors')") Instructors
+                          //button(class="subDropdown dropbtn" onclick="openSubDropdown('instructors')") Instructors
                           
                           
                           button(class="subDropdown dropbtn" onclick="openSubDropdown('students')") Students
                           #students.subdropdowm.hidden
+
                             a(class="subDropdown dropbtn" href="/login") Login
                             a(class="dropbtn subdropbtn" href=`/student-list`) List
                           button(class="subDropdown dropbtn" onclick="openSubDropdown('sport')") Sport
                           //#sport.subdropdowm.hidden1111111111
-                            button(class="dropbtn subdropbtn" onclick="") Sport #1
-                            button(class="dropbtn subdropbtn" onclick="") Sport #2
-                            button(class="dropbtn subdropbtn" onclick="") Sport #3
+                            //button(class="dropbtn subdropbtn" onclick="") Sport #1
+                            //button(class="dropbtn subdropbtn" onclick="") Sport #2
+                            //button(class="dropbtn subdropbtn" onclick="") Sport #3
 
                     li
                       .dropdown
                         button(onclick="myFunction('myDropdown2')" class="dropbtn") Trips
                         #myDropdown2.dropdown-content
-                          button(class="subDropdown dropbtn" onclick="") One Day Tour
-                          button(class="subDropdown dropbtn" onclick="") One Week Tour
-                          button(class="subDropdown dropbtn" onclick="") One Month Tour
+                          a(class="subDropdown dropbtn" href="") One Day Tour
+                          a(class="subDropdown dropbtn" href="/oneweek") One Week Tour
+                          a(class="subDropdown dropbtn" href="") One Month Tour
                     li
                       a(href="/about") About Us
                     li
@@ -62,10 +63,10 @@ html(lang="en")
     section#carouselExampleFade.carousel.slide.carousel-fade.slider(data-ride="carousel")
       .carousel-inner
         .carousel-item.active
-          img.d-block.img-slider(src="images/index/img-80.png", alt="..." style="width:100%;")
+          img.d-block.img-slider(src="/images/header/output_header12.jpeg", alt="..." style="width:100%;")
           .carousel-caption
-            div
-              img(src="images/logo.png", alt="", sizes="", srcset="" style="width:15rem")
+            div.header-img-co
+              img.header-img-ico(src="images/logo.png")
             h2 Unleash Your Potential with Premier Education
             p Embark on a transformative learning journey with courses designed to elevate your skills and knowledge.
             .button-01
@@ -79,10 +80,10 @@ html(lang="en")
           br
           br
         .carousel-item
-          img.d-block.img-slider(src="images/index/img-81.png", alt="..." style="width:100%;")
+          img.d-block.img-slider(src="/images/header/output_header13.jpeg", alt="..." style="width:100%;")
           .carousel-caption
-            div 
-              img(src="/images/header/header-img.png", alt="", sizes="", srcset="" style="width:15rem")
+            div.header-img-co
+              img.header-img-ico(src="/images/header/header-img.png")
             h2 Advance Your Career with Expert Training
             p Our tailored programs are designed to equip you with the tools you need to succeed in your chosen field.
             .button-01
@@ -96,10 +97,10 @@ html(lang="en")
           br
           br
         .carousel-item
-          img.d-block.img-slider(src="images/index/img-82.png", alt="..." style="width:100%;")
+          img.d-block.img-slider(src="/images/header/output_header14.jpeg", alt="..." style="width:100%;")
           .carousel-caption
-            div 
-              img(src="/images/header/header-img4.png", alt="", sizes="", srcset="" style="width:15rem")
+            div.header-img-co
+              img.header-img-ico(src="/images/header/header-img4.png")
             h2 Achieve Excellence with Our Programs
             p Join us to master new skills and gain the confidence to thrive in any environment.
             .button-01
@@ -113,26 +114,173 @@ html(lang="en")
           br
           br
         .carousel-item
-          img.d-block.img-slider(src="images/index/img-83.png", alt="..." style="width:100%;")
+          img.d-block.img-slider(src="/images/header/output_header15.jpeg", alt="..." style="width:100%;")
           .carousel-caption
-            div 
-              img(src="/images/header/header-img1.png", alt="", sizes="", srcset="" style="width:15rem")
-            br
-            br
-            br
-            br
-            h2(style="color:#ffc107;font-weight:700;") Celebrate Success with EPS Master Team
-            h2(style="color:#ffc107;font-weight:700;") Argentina 2018 Down River Champions
-            //.button-01
+            div.header-img-co
+              img.header-img-ico(src="/images/header/header-img1.png")
+            h2 Achieve Excellence with Our Programs
+            p Join us to master new skills and gain the confidence to thrive in any environment.
+            .button-01
               ul
                 li
-                  a(href="#") Learn More
+                  a(href="/contact") Get Started Now
+                //li
+                  a(href="#") View Courses
+          br
+          br
+          br
+          br
+        .carousel-item
+          img.d-block.img-slider(src="/images/header/output_header17.jpeg", alt="..." style="width:100%;")
+          .carousel-caption
+            div.header-img-co
+              img.header-img-ico(src="/images/header/logo.png")
+            h2 Achieve Excellence with Our Programs
+            p Join us to master new skills and gain the confidence to thrive in any environment.
+            .button-01
+              ul
                 li
-                  a(href="#") Explore Our Team
+                  a(href="/contact") Get Started Now
+                //li
+                  a(href="#") View Courses
           br
           br
           br
           br
+        .carousel-item
+          img.d-block.img-slider(src="/images/header/output_header18.jpeg", alt="..." style="width:100%;")
+          .carousel-caption
+            div.header-img-co
+              img.header-img-ico(src="images/header/header-img.png")
+            h2 Unleash Your Potential with Premier Education
+            p Embark on a transformative learning journey with courses designed to elevate your skills and knowledge.
+            .button-01
+              ul
+                li
+                  a(href="/contact") Get Started Now
+                //li
+                  a(href="#") View Courses
+          br
+          br
+          br
+          br
+        .carousel-item
+          img.d-block.img-slider(src="/images/header/output_header2.jpeg", alt="..." style="width:100%;")
+          .carousel-caption
+            div.header-img-co
+              img.header-img-ico(class="header-img-ico" src="/images/header/header-img4.png")
+            h2 Advance Your Career with Expert Training
+            p Our tailored programs are designed to equip you with the tools you need to succeed in your chosen field.
+            .button-01
+              ul
+                li
+                  a(href="/contact") Get Started Now
+                //li
+                  a(href="#") View Courses
+          br
+          br
+          br
+          br
+        .carousel-item
+          img.d-block.img-slider(src="/images/header/output_header5.jpeg", alt="..." style="width:100%;")
+          .carousel-caption
+            div.header-img-co
+              img.header-img-ico(src="/images/header/header-img1.png")
+            h2 Achieve Excellence with Our Programs
+            p Join us to master new skills and gain the confidence to thrive in any environment.
+            .button-01
+              ul
+                li
+                  a(href="/contact") Get Started Now
+                //li
+                  a(href="#") View Courses
+          br
+          br
+          br
+          br
+        .carousel-item
+          img.d-block.img-slider(src="/images/header/output_header6.jpeg", alt="..." style="width:100%;")
+          .carousel-caption
+            div.header-img-co
+              img.header-img-ico(src="/images/header/logo.png")
+            h2 Achieve Excellence with Our Programs
+            p Join us to master new skills and gain the confidence to thrive in any environment.
+            .button-01
+              ul
+                li
+                  a(href="/contact") Get Started Now
+                //li
+                  a(href="#") View Courses
+          br
+          br
+          br
+          br
+        .carousel-item
+          img.d-block.img-slider(src="/images/header/output_header9.jpeg", alt="..." style="width:100%;")
+          .carousel-caption
+            div.header-img-co
+              img.header-img-ico(src="/images/header/header-img.png")
+            h2 Achieve Excellence with Our Programs
+            p Join us to master new skills and gain the confidence to thrive in any environment.
+            .button-01
+              ul
+                li
+                  a(href="/contact") Get Started Now
+                //li
+                  a(href="#") View Courses
+          br
+          br
+          br
+          br
+        .carousel-item
+          img.d-block.img-slider(src="/images/header/output_header10.jpeg", alt="..." style="width:100%;")
+          .carousel-caption
+            div.header-img-co
+              img.header-img-ico(src="/images/header/header-img4.png")
+            h2 Achieve Excellence with Our Programs
+            p Join us to master new skills and gain the confidence to thrive in any environment.
+            .button-01
+              ul
+                li
+                  a(href="/contact") Get Started Now
+                //li
+                  a(href="#") View Courses
+          br
+          br
+          br
+          br
+        .carousel-item
+          img.d-block.img-slider(src="/images/header/output_header11.jpeg", alt="..." style="width:100%;")
+          .carousel-caption
+            div.header-img-co
+              img.header-img-ico(src="/images/header/header-img1.png")
+            h2 Achieve Excellence with Our Programs
+            p Join us to master new skills and gain the confidence to thrive in any environment.
+            .button-01
+              ul
+                li
+                  a(href="/contact") Get Started Now
+                //li
+                  a(href="#") View Courses
+          br
+          br
+          br
+          br
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       a.carousel-control-prev(href="#carouselExampleFade", role="button", data-slide="prev")
         span.carousel-control-prev-icon(aria-hidden="true")
@@ -151,21 +299,24 @@ html(lang="en")
               h2 Soon Courses
               p Learn new skills and improve your techniques in our upcoming courses! All taught by certified instructors.
         .row.curso-container
-          each curso in cursos
-            .col-lg-4.col-md-4.col-sm-6.col-xs-12.curso
-              article._lk_bg_sd_we(style="padding:1rem;")
-                .__bv_xs_we
-                .__xs_we_er
-                  .__he_w
-                    h3(style="color:black;text-align:center;margin:0") #{curso.titulo}
-                    ol
-                      li
-                        img(src=`/uploads/${curso.file}`, alt="", srcset="")
-                        p._mn_cd_xs(style="color:black;") Inicia: #{curso.inicio}
-                        p._mn_cd_xs(style="color:black;") Finaliza: #{curso.final}
-                        p._mn_cd_xs(style="color:black;") Lugar: #{curso.location}
-                    div(style="margin-top:1rem;width:100%;display:flex;justify-content:center;align-items:center;")
-                      a(style="color:black;background-color:gray;padding:0.5rem;") Learn More
+          if cursos.length > 0
+            each curso in cursos
+              .col-lg-4.col-md-4.col-sm-6.col-xs-12.curso
+                article._lk_bg_sd_we(style="padding:1rem;")
+                  .__bv_xs_we
+                  .__xs_we_er
+                    .__he_w
+                      h3(style="color:black;text-align:center;margin:0") #{curso.titulo}
+                      ol
+                        li
+                          img(src=`/uploads/${curso.file}`, alt="", srcset="")
+                          p._mn_cd_xs(style="color:black;") Inicia: #{curso.inicio}
+                          p._mn_cd_xs(style="color:black;") Finaliza: #{curso.final}
+                          p._mn_cd_xs(style="color:black;") Lugar: #{curso.location}
+                      div(style="margin-top:1rem;width:100%;display:flex;justify-content:center;align-items:center;")
+                        a(style="color:black;background-color:gray;padding:0.5rem;") Learn More
+          else
+            p No hay cursos disponibles.
     section.section-concern
       h2 About Us
       div(class="about-container")
@@ -189,6 +340,8 @@ html(lang="en")
           p Our prime location provides easy access to some of the best rafting and kayaking routes in the country. Whether you're navigating the exhilarating rapids of the Sarapiquí River or enjoying a peaceful paddle through calm waters, our surroundings offer the perfect setting for both adrenaline-fueled challenges and tranquil moments of connection with nature.
           p Come and discover the natural beauty of Costa Rica as you embark on unparalleled water adventures. Whether you're seeking a heart-pounding whitewater experience or a leisurely exploration of Costa Rica's stunning landscapes, Sarapiquí Paddle Sports promises an adventure like no other.
 
+
+
     section.team
       .container
         .heading
@@ -202,14 +355,18 @@ html(lang="en")
               p(style="padding: 0;margin: 0;") Lead Instructor
               //ol
                 li(style="margin:0 0.5rem;")
+                  
+                //li(style="margin:0 0.5rem;")
                   i.fab.fa-facebook-f(style="font-size:1rem;")
-                li(style="margin:0 0.5rem;")
+                //li(style="margin:0 0.5rem;")
                   i.fab.fa-instagram(style="font-size:1rem;")
-                li(style="margin:0 0.5rem;")
+                //li(style="margin:0 0.5rem;")
                   i.fab.fa-linkedin-in(style="font-size:1rem;")
-                li(style="margin:0 0.5rem;")
+                //li(style="margin:0 0.5rem;")
                   i.fab.fa-pinterest-p(style="font-size:1rem;")
               p Stanley Esquivel Mesen is a highly experienced and internationally certified instructor in swiftwater rescue, whitewater rafting, and kayaking. With numerous certifications from the American Canoe Association and extensive experience guiding and instructing in Costa Rica and abroad, Stanley brings unparalleled expertise to Sarapiquí Paddle Sports.
+              p Stanley has contributed to the book *Chasing Jaguars*, which focuses on whitewater opportunities in Costa Rica. He is certified by the [American Canoe Association](https://americancanoe.org/) as a swiftwater rescue instructor, raft paddle technical instructor, and river guide instructor.
+              p As a member of the [World Rafting Federation](https://worldraftingfederation.com/structure/commissions/24-wrf-training-guide-program-commission/67-stanley-esquivel-mesen), his passion for the sport and sharing adventures is reflected in his company, which offers options for exploring 37 different rivers in Costa Rica.
               // "Show More" Button
               // Hidden Details Section
               .details(style="display:none;" id="stanley-details")
@@ -227,6 +384,8 @@ html(lang="en")
                 p Stanley has also participated in over 200 freestyle kayaking events worldwide and contributed to the book *Chasing Jaguars*, which highlights Costa Rica's whitewater options.
                 p For more details, contact Stanley:
                 ul
+                  li(style="color: #444444;")
+                    a(href="https://www.facebook.com/share/1AkwntBr2o/?mibextid=qi2Omg", target="_blank") Facebook
                   li(style="color: #444444;") Email: sarapiquipaddless@gmail.com
                   li(style="color: #444444;") Phone: +(506) 6043 7366
                   li(style="color: #444444;") Location: Sarapiquí, Costa Rica
@@ -261,14 +420,339 @@ html(lang="en")
       div(style="display:flex;align-items:center;justify-content:center;")
         .slideshow-container
             .mySlides
-                img(src="/images/index/img-5.jpg", style="max-height: 600px !important;width:100%")
+                img(src="/images/gallery/gallery (13).jpeg", style="max-height: 600px !important;width:100%")  
             .mySlides
-                img(src="images/index/img-6.jpg", style="max-height: 600px !important;width:100%")
+                img(src="/images/gallery/gallery (14).jpeg", style="max-height: 600px !important;width:100%")
             .mySlides
-                img(src="images/index/img-4.jpg", style="max-height: 600px !important;width:100%")
+                img(src="/images/gallery/gallery (15).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (16).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (17).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (18).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (19).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (20).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (21).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (22).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (23).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (24).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (25).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (26).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (27).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (28).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (29).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (30).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (31).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (32).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (33).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (34).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (35).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (36).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (37).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (38).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (39).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (40).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (41).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (42).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (43).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (44).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (45).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (46).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (47).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (48).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (49).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (50).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (51).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (52).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (53).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (54).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (55).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (56).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (57).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (58).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (59).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (60).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (61).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (62).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (63).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (64).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (65).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (66).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (67).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (68).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (69).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (70).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (71).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (72).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (73).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (74).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (75).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (76).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (77).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (78).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (79).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (80).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (81).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (82).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (83).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (84).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (85).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (86).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (87).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (88).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (89).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (90).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (91).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (92).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (93).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (94).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (95).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (96).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (97).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (98).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (99).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (100).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (101).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (102).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (103).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (104).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (105).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (106).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (107).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (108).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (109).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (110).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (111).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (112).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (113).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (114).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (115).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (116).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (117).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (118).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (119).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (120).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (121).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (122).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (123).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (124).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (125).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (126).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (127).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (128).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (129).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (130).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (131).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (132).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (133).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (134).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (135).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (136).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (137).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (138).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (139).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (140).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (141).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (142).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (143).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (144).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (145).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (146).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (147).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (148).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (149).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (150).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (151).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (152).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (153).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (154).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (155).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (156).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (157).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (158).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (159).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (160).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (161).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (162).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (163).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (164).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (165).jpeg", style="max-height: 600px !important;width:100%") 
+            .mySlides
+                img(src="/images/gallery/gallery (1).jpeg", style="max-height: 600px !important;width:100%")   
+            .mySlides
+                img(src="/images/gallery/gallery (2).jpeg", style="max-height: 600px !important;width:100%")   
+            .mySlides
+                img(src="/images/gallery/gallery (3).jpeg", style="max-height: 600px !important;width:100%")   
+            .mySlides
+                img(src="/images/gallery/gallery (4).jpeg", style="max-height: 600px !important;width:100%")   
+            .mySlides
+                img(src="/images/gallery/gallery (5).jpeg", style="max-height: 600px !important;width:100%")   
+            .mySlides
+                img(src="/images/gallery/gallery (6).jpeg", style="max-height: 600px !important;width:100%")   
+            .mySlides
+                img(src="/images/gallery/gallery (7).jpeg", style="max-height: 600px !important;width:100%")   
+            .mySlides
+                img(src="/images/gallery/gallery (8).jpeg", style="max-height: 600px !important;width:100%")   
+            .mySlides
+                img(src="/images/gallery/gallery (9).jpeg", style="max-height: 600px !important;width:100%")   
+            .mySlides
+                img(src="/images/gallery/gallery (10).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (11).jpeg", style="max-height: 600px !important;width:100%")  
+            .mySlides
+                img(src="/images/gallery/gallery (12).jpeg", style="max-height: 600px !important;width:100%")
             a.prevx(onclick="plusSlides(-1)") ❮
             a.nextx(onclick="plusSlides(1)") ❯
-
+    a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
+      img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
     footer
       .container
         .row

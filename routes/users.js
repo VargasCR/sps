@@ -288,7 +288,21 @@ router.get('/profile/admin/courses/students/evaluation', async function(req, res
   
   const fechaHoyFormateada = hoy.toLocaleDateString('es-ES', opcionesDeFormato);
   const fechaEnDosAniosFormateada = dentroDeDosAnios.toLocaleDateString('es-ES', opcionesDeFormato);
-
+  const usersText = await findBD('users.json');
+  let users = JSON.parse(usersText);
+  let foto = '';
+  let user = '';
+  if(id) {
+        user = users.filter(user => user.id == id)[0];
+        //const usersText = await findBD('users.json');
+        //const users = JSON.parse(usersText);
+        nombreCompleto = `${user.nombre} ${user.apellidos}`;
+        if(user.foto == '') {
+          foto = 'standard.png';
+        } else {
+          foto = user.foto;
+        }
+    }
   let evaluacion = evaluaciones.filter(evaluacion => evaluacion.userID == eid 
     && cid == evaluacion.courseID)
   if (evaluacion.length == 0) {
@@ -432,6 +446,7 @@ await sleep(220);
   let cursos = JSON.parse(cursosText);
   let evaluaciones = JSON.parse(evaluacionesText);
   let users = JSON.parse(usersText);
+  
   let consecutivoPagina = JSON.parse(consecutivoPaginatxt);
 
 
@@ -1074,9 +1089,14 @@ router.post('/profile/student/unsubscribe', async function(req, res, next) {
 router.get('/', async function(req, res, next) {
   const cursosText = await findBD('cursos.json');
   const cursos = JSON.parse(cursosText);
-  console.log(cursos[0].isPublic == 'true');
-  const cursosActivos = cursos.filter(curso => curso.activo == 'true' && curso.isPublic == 'true' 
-    || curso.activo == true && curso.isPublic == true);
+  console.log(cursos[2].isPublic == 'true');
+  console.log(cursos[2].isPublic == 'true');
+  const cursosActivos = cursos.filter(curso => 
+    (curso.activo == 'true' && curso.isPublic == 'true') 
+    || (curso.activo == true && curso.isPublic == 'true')
+      || (curso.activo == 'true' && curso.isPublic == true)
+        || (curso.activo == true && curso.isPublic == true)
+  );
 console.log(cursos)
   let headerCourses = findActiveCourses();
   for (const key in headerCourses) {
@@ -2160,5 +2180,21 @@ router.post('/login', async function(req, res, next) {
   });
 });
 
+router.get('/oneweek', async function(req, res, next) {
+  let headerCourses = findActiveCourses();
+  for (const key in headerCourses) {
+    if (Object.prototype.hasOwnProperty.call(headerCourses, key)) {
+      const element = {
+        index:key,
+        name:headerCourses[key].name
+      }
+      headerCourses[key] = element;
+    }
+  }
+  res.render('oneweek', { 
+    title: 'Express',
+    headerCourses:headerCourses
+  });
+});
 
 module.exports = router;
