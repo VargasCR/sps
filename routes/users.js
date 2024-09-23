@@ -1118,6 +1118,38 @@ console.log(cursos)
     //courses: courses
   });
 });
+router.get('/courses-list', async function(req, res, next) {
+  const cursosText = await findBD('cursos.json');
+  const cursos = JSON.parse(cursosText);
+  console.log(cursos[2].isPublic == 'true');
+  console.log(cursos[2].isPublic == 'true');
+  const cursosActivos = cursos.filter(curso => 
+    (curso.activo == 'true' && curso.isPublic == 'true') 
+    || (curso.activo == true && curso.isPublic == 'true')
+      || (curso.activo == 'true' && curso.isPublic == true)
+        || (curso.activo == true && curso.isPublic == true)
+  );
+console.log(cursos)
+  let headerCourses = findActiveCourses();
+  for (const key in headerCourses) {
+    if (Object.prototype.hasOwnProperty.call(headerCourses, key)) {
+      const element = {
+        index:key,
+        name:headerCourses[key].name
+      }
+      headerCourses[key] = element;
+    }
+  }
+  console.log('cursosActivos')
+  console.log(cursosActivos)
+  //const courses = findActiveCourses();
+  res.render('courses', { 
+    title: 'Express',
+    cursos:cursosActivos,
+    headerCourses:headerCourses
+    //courses: courses
+  });
+});
 
 router.get('/login', async function(req, res, next) {
   res.render('login', { 
