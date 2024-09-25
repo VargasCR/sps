@@ -44,72 +44,59 @@ html(lang="en")
     br
     br
     br
-    a(href=`/profile/admin?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") BACK
-    a(href=`/profile/admin/courses/add?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") ADD 
-    div(class="")
-        .main-content(style="width:100%;")
-          
-          br
-          h3 Cursos Disponibles
-          br
-          table
-            thead
-              tr
-                th Nombre
-                th Instructor
-                th Fecha Inicio
-                th Fecha Final
-                th Inscritos
-                th Acciones
-                th.tableInfoField
-            tbody
-              if cursos.length > 0
-                - var found = '0'
-                each curso in cursos
-                  if curso.activo == true || curso.activo == "true"
-                    - found = '1'
+
+  
+    section(style="overflow:auto;")
+      h1 #{courses.length}
+      if courses.length == 0
+        br
+        br
+        h1(style="text-align:center;color:black;") Vacio
+        br
+        br
+      if courses.length > 0
+        div(class="" style="height:80vh;")
+          .main-content(style="width:100%;")
+            br
+            h3 Certificados
+            br
+            table
+              thead
+                tr
+                  th Curso
+                  th Dni
+                  th Name
+                  th Expira
+                  th Carnet
+                  th Evaluation
+                  //th.tableInfoField
+              tbody
+                  each item in courses
                     tr
                       td
-                          p.tableInfoField Inscritos: 
-                          = curso.titulo
+                        p.tableInfoField Curso: 
+                        = item.curso.titulo
                       td
-                          p.tableInfoField Inscritos: 
-                          = curso.instructor
+                        p.tableInfoField Dni: 
+                        = item.estudiante.cedula
                       td
-                          p.tableInfoField Inscritos: 
-                          = curso.inicio
+                        p.tableInfoField Name: 
+                        = item.estudiante.nombre + item.estudiante.apellidos
                       td
-                          p.tableInfoField Inscritos: 
-                          = curso.final
+                        p.tableInfoField Expira: 
+                        = item.curso.expira
                       td
-                          p.tableInfoField Inscritos: 
-                          = curso.inscritos
-                      td.actions
-                        form(action="/profile/admin/courses/students", method="post")
-                          input(type="hidden", name="id" value=id)
-                          input(type="hidden", name="cid" value=curso.id)
-                          button(type="submit") Estudiantes
-                        form(action=`/profile/admin/courses/edit`, method="GET")
-                          input(type="hidden", name="ee11cbb19052e40b07aac0ca060c23ee" value=id)
-                          input(type="hidden", name="aac0ca060c23ee" value=curso.id)
-                          button(type="submit") Editar
-                        form(action="/profile/admin/courses/close", method="post")
-                          input(type="hidden", name="id" value=id)
-                          input(type="hidden", name="cid" value=curso.id)
-                          button(type="submit") Cerrar
-                        form(action="/profile/admin/courses/delete", method="post")
-                          input(type="hidden", name="id" value=id)
-                          input(type="hidden", name="cid" value=curso.id)
-                          button(type="submit") Borrar
-                if found == '0'
-                  tr
-                    td(style="text-align:center;" colspan="6") No hay cursos disponibles
-                
-              else
-                tr
-                  td(style="text-align:center;" colspan="6") No hay cursos disponibles
+                        p.tableInfoField Carnet:
+                        form(action="/download", method="post")
+                          input(type="hidden", name="link" value=item.url)
+                          button(type="submit" class="btn-nav") Download
+                      td
+                        p.tableInfoField Evaluation:
+                        form(action="/download", method="post")
+                          input(type="hidden", name="link" value=item.eurl)
+                          button(type="submit" class="btn-nav") Download
 
-    //- ====================== Footer Section started======================
+        //- ====================== Footer Section started======================
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
       img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
     footer

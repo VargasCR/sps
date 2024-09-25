@@ -1,3 +1,26 @@
+try {
+  if(document.querySelector('#errorfield').value == 'f0') {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: 'Error, add your picture before.',
+      confirmButtonColor: "#3085d6"
+    });
+  } else if(document.querySelector('#errorfield').value == 'f1') {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: 'La imagen debe ser cuadrada con una relación de aspecto de 1:1',
+      confirmButtonColor: "#3085d6"
+    });
+  }
+} catch (error) {
+  
+}
+function showCourseDetail(id) {
+  document.querySelector('#d-'+id).classList.toggle('hidden');
+}
+ console.log(document.querySelector('#errorfield').value)
 function openTab(evt, id) {
     //alert(id)
     const alltabs = document.querySelectorAll('.tabcontent');

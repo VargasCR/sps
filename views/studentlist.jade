@@ -65,7 +65,11 @@ html(lang="en")
     section(style="overflow:auto;")
       h1 #{courses.length}
       if courses.length == 0
+        br
+        br
         h1(style="text-align:center;color:black;") Vacio
+        br
+        br
       if courses.length > 0
         div(class="" style="height:80vh;")
           .main-content(style="width:100%;")
@@ -79,7 +83,7 @@ html(lang="en")
                   th Dni
                   th Name
                   th Expira
-                  th Carnet
+                  //th Carnet
                   th.tableInfoField
               tbody
                   each item in courses

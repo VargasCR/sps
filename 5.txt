@@ -61,23 +61,23 @@ tbody
             <tbody>
                 <tr>
                     <td style="width: 32%;">Full Name</td>
-                    <td>Stanley Esquivel Mesen</td>
+                    <td>Cristopher  Rojas</td>
                 </tr>
                 <tr>
                     <td style="width: 32%;">Birthdate</td>
-                    <td>1978-08-23</td>
+                    <td>1992-05-22</td>
                 </tr>
                 <tr>
                     <td style="width: 32%;">ID Number</td>
-                    <td>110110170</td>
+                    <td>207000491</td>
                 </tr>
                 <tr>
                     <td style="width: 32%;">Email Address</td>
-                    <td>sarapiquipaddless@gmail.com</td>
+                    <td>cpayrojas@gmail.com</td>
                 </tr>
                 <tr>
                     <td style="width: 32%;">Phone Number</td>
-                    <td>60074373</td>
+                    <td>60678786</td>
                 </tr>
                 <tr>
                     <td style="width: 32%;">Blood Type</td>
@@ -85,7 +85,7 @@ tbody
                 </tr>
                 <tr>
                     <td style="width: 32%;">Nacionalidad</td>
-                    <td>cr</td>
+                    <td>CR</td>
                 </tr>
                 
                 <tr>
@@ -94,11 +94,11 @@ tbody
                 </tr>
                 <tr>
                     <td style="width: 32%;">Month and Year Issued</td>
-                    <td>17/9/2024</td>
+                    <td>24/9/2024</td>
                 </tr>
                 <tr>
                     <td style="width: 32%;">Month and Year Expiration</td>
-                    <td>17/9/2026</td>
+                    <td>24/9/2026</td>
                 </tr>
             </tbody>
         </table>
@@ -227,7 +227,7 @@ tbody
       Name: Stanley Esquivel Mesen
   </p>
   <p>
-      Date: 17/9/2024
+      Date: 24/9/2024
   </p>
   <p>
       Signature: ___________________________________________

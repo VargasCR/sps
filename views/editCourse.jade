@@ -26,6 +26,8 @@ html(lang="en")
                     li
                       a(href=`/profile/admin/courses?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Cursos
                     li
+                      a(href=`/admin-student-list?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Certificados
+                    li
                       a(href=`/profile/admin/users?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Usuarios
                     li
                       a(href=`/login`) - Salir
@@ -115,7 +117,9 @@ html(lang="en")
         div.inputContainer
           label Ubicación:
           input.inputField(name="location" type="text" placeholder="Ubicación" value=curso.location)
-
+        div.inputContainer
+            label Description:
+            textarea.inputField(name="desc" type="textarea" style="height: 120px;" placeholder="Description") #{curso.desc}
         button#button(type="submit") Guardar
 
     //- ====================== Footer Section started======================

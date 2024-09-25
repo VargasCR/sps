@@ -26,6 +26,8 @@ html(lang="en")
                     li
                       a(href=`/profile/admin/courses?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Cursos
                     li
+                      a(href=`/admin-student-list?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Certificados
+                    li
                       a(href=`/profile/admin/users?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Usuarios
                     li
                       a(href=`/login`) - Salir
@@ -96,6 +98,7 @@ html(lang="en")
 
 
     //- ====================== Footer Section started======================
+    input(type="hidden" id="errorfield" value=error)
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
       img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
     footer
@@ -138,5 +141,5 @@ html(lang="en")
   script(src="/assets/js/owl.carousel.min.js")
   script(src="/assets/js/owl.carousel.js")
   script(src="/assets/js/script.js")
-  script(src="/javascripts/main.js")
   script(src="/javascripts/alert.js")
+  script(src="/javascripts/main.js")

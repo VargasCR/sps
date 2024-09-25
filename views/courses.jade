@@ -88,8 +88,9 @@ html(lang="en")
                           p._mn_cd_xs(style="color:black;") Inicia: #{curso.inicio}
                           p._mn_cd_xs(style="color:black;") Finaliza: #{curso.final}
                           p._mn_cd_xs(style="color:black;") Lugar: #{curso.location}
+                          p._mn_cd_xs.hidden(style="color:black;" id=`d-${curso.id}`) Description: #{curso.desc}
                       div(style="margin-top:1rem;width:100%;display:flex;justify-content:center;align-items:center;")
-                        a(style="color:black;background-color:gray;padding:0.5rem;") Learn More
+                        button(style="color:black;background-color:gray;padding:0.5rem;" onclick=`showCourseDetail(${curso.id})`) Learn More
           else
             p No hay cursos disponibles.
     footer
