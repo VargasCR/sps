@@ -1,1 +1,1 @@
-[{"id":1,"courseID":4,"instructor":"1001","estudiantes":[],"finalizado":false,"activo":true,"verificado":[]},{"id":1,"courseID":3,"instructor":"1001","estudiantes":[],"finalizado":false,"activo":true,"verificado":[]},{"id":1,"courseID":2,"instructor":"1001","estudiantes":["1006"],"finalizado":true,"activo":true,"verificado":[1]}]
+[{"id":1,"courseID":3,"instructor":"1001","estudiantes":["1003"],"finalizado":false,"activo":true,"verificado":[1]},{"id":1,"courseID":2,"instructor":"1001","estudiantes":[],"finalizado":false,"activo":true,"verificado":[]}]

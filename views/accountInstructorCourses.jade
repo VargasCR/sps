@@ -42,61 +42,60 @@ html(lang="en")
     br
     br
     br
-    
-    
-    div(class="account-container")
-      .container-profile
-        .main-content
-          //a(href=`/profile/instructor/courses/add?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") ADD 
+    a(href=`/profile/instructor?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") BACK
+    //a(href=`/profile/admin/courses/add?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") ADD 
+    div(class="")
+        .main-content(style="width:100%;")
+          
           br
           h3 Cursos Disponibles
           br
-          div.table-responsive
-            table.table
-              thead
-                tr
-                  th Nombre
-                  th Inicio
-                  th Final
-                  th Inscritos
-                  //th Acciones
-                  //th.tableInfoField
-              tbody
-                if cursos.length > 0
-                  - var found = '0'
-                  each curso in cursos
-                    if curso.activo == true || curso.activo == "true"
-                      - found = '1'
-                      tr
-                        td
+          table
+            thead
+              tr
+                th Nombre
+                th Instructor
+                th Fecha Inicio
+                th Fecha Final
+                th Inscritos
+                th Acciones
+                th.tableInfoField
+            tbody
+              if cursos.length > 0
+                - var found = '0'
+                each curso in cursos
+                  if curso.activo == true || curso.activo == "true"
+                    - found = '1'
+                    tr
+                      td
                           p.tableInfoField Nombre: 
                           = curso.titulo
-                        td
-                          p.tableInfoField Inicio: 
+                      td
+                          p.tableInfoField Instructor: 
+                          = curso.instructor
+                      td
+                          p.tableInfoField Fecha Inicio: 
                           = curso.inicio
-                        td
-                          p.tableInfoField Final: 
+                      td
+                          p.tableInfoField Fecha Final: 
                           = curso.final
-                        td
+                      td
                           p.tableInfoField Inscritos: 
                           = curso.inscritos
-                        //td.actions
-                          form(action="", method="post")
-                            input(type="hidden", name="id" value=curso.id)
-                            button(type="submit") Estudiantes
-                          form(action="", method="post")
-                            input(type="hidden", name="id" value=curso.id)
-                            button(type="submit") Borrar
-                  if found == '0'
-                    tr
-                      td(style="text-align:center;" colspan="4") No hay cursos disponibles
-                else
+                      td.actions
+                        form(action="/profile/instructor/courses/students", method="post")
+                          input(type="hidden", name="id" value=id)
+                          input(type="hidden", name="cid" value=curso.id)
+                          button(type="submit") Estudiantes
+                if found == '0'
                   tr
-                    td(style="text-align:center;" colspan="4") No hay cursos disponibles
-
+                    td(style="text-align:center;" colspan="6") No hay cursos disponibles
+                
+              else
+                tr
+                  td(style="text-align:center;" colspan="6") No hay cursos disponibles
 
     //- ====================== Footer Section started======================
-    input(type="hidden" id="errorfield" value=error)
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
       img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
     footer
@@ -108,7 +107,7 @@ html(lang="en")
               p Come discover the best water adventures in Costa Rica with Sarapiquí Paddle Sports.
           .col-lg-3.col-md-3.col-sm-6.col-12
             .__kl_de_w
-              h3 Quick Links  instructor
+              h3 Quick Links
               ol
                 li(style="text-align:center;margin-top:1rem;")
                   i.fa-solid.fa-angle-right
@@ -139,5 +138,5 @@ html(lang="en")
   script(src="/assets/js/owl.carousel.min.js")
   script(src="/assets/js/owl.carousel.js")
   script(src="/assets/js/script.js")
-  script(src="/javascripts/alert.js")
   script(src="/javascripts/main.js")
+  script(src="/javascripts/alert.js")

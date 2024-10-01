@@ -20,7 +20,7 @@ try {
 function showCourseDetail(id) {
   document.querySelector('#d-'+id).classList.toggle('hidden');
 }
- console.log(document.querySelector('#errorfield').value)
+ //console.log(document.querySelector('#errorfield').value)
 function openTab(evt, id) {
     //alert(id)
     const alltabs = document.querySelectorAll('.tabcontent');
@@ -128,3 +128,32 @@ function showSlides(n) {
   }
   slides[slideIndex-1].style.display = "block";  
 }
+
+
+
+
+
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+
+  // Ocultar todos los contenidos de las tabs
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Eliminar la clase "active" de todos los enlaces de las tabs
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Mostrar la tab actual y agregar la clase "active" al botón que abrió la tab
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Por defecto, abrir la primera tab al cargar la página
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelector(".tablinks").click();
+});

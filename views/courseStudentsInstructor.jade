@@ -44,59 +44,78 @@ html(lang="en")
     br
     
     
-    div(class="account-container")
-      .container-profile
-        .main-content
-          //a(href=`/profile/instructor/courses/add?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") ADD 
+    a(href=`/profile/instructor/courses?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") BACK 
+    if listaEstudiantes.length == 0
+            h1(style="text-align:center;color:black;") Vacio
+    if listaEstudiantes.length > 0
+      div(class="")
+        .main-content(style="width:100%;")
           br
-          h3 Cursos Disponibles
+          h3 Estudiantes
           br
-          div.table-responsive
-            table.table
-              thead
-                tr
-                  th Nombre
-                  th Inicio
-                  th Final
-                  th Inscritos
-                  //th Acciones
-                  //th.tableInfoField
-              tbody
-                if cursos.length > 0
-                  - var found = '0'
-                  each curso in cursos
-                    if curso.activo == true || curso.activo == "true"
-                      - found = '1'
-                      tr
-                        td
-                          p.tableInfoField Nombre: 
-                          = curso.titulo
-                        td
-                          p.tableInfoField Inicio: 
-                          = curso.inicio
-                        td
-                          p.tableInfoField Final: 
-                          = curso.final
-                        td
-                          p.tableInfoField Inscritos: 
-                          = curso.inscritos
-                        //td.actions
-                          form(action="", method="post")
-                            input(type="hidden", name="id" value=curso.id)
-                            button(type="submit") Estudiantes
-                          form(action="", method="post")
-                            input(type="hidden", name="id" value=curso.id)
-                            button(type="submit") Borrar
-                  if found == '0'
-                    tr
-                      td(style="text-align:center;" colspan="4") No hay cursos disponibles
-                else
+          table
+            thead
+              tr
+                th Nombre
+                th Tipo Cedula
+                th Cedula
+                th Nacionalidad
+                th Aca Codigo
+                th Email
+                th Telefono
+                th Sangre
+                th Acciones
+                  th.tableInfoField
+            tbody
+                each item in listaEstudiantes
                   tr
-                    td(style="text-align:center;" colspan="4") No hay cursos disponibles
-
+                    td
+                      p.tableInfoField Nombre: 
+                      = item.nombre
+                    td
+                      p.tableInfoField Tipo Cedula: 
+                      = item.tipo_cedula
+                    td
+                      p.tableInfoField Cedula: 
+                      = item.cedula
+                    td
+                      p.tableInfoField Nacionalidad: 
+                      = item.nacionalidad
+                    td
+                      p.tableInfoField Aca Codigo: 
+                      = item.aca_codigo
+                    td
+                      p.tableInfoField Email: 
+                      = item.email
+                    td
+                      p.tableInfoField Telefono: 
+                      = item.telefono
+                    td
+                      p.tableInfoField Sangre: 
+                      = item.sangre
+                    if item.cursoVerificado == 0 || item.cursoVerificado == '0'
+                      td.actions
+                        p No Verified
+                      //td.actions
+                        form(action="/profile/instructor/courses/students/evaluation/verify", method="post")
+                            input(type="hidden", name="id" value=id)
+                            input(type="hidden", name="cid" value=cid)
+                            input(type="hidden", name="eid" value=item.id)
+                            button(type="submit") Verificar
+                    else
+                      td.actions
+                        form(action="/profile/instructor/courses/students/evaluation", method="get")
+                            input(type="hidden", name="id" value=id)
+                            input(type="hidden", name="cid" value=cid)
+                            input(type="hidden", name="eid" value=item.id)
+                            button(type="submit") Calificar
+                        //form(action="/profile/admin/courses/students/delete", method="post")
+                            input(type="hidden", name="id" value=id)
+                            input(type="hidden", name="cid" value=cid)
+                            input(type="hidden", name="eid" value=item.id)
+                            button(type="submit") Borrar
 
     //- ====================== Footer Section started======================
-    input(type="hidden" id="errorfield" value=error)
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
       img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
     footer
@@ -108,7 +127,7 @@ html(lang="en")
               p Come discover the best water adventures in Costa Rica with Sarapiquí Paddle Sports.
           .col-lg-3.col-md-3.col-sm-6.col-12
             .__kl_de_w
-              h3 Quick Links  instructor
+              h3 Quick Links
               ol
                 li(style="text-align:center;margin-top:1rem;")
                   i.fa-solid.fa-angle-right
@@ -139,5 +158,5 @@ html(lang="en")
   script(src="/assets/js/owl.carousel.min.js")
   script(src="/assets/js/owl.carousel.js")
   script(src="/assets/js/script.js")
-  script(src="/javascripts/alert.js")
   script(src="/javascripts/main.js")
+  script(src="/javascripts/alert.js")

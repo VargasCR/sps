@@ -60,25 +60,36 @@ html(lang="en")
     br
     br
     br
-    section.section-concern.tour-section(style="margin:2rem 0;")
+    .tab
+      button.tablinks(onclick="openTab(event, 'WhiteWaterWeek')") SPS Costa Rica White Water Week
+      button.tablinks(onclick="openTab(event, 'RioSarapiqui')") Río Sarapiquí
+      button.tablinks(onclick="openTab(event, 'LowerSarapiqui')") Lower Sarapiquí
+      button.tablinks(onclick="openTab(event, 'RioToro')") Río Toro
+      button.tablinks(onclick="openTab(event, 'UpperPuertoViejo')") Upper Puerto Viejo
+      button.tablinks(onclick="openTab(event, 'RioSucio')") Río Sucio
+      button.tablinks(onclick="openTab(event, 'RioToroAmarillo')") Río Toro Amarillo
+      button.tablinks(onclick="openTab(event, 'PacuareRiver')") Pacuare River
+      button.tablinks(onclick="openTab(event, 'PejibayeRiver')") Pejibaye River
+
+    #WhiteWaterWeek.tabcontent.mySlides
       h1.tourText SPS Costa Rica White Water Week
       h2 Trip Includes:
-      ul
-        li All Meals from Dinner on Day 1 through Breakfast on Day 8
-        li 7 Nights accommodation, Sarapiquí paddle sports base including 1 night at Jungle Camp on the Pacuare River
-        li 6 Days of whitewater kayaking or rafting (weather/water level dependent)
-        li Raft support along the white water week (in case you get tired or want to experience the river without having to kayak on Class II +IV rapids)
-        li Airport Transfers + All Ground Transportation
-        li All guides
+        ul
+          li All Meals from Dinner on Day 1 through Breakfast on Day 8
+          li 7 Nights accommodation, Sarapiquí paddle sports base including 1 night at Jungle Camp on the Pacuare River
+          li 6 Days of whitewater kayaking or rafting (weather/water level dependent)
+          li Raft support along the white water week (in case you get tired or want to experience the river without having to kayak on Class II +IV rapids)
+          li Airport Transfers + All Ground Transportation
+          li All guides
       h2 What’s Not Included?
-      ul
-        li Airfare
-        li Tips and Gratuities
-        li Alcohol
+        ul
+          li Airfare
+          li Tips and Gratuities
+          li Alcohol
 
-    section.rio-sarapiqui.tour-section
-      h2 Río Sarapiquí
-      p The Río Sarapiqui (sarah-PIH-key), which originates between the slopes of volcanoes Poas and Barva, freefalls over a long series of cataracts and waterfalls before entering the Sarapiqui River Valley. Just east of San Miguel, the Sarapiqui's gradient becomes a manageable 92 feet per mile...
+    #RioSarapiqui.tabcontent.mySlides
+      h1.tourText Río Sarapiquí
+      p The Río Sarapiquí (sarah-PIH-key), which originates between the slopes of volcanoes Poas and Barva, freefalls over a long series of cataracts and waterfalls before entering the Sarapiqui River Valley. Just east of San Miguel, the Sarapiquí's gradient becomes a manageable 92 feet per mile...
       h3 From San Miguel to La Virgen
       p Length: 7 miles
       p Grade: 92 feet per mile
@@ -87,17 +98,17 @@ html(lang="en")
       p Season: Year-round
       p If you like to ride long, continuous Class IV rapids that demand precise eddy jumps and strong countercurrent moves, you'll have a blast on the San Miguel section of the Sarapiquí...
 
-    section.lower-sarapiqui.tour-section
-      h2 Lower Sarapiqui
+    #LowerSarapiqui.tabcontent.mySlides
+      h2 Lower Sarapiquí
       p La Virgen to El Roble
       p Length: 6 miles
       p Gradient: 58 feet per mile
       p Class: II-III+
       p Suitable levels: 800 - 2,500 C.F.S.
       p Season: All year
-      p The Lower Sarapiqui offers the best of many worlds and has much to offer paddlers of all ability levels...
+      p The Lower Sarapiquí offers the best of many worlds and has much to offer paddlers of all ability levels...
 
-    section.rio-toro.tour-section(style="margin:2rem 0;")
+    #RioToro.tabcontent.mySlides
       h1.tourText Río Toro
       p A fascinating blend of regional river characteristics merge to create the exceptional river experience that is the Río Toro (TOR-oh). The Toro rampages off the western slope of Volcano Poas and unloads the bulk of its fury as it laces through a massive gorge...
       
@@ -127,7 +138,7 @@ html(lang="en")
       p Season: Year-round (depending on dam releases)
       p The Upper Toro begins in the same beautiful, deep gorge as the two sections upstream...
 
-    section.rio-puerto-viejo.tour-section(style="margin:2rem 0;")
+    #UpperPuertoViejo.tabcontent.mySlides
       h1.tourText Upper Puerto Viejo
       p Few boaters have heard of the Puerto Viejo River, but those who have traveled it have no doubt that this beautiful stretch of rapids is destined to take its place among Costa Rican classics...
 
@@ -147,7 +158,8 @@ html(lang="en")
       p Suitable water levels: 700-2,500 cfs
       p Season: Year-round
       p Lower Puerto Viejo cuts a rugged course that parallels the eastern flank of Braulio Carrillo National Park...
-    section.rio-sucio.tour-section(style="margin:2rem 0;")
+
+    #RioSucio.tabcontent.mySlides
       h1.tourText Río Sucio
       p Length: 6 miles
       p Slope: 132 feet per mile
@@ -155,8 +167,8 @@ html(lang="en")
       p Suitable levels: 0-2200 cubic feet per second
       p Season: Year-round
       p Since rainforests are among the best water filtration systems in the world, you might expect only the purest water to flow from Braulio Carrillo. However, the reality you'll find at the edge of the Rio Sucio is quite different...
-      
-    section.rio-toro-amarillo.tour-section(style="margin:2rem 0;")
+
+    #RioToroAmarillo.tabcontent.mySlides
       h1.tourText Río Toro Amarillo
       p Length: 4 miles
       p Grade: 131 feet per mile
@@ -165,10 +177,10 @@ html(lang="en")
       p Season: May through February
       p Don't be fooled by the names. Beyond regional proximity, the Rio Toro and the Toro Amarillo River don't have much in common...
 
-    section.pacuare-river.tour-section(style="margin:2rem 0;")
+    #PacuareRiver.tabcontent.mySlides
       h1.tourText Pacuare River
       p The Pacuare River is wild and wonderful. Frequently featured on lists of the world's most spectacular whitewater rivers, the five sections of the Pacuare River make up more than 60 miles of truly unforgettable whitewater...
-      
+
       h2 Lower Pacuare
       p Tres Equuis Highway to Braulio Carrillo
       p Length: 16 miles
@@ -178,10 +190,11 @@ html(lang="en")
       p Season: Year-round
       p When people talk about the magnificent Pacuare River, they are usually referring to this section...
 
-    section.pejibaye-river.tour-section(style="margin:2rem 0;")
+    #PejibayeRiver.tabcontent.mySlides
       h1.tourText Pejibaye River
       p The Pejibaye River is a scenically charming river that runs parallel to a small sugarcane farming community that shares the same name...
       p The two popular sections of the Pejibaye are linked by their excellent water quality and beautiful scenery, although they have very different personalities...
+
 
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")

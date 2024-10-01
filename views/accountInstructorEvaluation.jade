@@ -42,61 +42,28 @@ html(lang="en")
     br
     br
     br
-    
-    
-    div(class="account-container")
-      .container-profile
-        .main-content
-          //a(href=`/profile/instructor/courses/add?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") ADD 
-          br
-          h3 Cursos Disponibles
-          br
-          div.table-responsive
-            table.table
-              thead
-                tr
-                  th Nombre
-                  th Inicio
-                  th Final
-                  th Inscritos
-                  //th Acciones
-                  //th.tableInfoField
-              tbody
-                if cursos.length > 0
-                  - var found = '0'
-                  each curso in cursos
-                    if curso.activo == true || curso.activo == "true"
-                      - found = '1'
-                      tr
-                        td
-                          p.tableInfoField Nombre: 
-                          = curso.titulo
-                        td
-                          p.tableInfoField Inicio: 
-                          = curso.inicio
-                        td
-                          p.tableInfoField Final: 
-                          = curso.final
-                        td
-                          p.tableInfoField Inscritos: 
-                          = curso.inscritos
-                        //td.actions
-                          form(action="", method="post")
-                            input(type="hidden", name="id" value=curso.id)
-                            button(type="submit") Estudiantes
-                          form(action="", method="post")
-                            input(type="hidden", name="id" value=curso.id)
-                            button(type="submit") Borrar
-                  if found == '0'
-                    tr
-                      td(style="text-align:center;" colspan="4") No hay cursos disponibles
-                else
-                  tr
-                    td(style="text-align:center;" colspan="4") No hay cursos disponibles
-
-
+    form(action="/profile/instructor/courses/students", method="post")
+      input(type="hidden", name="id" value=id)
+      input(type="hidden", name="cid" value=cid)
+      input(type="submit", value="BACK" class="btn-nav")
+    div(class="")
+      .main-content(style="width:100%;")
+        div(style="display:flex;justify-content:center;aling-items:center;")
+            form.form_main(action="/profile/instructor/courses/students/evaluation" method="post")
+              input(type="hidden", name="id" value=id)
+              input(type="hidden", name="cid" value=cid)
+              input(type="hidden", name="eid" value=eid)
+              input(type="hidden", name="evaid" value=evaluacion.id)
+              p.heading Evaluacion
+              each item, index in evaluationText
+                div.inputContainer
+                    label(style="margin:0;") #{item}:
+                    if index == 0
+                      input.inputField(value=evaluacion.points[index] name="pregunta[]" type="number" min=1 max=4, id="pregunta", placeholder="Calificacion 1 - 4")
+                    else
+                      input.inputField(value=evaluacion.points[index] name="pregunta[]" type="number" min=1 max=3, id="pregunta", placeholder="Calificacion 1 - 3")
+              input(type="submit", value="GUARDAR" class="btn-nav")
     //- ====================== Footer Section started======================
-    input(type="hidden" id="errorfield" value=error)
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
       img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
     footer
@@ -108,7 +75,7 @@ html(lang="en")
               p Come discover the best water adventures in Costa Rica with Sarapiquí Paddle Sports.
           .col-lg-3.col-md-3.col-sm-6.col-12
             .__kl_de_w
-              h3 Quick Links  instructor
+              h3 Quick Links
               ol
                 li(style="text-align:center;margin-top:1rem;")
                   i.fa-solid.fa-angle-right
@@ -139,5 +106,5 @@ html(lang="en")
   script(src="/assets/js/owl.carousel.min.js")
   script(src="/assets/js/owl.carousel.js")
   script(src="/assets/js/script.js")
-  script(src="/javascripts/alert.js")
   script(src="/javascripts/main.js")
+  script(src="/javascripts/alert.js")

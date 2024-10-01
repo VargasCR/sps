@@ -327,6 +327,86 @@ router.get('/profile/admin/courses/students/evaluation', async function(req, res
   
 })
 
+router.get('/profile/instructor/courses/students/evaluation', async function(req, res, next) {
+  const { id,cid,eid } = req.query;
+  const cursosText = await findBD('cursos.json');
+  let cursos = JSON.parse(cursosText);
+  let curso = cursos.filter(curso => curso.id == cid)[0];
+  let evaluationText = findEvaluation(curso.curso);
+
+  const evaluacionConsecutivoText = await findBD('evaluacionConsecutivo.txt');
+  let evaluacionConsecutivo = JSON.parse(evaluacionConsecutivoText);
+
+  const evaluacionesText = await findBD('evaluaciones.json');
+  let evaluaciones = JSON.parse(evaluacionesText);
+
+  const hoy = new Date();
+  const dentroDeDosAnios = new Date();
+  dentroDeDosAnios.setFullYear(dentroDeDosAnios.getFullYear() + 2);
+  const opcionesDeFormato = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  
+  const fechaHoyFormateada = hoy.toLocaleDateString('es-ES', opcionesDeFormato);
+  const fechaEnDosAniosFormateada = dentroDeDosAnios.toLocaleDateString('es-ES', opcionesDeFormato);
+  const usersText = await findBD('users.json');
+  let users = JSON.parse(usersText);
+  let foto = '';
+  let user = '';
+  if(id) {
+        user = users.filter(user => user.id == id)[0];
+        //const usersText = await findBD('users.json');
+        //const users = JSON.parse(usersText);
+        nombreCompleto = `${user.nombre} ${user.apellidos}`;
+        if(user.foto == '') {
+          foto = 'standard.png';
+        } else {
+          foto = user.foto;
+        }
+    }
+  let evaluacion = evaluaciones.filter(evaluacion => evaluacion.userID == eid 
+    && cid == evaluacion.courseID)
+  if (evaluacion.length == 0) {
+    evaluacionConsecutivo++;
+    const newEvaluation = {
+      id:evaluacionConsecutivo,
+      userID:eid,
+      courseID:cid,
+      points:[],
+      aprobado:false,
+      obtenido:fechaHoyFormateada,
+      vence:fechaEnDosAniosFormateada
+    }
+    evaluationText.forEach(element => {
+      newEvaluation.points.push(1);
+    });
+    evaluaciones.push(newEvaluation);
+    
+    evaluacion = newEvaluation;
+    await writeBD('evaluaciones.json',evaluaciones);
+    await writeBD('evaluacionConsecutivo.txt',evaluacionConsecutivo);
+    res.render('accountAdminEvaluation', { 
+      title: 'Express',
+      id:id,
+      cid:cid,
+      eid:eid,
+      evaluationText:evaluationText,
+      evaluacion:newEvaluation
+    });
+  } else {
+    res.render('accountInstructorEvaluation', { 
+      title: 'Express',
+      id:id,
+      cid:cid,
+      eid:eid,
+      foto:foto,
+      evaluationText:evaluationText,
+      evaluacion:evaluacion[0]
+    });
+  }
+  //return
+  ////console.log(evaluacion[0])
+  
+})
+
 
 const { PDFDocument, rgb } = require('pdf-lib');
 const { isReadable } = require('stream');
@@ -670,6 +750,46 @@ router.post('/profile/admin/courses/students/evaluation', async function(req, re
   });
 })
 
+router.post('/profile/instructor/courses/students/evaluation', async function(req, res, next) {
+  const { id,cid,eid,evaid,pregunta } = req.body;
+  //return;
+  const cursosText = await findBD('cursos.json');
+  let cursos = JSON.parse(cursosText);
+  let curso = cursos.filter(curso => curso.id == cid)[0];
+  let evaluationText = findEvaluation(curso.curso);
+
+  let evaluacion = {};
+  const evaluacionesText = await findBD('evaluaciones.json');
+  let evaluaciones = JSON.parse(evaluacionesText);
+  evaluaciones.forEach(element => {
+    if(element.id == evaid) {
+      element.points = pregunta;
+      evaluacion = element;
+    }
+  });
+  await writeBD('evaluaciones.json',evaluaciones);
+  let foto = '';
+  if(id) {
+      const usersText = await findBD('users.json');
+      const users = JSON.parse(usersText);
+      let user = users.filter(user => user.id == id)[0];
+      nombreCompleto = `${user.nombre} ${user.apellidos}`;
+      if(user.foto == '') {
+        foto = 'standard.png';
+      } else {
+        foto = user.foto;
+      }
+  }
+  res.render('accountInstructorEvaluation', { 
+    title: 'Express',
+    id:id,
+    cid:cid,
+    eid:eid,
+    evaluationText:evaluationText,
+    evaluacion:evaluacion,foto:foto
+  });
+})
+
 router.get('/profile/student/courses/subscribed', async function(req, res, next) {
   const { ee11cbb19052e40b07aac0ca060c23ee } = req.query;
   const id = ee11cbb19052e40b07aac0ca060c23ee;
@@ -872,6 +992,90 @@ router.get('/admin-student-list', async function(req, res, next) {
       }
   }
   res.render('accountAdminListStudent', { 
+    title: 'Express',
+    courses:courses,
+    headerCourses:headerCourses,id:id,foto:foto
+  })
+})
+
+router.get('/instructor-student-list', async function(req, res, next) {
+  const { ee11cbb19052e40b07aac0ca060c23ee } = req.query;
+  const id = ee11cbb19052e40b07aac0ca060c23ee;
+let user = null;
+  const usersText = await findBD('users.json');
+  const users = JSON.parse(usersText);
+
+  const cursosText = await findBD('cursos.json');
+  const fcorses = JSON.parse(cursosText);
+  let cursos = fcorses.filter(c => c.instructor == id);
+  const certificadosText = await findBD('certificados.json');
+  let fcertificados = JSON.parse(certificadosText);
+  let certificados = fcertificados.filter(c => c.instructor == id);
+
+  let courses = [];
+
+  let certificado = null;
+  let curso = null;
+  certificados.forEach(element_certificado => {
+    certificado = null;
+    certificado = element_certificado;
+    curso = null;
+    curso = cursos.filter(curso => curso.id == element_certificado.courseID)[0];
+    element_certificado.estudiantes.forEach(element_estudianteID => {
+      let datos = {
+        certificado:'',
+        estudiante:'',
+        url:'',
+        eurl:'',
+        curso:''};
+      datos.curso = curso;
+      datos.certificado = certificado;
+      datos.url = `../database/certificados/${curso.id+'-'+element_estudianteID}.pdf`;
+      datos.eurl = `../database/certificados/e-${curso.id+'-'+element_estudianteID}.pdf`;
+      const estudiante = users.filter(user => user.id == element_estudianteID)[0];
+      
+      datos.estudiante = estudiante;
+      // Crear una nueva fecha con la fecha original
+      let fechaOriginal = new Date(curso.final);
+  
+      // Crear una nueva fecha a partir de la fecha original, sumando dos años
+      let nuevaFecha = new Date(fechaOriginal);
+      nuevaFecha.setFullYear(fechaOriginal.getFullYear() + 2);
+      
+      
+      let anio = nuevaFecha.getFullYear();
+      let mes = String(nuevaFecha.getMonth() + 1).padStart(2, '0');
+      let dia = String(nuevaFecha.getDate()).padStart(2, '0');
+      let fechaFormateada = `${anio}-${mes}-${dia}`;
+      
+      //console.log(fechaFormateada);
+      datos.curso.expira = fechaFormateada;
+      courses.push(datos);
+    });
+  });
+  let headerCourses = findActiveCourses();
+  for (const key in headerCourses) {
+    if (Object.prototype.hasOwnProperty.call(headerCourses, key)) {
+      const element = {
+        index:key,
+        name:headerCourses[key].name
+      }
+      headerCourses[key] = element;
+    }
+  }
+  let foto = '';
+  if(id) {
+      //const usersText = await findBD('users.json');
+      //const users = JSON.parse(usersText);
+      user = users.filter(user => user.id == id)[0];
+      nombreCompleto = `${user.nombre} ${user.apellidos}`;
+      if(user.foto == '') {
+        foto = 'standard.png';
+      } else {
+        foto = user.foto;
+      }
+  }
+  res.render('accountInstructorListStudent', { 
     title: 'Express',
     courses:courses,
     headerCourses:headerCourses,id:id,foto:foto
@@ -1719,6 +1923,55 @@ router.post('/profile/admin/courses/students', async function(req, res, next) {
   });
 })
 
+router.post('/profile/instructor/courses/students', async function(req, res, next) {
+  const { id,cid } = req.body;
+  const cursosText = await findBD('cursos.json');
+  const cursos = JSON.parse(cursosText);
+  const curso = cursos.filter(cursox => cursox.id == cid)[0];
+
+  const certificadosText = await findBD('certificados.json');
+  const certificados = JSON.parse(certificadosText);
+  const certificado = certificados.filter(certificado => certificado.courseID == curso.id)[0];
+  ////console.log(certificados)
+  const usersText = await findBD('users.json');
+  const users = JSON.parse(usersText);
+  let listaIdEstudiantes = [];
+  if(certificado != undefined) {
+    listaIdEstudiantes = certificado.estudiantes;
+  } else {
+
+  }
+  let listaEstudiantes = [];
+  let i = 0;
+  listaIdEstudiantes.forEach(element => {
+    let estudiante = users.filter(user => user.id == element)[0];
+    estudiante.cursoVerificado = certificado.verificado[i]
+    i++;
+    listaEstudiantes.unshift(estudiante);
+  });
+  const codigoError = 0;
+  let foto = '';
+    if(id) {
+        const usersText = await findBD('users.json');
+        const users = JSON.parse(usersText);
+        let user = users.filter(user => user.id == id)[0];
+        nombreCompleto = `${user.nombre} ${user.apellidos}`;
+        if(user.foto == '') {
+          foto = 'standard.png';
+        } else {
+          foto = user.foto;
+        }
+    }
+  res.render('courseStudentsInstructor', { 
+    title: 'Express',
+    id:id,
+    codigoError:codigoError,
+    curso:curso,
+    listaEstudiantes:listaEstudiantes,
+    cid:cid,foto:foto
+  });
+})
+
 router.post('/profile/admin/courses/students/delete', async function(req, res, next) {
   const { id,cid,eid } = req.body;
   //console.log(id,cid)
@@ -1882,6 +2135,70 @@ router.get('/profile/admin', async function(req, res, next) {
     id:id,error:e
   });
 });
+router.get('/profile/instructor', async function(req, res, next) {
+    // Obtener los parámetros de la URL
+    let { ee11cbb19052e40b07aac0ca060c23ee,e } = req.query;
+    if(e != 'f0' && e != 'f1') {
+      e = '';
+    }
+    const id = ee11cbb19052e40b07aac0ca060c23ee;
+    let nombreCompleto = '';
+    let user = null;
+    let cursos = [];
+    let foto = '';
+    if(id) {
+      const usersText = await findBD('users.json');
+      const users = JSON.parse(usersText);
+      let user = users.filter(user => user.id == id)[0];
+      nombreCompleto = `${user.nombre} ${user.apellidos}`;
+      if(user.foto == '') {
+        foto = 'standard.png';
+      } else {
+        foto = user.foto;
+      }
+      const cursosText = await findBD('cursos.json');
+      let fcorses = JSON.parse(cursosText);
+      const courses = findActiveCourses();
+      const certificadosText = await findBD('certificados.json');
+      
+      const certificados = JSON.parse(certificadosText);
+      let cursos = fcorses.filter(c => c.instructor == id);
+      console.log(cursos)
+      console.log('cursos')
+      cursos.forEach(element => {
+      console.log('element')
+      console.log(element)
+      user = users.filter(user => user.id == element.instructor)[0];
+      if(user) {
+        element.instructor = user.nombre +' '+ user.apellidos;
+      } else {
+        element.instructor = '';
+      }
+      console.log(element)
+      
+      for (const key in courses) {
+        if (courses.hasOwnProperty(key)) {
+          const curso = courses[key];
+          if(key == element.id) {
+            element.nombre = curso.name;
+          }
+        }
+      }
+      console.log(element)
+    });
+    res.render('accountInstructor', { 
+      title: 'Express',
+      nombreCompleto:nombreCompleto,
+      cursos:cursos,
+      foto:foto,
+      id:id,error:e
+    });
+    } else {
+        res.send('No se encontró el parámetro ee11cbb19052e40b07aac0ca060c23ee');
+    }
+    console.log(cursos)
+    console.log(cursos)
+});
 
 router.get('/profile/student', async function(req, res, next) {
     // Obtener los parámetros de la URL
@@ -2020,6 +2337,59 @@ router.get('/profile/admin/courses', async function(req, res, next) {
     foto:foto,
     id:id
   });
+});
+
+router.get('/profile/instructor/courses', async function(req, res, next) {
+  const { ee11cbb19052e40b07aac0ca060c23ee } = req.query;
+  const id = ee11cbb19052e40b07aac0ca060c23ee;
+  let nombreCompleto = '';
+  let user = null;
+  let cursos = [];
+  if(id) {
+      const usersText = await findBD('users.json');
+      const users = JSON.parse(usersText);
+      let user = users.filter(user => user.id == id)[0];
+      nombreCompleto = `${user.nombre} ${user.apellidos}`;
+      const courses = findActiveCourses();
+      if(user.foto == '') {
+        foto = 'standard.png';
+      } else {
+        foto = user.foto;
+      }
+      const cursosText = await findBD('cursos.json');
+      let fcorses = JSON.parse(cursosText);
+      console.log(id)
+      const certificadosText = await findBD('certificados.json');
+      const certificados = JSON.parse(certificadosText);
+      let cursos = fcorses.filter(c => c.instructor == id);
+      cursos.forEach(element => {
+        console.log(user.id == element.instructor)
+        user = users.filter(user => user.id == element.instructor)[0];
+        if(user) {
+          element.instructor = user.nombre +' '+ user.apellidos;
+        } else {
+          element.instructor = '';
+        }
+        for (const key in courses) {
+          if (courses.hasOwnProperty(key)) {
+            const curso = courses[key];
+            if(key == element.id) {
+              element.nombre = curso.name;
+            }
+          }
+        }
+      });
+      res.render('accountInstructorCourses', { 
+        title: 'Express',
+        nombreCompleto:nombreCompleto,
+        cursos:cursos,
+        foto:foto,
+        id:id
+      });
+  } else {
+      //res.send('No se encontró el parámetro ee11cbb19052e40b07aac0ca060c23ee');
+  }
+    
 });
 
 
