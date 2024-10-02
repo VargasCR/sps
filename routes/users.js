@@ -2580,7 +2580,7 @@ router.post('/singup', async function(req, res, next) {
     telefono,
     sangre,dob
   } = req.body;
-  if (!nombre || !apellidos || !tipo_cedula || !tipo_cuenta || !cedula || !contra || !nacionalidad || !dob || !email || !telefono || !sangre) {
+  if (!nombre || !apellidos || !tipo_cedula || !tipo_cuenta || !cedula || !contra || !nacionalidad || !dob || !email || !telefono) {
     codigoError = '2';
     //console.log(codigoError)
     res.render('singup', { 
