@@ -185,7 +185,7 @@ a:hover {
     height: 100%;
     width: 100%; }
   .slider .carousel-inner .carousel-item .carousel-caption {
-    top: 15%;
+    top: 62%;
     display: block;
     transition: ease-in 0.5s; }
     .header-img-ico {
@@ -201,7 +201,7 @@ a:hover {
          } }
     @media (max-width: 1199.98px) and (min-width: 992px) {
       .slider .carousel-inner .carousel-item .carousel-caption {
-        top: 20%; } }
+        top: 62%; } }
     .slider .carousel-inner .carousel-item .carousel-caption h2 {
       font-size: 2.5rem;
       text-transform: uppercase;
@@ -896,6 +896,9 @@ footer {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+}
+.tabcontent li {
+  color: black;
 }
 
 .active {
@@ -1623,6 +1626,8 @@ footer .col-lg-3 {
 .d-block.img-slider {
   max-height: 1000px;
   height: 1000px;
+  background-size: cover; /* cubrir el contenedor sin distorsionar */
+    background-position: center; /* centrar la imagen */
 }
 @media (max-width: 768px) {
   .d-block.img-slider {
@@ -1676,4 +1681,19 @@ footer .col-lg-3 {
 }
 .tour-section {
   padding: 2rem;
+}
+
+.btn-book {
+  padding: 1rem;
+  background-color: #002147;
+  color: white;
+}
+
+.carousel-caption {
+  display: flex;
+  flex-direction: column; /* Coloca los elementos en una columna */
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  height: 100%; /* Asegúrate de que el contenedor tenga altura */
+  text-align: center; /* Opcional: centrar texto dentro */
 }

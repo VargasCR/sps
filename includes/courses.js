@@ -1,6 +1,6 @@
 var requerimentos = {
     
-    7:['First Aid'],
+    7:['First Aid',],
     14:['First Aid','RG', 'SWR Update'],
     1:['First Aid', 'SWR Update'],
 }
