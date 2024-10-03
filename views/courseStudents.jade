@@ -102,6 +102,11 @@ html(lang="en")
                             input(type="hidden", name="cid" value=cid)
                             input(type="hidden", name="eid" value=item.id)
                             button(type="submit") Verificar
+                        form(action="/profile/admin/courses/students/delete", method="post")
+                            input(type="hidden", name="id" value=id)
+                            input(type="hidden", name="cid" value=cid)
+                            input(type="hidden", name="eid" value=item.id)
+                            button(type="submit") Borrar
                     else
                       td.actions
                         form(action="/profile/admin/courses/students/evaluation", method="get")

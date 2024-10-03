@@ -495,56 +495,15 @@ const carnetSWR = async (document) => {
   } else {
     imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
   }
-if (fs.existsSync(imagePathFlag)) {
-    console.log("El archivo existe.");
-    try {
-      await fs.promises.writeFile('imagePathFlag.txt', 'TREE', 'utf8');
-      console.log('Archivo guardado correctamente');
-    } catch (err) {
-      console.error('Error al escribir el archivo:', err);
-    }
-  } else {
-    console.log("El archivo no existe.");
-    try {
-      await fs.promises.writeFile('imagePathFlag.txt', 'FALSE', 'utf8');
-      console.log('Archivo guardado correctamente');
-    } catch (err) {
-      console.error('Error al escribir el archivo:', err);
-    }
-  }
   const base64Image = base64Encode(imagePath);
- 
   const base64Image2 = base64Encode(imagePath2);
-try {
-    await fs.promises.writeFile('0010imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
+
   const base64ImageFlag = base64Encode(imagePathFlag);
-try {
-    await fs.promises.writeFile('00110imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }  
-const base64ImageProfile = base64Encode(imagePathProfile);
+  const base64ImageProfile = base64Encode(imagePathProfile);
   let level = 1;
-try {
-    await fs.promises.writeFile('11imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
-  const url = `https://sarapiquipaddlesports.com/student-certified?id=${document.matriculados.id}&course=${document.curso.id}`;
+  const url = `sarapiquipaddlesports.com/sc?i=${document.matriculados.id}&c=${document.curso.id}`;
   //console.log(document)
   const barcodeurl = path.join(__dirname, `/certify/barcode.png`);
-  try {
-    await fs.promises.writeFile('12imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
   bwipjs.toBuffer({
     bcid: 'code128',
     text: url,              
@@ -568,23 +527,11 @@ try {
 });
 const imageBarCode = path.join(__dirname, '/certify/barcode.png');
 const base64ImageBarCode = base64Encode(imageBarCode);
-try {
-  await fs.promises.writeFile('11imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-  console.log('Archivo guardado correctamente');
-} catch (err) {
-  console.error('Error al escribir el archivo:', err);
-}
   document.evaluaciones.forEach(element => {
     if(document.matriculados.id == element.userID) {
       level = element.points[0];
     }
   });
-  try {
-    await fs.promises.writeFile('12imagePath.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
   let pdfContent = `
   <!DOCTYPE html>
 <html>
@@ -750,7 +697,6 @@ try {
 }
 
 const carnetWFA = (document) => {
-  console.log(document.curso)
   let courseName = findCourseName(document.curso.curso)
   if(document.curso.isInstructor == 'true' || document.curso.isInstructor == true) {
     courseName+= ' Instructor'
@@ -951,155 +897,11 @@ const base64ImageProfile = base64Encode(imagePathProfile);
 </body>
 </html>
 `;
-
-/*let pdfContent = `
-  <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>Factura</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      width: 400px;
-    }
-    .container {
-      position: relative;
-      width: 100%;
-    }
-    .image {
-      width: 100%;
-    }
-    .text-overlay {
-      position: absolute;
-      top: 44px;
-      right: 17px;
-      background-color: transparent;
-      color: #295092;
-      font-size: 11px;
-      font-weight: 700;
-      text-align: center;
-      padding: 0px;
-      width: 200px;
-      border-radius: 5px;
-    }
-    .text-overlay_level {
-      position: absolute;
-      top: 82px;
-      right: 17px;
-      background-color: transparent;
-      color: #295092;
-      font-size: 17px;
-      font-weight: 700;
-      text-align: center;
-      padding: 0px;
-      width: 200px;
-      border-radius: 5px;
-    }
-    .text-overlay_cname {
-      position: absolute;
-      top: 120px;
-      right: 17px;
-      background-color: transparent;
-      color: #295092;
-      font-size: 17px;
-      font-weight: 700;
-      text-align: center;
-      padding: 0px;
-      width: 200px;
-      border-radius: 5px;
-    }
-    .img-flag-overlay {
-      position: absolute;
-      top: 148px;
-      left: 13px;
-      padding: 0px;
-      width: 28px;
-    }
-    .img-profile-overlay {
-      position: absolute;
-      top: 28px;
-      left: 13px;
-      padding: 0px;
-      width: 85px;
-      max-height:110px;
-    }
-    .imgico-overlay {
-      position: absolute;
-      top: 10px;
-      left: 33px;
-      padding: 0px;
-      width: 150px;
-      max-height:150px;
-    }
-    .text-overlay_date {
-      position: absolute;
-      bottom: 18.5px;
-      right: 13px;
-      color: rgb(0, 0, 0);
-      font-size: 11px;
-      font-weight: 700;
-      text-align: center;
-      padding: 0px;
-      border-radius: 5px;
-    }
-    .text-overlay_acaNum {
-      position: absolute;
-      bottom: 38px;
-      left: 355px;
-      color: rgb(0, 0, 0);
-      font-size: 10px;
-      font-weight: 700;
-      text-align: center;
-      padding: 0px;
-      border-radius: 5px;
-      }
-      .text-overlay_dni {
-        position: absolute;
-        top: 138px;
-        left: 13px;
-        color: rgb(0, 0, 0);
-        font-size: 9px;
-        font-weight: 700;
-        text-align: center;
-        padding: 0px;
-        border-radius: 5px;
-      }
-      </style>
-</head>
-<body>
-  <div class="container">
-    <img src="data:image/png;base64,${base64Image}" alt="" class="image">
-    
-    <div class="imgico-overlay">
-      <img src="data:image/png;base64,${base64ImageIco}" alt="" class="image">
-    </div>
-    <div class="text-overlay">${document.matriculados.nombre} ${document.matriculados.apellidos}</div>
-    <div class="text-overlay_date">${document.curso.final}</div>
-    <div class="text-overlay_level">Level ${level}</div>
-    <div class="text-overlay_cname">${courseName}</div>
-    <div class="text-overlay_acaNum">${document.matriculados.aca_codigo}</div>
-  </div>
-  <br>
-  <div class="container">
-  
-    <img src="data:image/png;base64,${base64Image2}" alt="" class="image">
-    <div class="text-overlay_dni">DNI: ${document.matriculados.cedula}</div>
-    <img src="data:image/png;base64,${base64ImageFlag}" alt="" class="img-flag-overlay">
-    <img src="data:image/png;base64,${base64ImageProfile}" alt="" class="img-profile-overlay">
-  </div>
-</body>
-</html>
-`;*/
-  /////console.log(pdfContent)
   return pdfContent;
 }
 
 
 const evaluacionWFA = (document) => {
-  console.log('docxxxument')
-  console.log('xxx')
   
   //console.log(document.evaluaciones.points)
   const courseName = findCourseName(document.curso.curso,0)
@@ -2758,39 +2560,11 @@ const evaluationACASWR = async (document) => {
   const courseName = findCourseName(document.curso.curso,evaluacion.points[0])
   const imagePath = path.join(__dirname, '/certify/acalogo2.png');
 
-  if (fs.existsSync(imagePath)) {
-    console.log("El archivo existe.");
-    try {
-      await fs.promises.writeFile('imagePathv.txt', 'TREE', 'utf8');
-      console.log('Archivo guardado correctamente');
-    } catch (err) {
-      console.error('Error al escribir el archivo:', err);
-    }
-  } else {
-    console.log("El archivo no existe.");
-    try {
-      await fs.promises.writeFile('imagePathv.txt', 'FALSE', 'utf8');
-      console.log('Archivo guardado correctamente');
-    } catch (err) {
-      console.error('Error al escribir el archivo:', err);
-    }
-  }
-
-  try {
-    await fs.promises.writeFile('imagePath.txt', JSON.stringify(imagePath), 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
+  
   const imagePathEscudo = path.join(__dirname, '/certify/logo.png');
   const imagePathFeco = path.join(__dirname, '/certify/fecoraftlogo.png');
   //const imagePath2 = path.join(__dirname, '/certify/carnet2.png');
-  try {
-    await fs.promises.writeFile('imagePath4.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
+  
   const imagePathFlag = path.join(__dirname, `/flags/${document.matriculados.nacionalidad}.png`);
   let imagePathProfile = '';
   if(document.matriculados.foto == '') {
@@ -2798,37 +2572,21 @@ const evaluationACASWR = async (document) => {
   } else {
     imagePathProfile = path.join(__dirname, `../public/uploads/${document.matriculados.foto}`);
   }
-  try {
-    await fs.promises.writeFile('imagePath5.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
+  
   const base64Image = base64Encode(imagePath);
   const base64Image2 = base64Encode(imagePathEscudo);
   const base64Image3 = base64Encode(imagePathFeco);
   //const base64ImageFlag = base64Encode(imagePathFlag);
   //const base64ImageProfile = base64Encode(imagePathProfile);
   let level = 1;
-  try {
-    await fs.promises.writeFile('imagePath8.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
+  
   document.evaluaciones.forEach(element => {
     if(document.matriculados.id == element.userID) {
       level = element.points[0];
     }
   });
-  try {
-    await fs.promises.writeFile('imagePath9.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
+  
   const questions = findEvaluation(document.curso.curso);
-////console.log(questions)
 let pdfContent = `<!DOCTYPE html>
 <html lang="en">
 <head>

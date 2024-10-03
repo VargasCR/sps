@@ -1631,8 +1631,8 @@ footer .col-lg-3 {
 }
 @media (max-width: 768px) {
   .d-block.img-slider {
-    max-height: 800px;
-    height: 800px;
+    max-height: 670px;
+    height: 670px;
   }
   .slider .carousel-inner .carousel-item .carousel-caption h2 {
     font-size: 1.5rem;

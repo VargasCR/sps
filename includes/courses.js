@@ -726,7 +726,7 @@ var courses = {
             'Essentials of River Safety',
             'Essentials of River Safety',
             'River Safety and Rescue',
-            'Swift Water Rescue',
+            'Swift Water Rescue River Pro',
             'Swift Water Rescue Advance'],
         'img':'assets/images/slider/1.jpg',
         'active':1,
@@ -973,7 +973,7 @@ var courses = {
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam explicabo hic asperiores ad dolor? Odio quam itaque minus. Officiis optio officia eligendi molestiae blanditiis iusto saepe iure expedita facilis quaerat?',
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam explicabo hic asperiores ad dolor? Odio quam itaque minus. Officiis optio officia eligendi molestiae blanditiis iusto saepe iure expedita facilis quaerat?'
         ],
-        'name':'River Guide International',
+        'name':'ACA River Guide International',
         'folder':'',
         'img':'assets/images/slider/1.jpg',
         'active':1,

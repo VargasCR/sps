@@ -1,1 +1,0 @@
-[{"id":1,"courseID":2,"instructor":"1001","estudiantes":["1006"],"finalizado":false,"activo":true,"verificado":[1]}]

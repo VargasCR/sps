@@ -26,7 +26,7 @@ html(lang="en")
                       a(href="/") Home
                     li
                       .dropdown
-                        button(onclick="myFunction('myDropdown')" class="dropbtn") Education
+                        button(onclick="myFunction('myDropdown')" class="dropbtn" style="padding:0;") Education
                         #myDropdown.dropdown-content
                           //button(class="subDropdown dropbtn" onclick="openSubDropdown('instructors')") Instructors
                           #instructors.subdropdown.hidden
@@ -36,7 +36,7 @@ html(lang="en")
                           button(class="subDropdown dropbtn" onclick="openSubDropdown('students')") Students
                           #students.subdropdowm.hidden
                             a(class="subDropdown dropbtn" href="/login") Login
-                            a(class="dropbtn subdropbtn" href=`/student-list`) List
+                            //a(class="dropbtn subdropbtn" href=`/student-list`) List
                             a(class="dropbtn subdropbtn" href=`/courses-list`) COURSES
                             
                           button(class="subDropdown dropbtn" onclick="openSubDropdown('sport')") Sport
@@ -47,7 +47,7 @@ html(lang="en")
 
                     li
                       .dropdown
-                        button(onclick="myFunction('myDropdown2')" class="dropbtn") Trips
+                        button(onclick="myFunction('myDropdown2')" class="dropbtn" style="padding:0;") Trips
                         #myDropdown2.dropdown-content
                           a(class="subDropdown dropbtn" href="#") One Day Tour
                           a(class="subDropdown dropbtn" href="/oneweek") One Week Tour

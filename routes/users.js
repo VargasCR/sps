@@ -198,28 +198,23 @@ router.get('/student-course', async function(req, res, next) {
   });
 })
 
-router.get('/student-certified', async function(req, res, next) {
-  const {id, course} = req.query;
+router.get('/sc', async function(req, res, next) {
+  const {i, c} = req.query;
   const cursosText = await findBD('cursos.json');
   let cursos = JSON.parse(cursosText);
-  let curso = cursos.filter(curso => curso.id == course)[0];
-
+  let curso = cursos.filter(curso => curso.id == c)[0];
 
   let courseInfo = findCourseFromID(curso.curso);
 
   const usersText = await findBD('users.json');
   const users = JSON.parse(usersText);
-  let user = users.filter(user => user.id == id)[0];
+  let user = users.filter(user => user.id == i)[0];
 
   const nombreCompleto = `${user.nombre} ${user.apellidos}`;
 
   const evaluacionesText = await findBD('evaluaciones.json');
   let evaluaciones = JSON.parse(evaluacionesText);
-  let evaluacion = evaluaciones.filter(evaluacion => evaluacion.courseID == course)[0];
-
-  //console.log('evaluacion');
-  ////console.log(evaluaciones);
-  ////console.log(courseInfo);
+  let evaluacion = evaluaciones.filter(evaluacion => evaluacion.courseID == c)[0];
 
   let item = {
     obtenido:evaluacion.obtenido,
@@ -445,60 +440,30 @@ async function addWatermarkImageToPDF(inputBuffer) {
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 router.post('/profile/admin/courses/close', async function(req, res, next) {
-  try {
-    await fs.promises.writeFile('arc.txt', 'dataText', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
+  
   const { id,cid } = req.body;
   // Define la ruta del archivo
   
   const usersText = await findBD('users.json');
   
-try {
-    await fs.promises.writeFile('usersText.txt', usersText, 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
 
-  await sleep(220);
+
+  //await sleep(220);
   const certificadosText = await findBD('certificados.json');
-try {
-    await fs.promises.writeFile('certificadosText.txt', certificadosText, 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }  
-await sleep(220);
+
+//await sleep(220);
   
   const evaluacionesText = await findBD('evaluaciones.json');
-try {
-    await fs.promises.writeFile('evaluacionesText.txt', evaluacionesText, 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
-await sleep(220);
+
+//await sleep(220);
   
   const cursosText = await findBD('cursos.json');
-try {
-    await fs.promises.writeFile('cursosText.txt', cursosText, 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }  
-await sleep(220);
+
+//await sleep(220);
   
   const consecutivoPaginatxt = await findBD('consecutivoPagina.json');
-  try {
-    await fs.promises.writeFile('consecutivoPaginatxt.txt', consecutivoPaginatxt, 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
-await sleep(220);
+  
+//await sleep(220);
   
   
   let certificados = JSON.parse(certificadosText);
@@ -507,23 +472,6 @@ await sleep(220);
   let users = JSON.parse(usersText);
   
   let consecutivoPagina = JSON.parse(consecutivoPaginatxt);
-
-
-  try {
-    await fs.promises.writeFile('certificados.txt', JSON.stringify(certificados), 'utf8');
-    await fs.promises.writeFile('cursos.txt', JSON.stringify(cursos), 'utf8');
-    await fs.promises.writeFile('evaluaciones.txt', JSON.stringify(evaluaciones), 'utf8');
-    await fs.promises.writeFile('users.txt', JSON.stringify(users), 'utf8');
-    await fs.promises.writeFile('consecutivoPagina.txt', JSON.stringify(consecutivoPagina), 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-    console.log(certificados)
-    console.log(cursos)
-    console.log(evaluaciones)
-    console.log(users)
-    console.log(consecutivoPagina)
-  }
 
 
   let curso = {};
@@ -549,12 +497,7 @@ await sleep(220);
   }  
   //await writeBD('cursos.json',cursos);
   const courses = findActiveCourses();
-  try {
-    await fs.promises.writeFile('courses.txt', JSON.stringify(courses), 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
+  
   cursos.forEach(element => {
     user = users.filter(user => user.id == element.instructor)[0];
     if(user) {
@@ -578,49 +521,18 @@ await sleep(220);
     border: "0mm",
   };
 
-console.log(consecutivoPaginatxt)
 
-try {
-  await fs.promises.writeFile('matriculados.txt', JSON.stringify(matriculados), 'utf8');
-  console.log('Archivo guardado correctamente');
-} catch (err) {
-  console.error('Error al escribir el archivo:', err);
-}
 for (const matriculado of matriculados) {
     infoCurso.matriculados = matriculado;
     let documentPDF = ``;
-    try {
-      await fs.promises.writeFile('matriculado.txt', JSON.stringify(matriculado), 'utf8');
-      console.log('Archivo guardado correctamente');
-    } catch (err) {
-      console.error('Error al escribir el archivo:', err);
-    }
     const num = consecutivoPagina[infoCurso.curso.curso] + 1;
     consecutivoPagina[infoCurso.curso.curso] = num;
     await writeBD('consecutivoPagina.json',consecutivoPagina);
-	try {
-      await fs.promises.writeFile('num.txt', JSON.stringify(consecutivoPagina), 'utf8');
-      console.log('Archivo guardado correctamente');
-    } catch (err) {
-      console.error('Error al escribir el archivo:', err);
-    }
     infoCurso.pagina = num;
     if(parseInt(infoCurso.curso.curso) == 14) {
       documentPDF = await evaluacionSK(infoCurso);
     } else if(parseInt(infoCurso.curso.curso) == 7) {
-      try {
-        await fs.promises.writeFile('3.txt', 'JSON.stringify(matriculados)', 'utf8');
-        console.log('Archivo guardado correctamente');
-      } catch (err) {
-        console.error('Error al escribir el archivo:', err);
-      }
       documentPDF = await evaluationACASWR(infoCurso);
-      try {
-        await fs.promises.writeFile('5.txt', documentPDF, 'utf8');
-        console.log('Archivo guardado correctamente');
-      } catch (err) {
-        console.error('Error al escribir el archivo:', err);
-      }
     } else if(parseInt(infoCurso.curso.curso) > 12) {
       documentPDF = await evaluacionWFA(infoCurso);
     }
@@ -629,31 +541,10 @@ for (const matriculado of matriculados) {
     }
     const file = { content: documentPDF };
     const pdfBuffer = await pdf.generatePdf(file, { format: 'A4' });
-    console.log(pdfBuffer)
     const pdfWithWatermark = await addWatermarkImageToPDF(pdfBuffer);
     let pathx = path.join(__dirname, `../database/certificados/e-${curso.id+'-'+matriculado.id}.pdf`);
-    fs.writeFileSync(pathx, pdfWithWatermark);
-    console.log(`PDF guardado en: ${pathx}`);
-    try {
-      await fs.promises.writeFile('33.txt', pathx, 'utf8');
-      console.log('Archivo guardado correctamente');
-    } catch (err) {
-      console.error('Error al escribir el archivo:', err);
-    }
+    await fs.writeFileSync(pathx, pdfWithWatermark);
   };
-  try {
-    await fs.promises.writeFile('4.txt', 'JSON.stringify(imagePath)', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
-  //
-  try {
-    await fs.promises.writeFile('consecutivoPaginaxxx.txt', 'consecutivoPagina', 'utf8');
-    console.log('Archivo guardado correctamente');
-  } catch (err) {
-    console.error('Error al escribir el archivo:', err);
-  }
   for (const matriculado of matriculados) {
     infoCurso.matriculados = matriculado;
     let documentPDF = '';
@@ -667,17 +558,12 @@ for (const matriculado of matriculados) {
     } else {
       documentPDF = await carnetACA(infoCurso);
     }
-
     // Genera el archivo PDF
     await sleep(200)
     const file = { content: documentPDF };
     try {
       const pdfBuffer = await pdf.generatePdf(file, options);
       const pathx = path.join(__dirname, `../database/certificados/${curso.id+'-'+matriculado.id}.pdf`); 
-      //path = `./database/certificados/${curso.id}-${matriculado.id}.pdf`;
-      console.log(`PDF guardado en: ${pathx}`);
-      //console.log(`PDF forafat en: ${pdfBuffer}`);
-      
       await fs.writeFileSync(pathx, pdfBuffer);
     } catch (error) {
       console.error('Error generando el PDF:', error);
@@ -933,41 +819,43 @@ router.get('/admin-student-list', async function(req, res, next) {
   let certificado = null;
   let curso = null;
   certificados.forEach(element_certificado => {
-    certificado = null;
-    certificado = element_certificado;
-    curso = null;
-    curso = cursos.filter(curso => curso.id == element_certificado.courseID)[0];
-    element_certificado.estudiantes.forEach(element_estudianteID => {
-      let datos = {
-        certificado:'',
-        estudiante:'',
-        url:'',
-        eurl:'',
-        curso:''};
-      datos.curso = curso;
-      datos.certificado = certificado;
-      datos.url = `../database/certificados/${curso.id+'-'+element_estudianteID}.pdf`;
-      datos.eurl = `../database/certificados/e-${curso.id+'-'+element_estudianteID}.pdf`;
-      const estudiante = users.filter(user => user.id == element_estudianteID)[0];
-      
-      datos.estudiante = estudiante;
-      // Crear una nueva fecha con la fecha original
-      let fechaOriginal = new Date(curso.final);
-  
-      // Crear una nueva fecha a partir de la fecha original, sumando dos años
-      let nuevaFecha = new Date(fechaOriginal);
-      nuevaFecha.setFullYear(fechaOriginal.getFullYear() + 2);
-      
-      
-      let anio = nuevaFecha.getFullYear();
-      let mes = String(nuevaFecha.getMonth() + 1).padStart(2, '0');
-      let dia = String(nuevaFecha.getDate()).padStart(2, '0');
-      let fechaFormateada = `${anio}-${mes}-${dia}`;
-      
-      //console.log(fechaFormateada);
-      datos.curso.expira = fechaFormateada;
-      courses.push(datos);
-    });
+    if(element_certificado.finalizado) {
+      certificado = null;
+      certificado = element_certificado;
+      curso = null;
+      curso = cursos.filter(curso => curso.id == element_certificado.courseID)[0];
+      element_certificado.estudiantes.forEach(element_estudianteID => {
+        let datos = {
+          certificado:'',
+          estudiante:'',
+          url:'',
+          eurl:'',
+          curso:''};
+        datos.curso = curso;
+        datos.certificado = certificado;
+        datos.url = `../database/certificados/${curso.id+'-'+element_estudianteID}.pdf`;
+        datos.eurl = `../database/certificados/e-${curso.id+'-'+element_estudianteID}.pdf`;
+        const estudiante = users.filter(user => user.id == element_estudianteID)[0];
+        
+        datos.estudiante = estudiante;
+        // Crear una nueva fecha con la fecha original
+        let fechaOriginal = new Date(curso.final);
+    
+        // Crear una nueva fecha a partir de la fecha original, sumando dos años
+        let nuevaFecha = new Date(fechaOriginal);
+        nuevaFecha.setFullYear(fechaOriginal.getFullYear() + 2);
+        
+        
+        let anio = nuevaFecha.getFullYear();
+        let mes = String(nuevaFecha.getMonth() + 1).padStart(2, '0');
+        let dia = String(nuevaFecha.getDate()).padStart(2, '0');
+        let fechaFormateada = `${anio}-${mes}-${dia}`;
+        
+        //console.log(fechaFormateada);
+        datos.curso.expira = fechaFormateada;
+        courses.push(datos);
+      });
+    }
   });
   let headerCourses = findActiveCourses();
   for (const key in headerCourses) {
@@ -1001,7 +889,7 @@ router.get('/admin-student-list', async function(req, res, next) {
 router.get('/instructor-student-list', async function(req, res, next) {
   const { ee11cbb19052e40b07aac0ca060c23ee } = req.query;
   const id = ee11cbb19052e40b07aac0ca060c23ee;
-let user = null;
+  let user = null;
   const usersText = await findBD('users.json');
   const users = JSON.parse(usersText);
 
@@ -1017,41 +905,43 @@ let user = null;
   let certificado = null;
   let curso = null;
   certificados.forEach(element_certificado => {
-    certificado = null;
-    certificado = element_certificado;
-    curso = null;
-    curso = cursos.filter(curso => curso.id == element_certificado.courseID)[0];
-    element_certificado.estudiantes.forEach(element_estudianteID => {
-      let datos = {
-        certificado:'',
-        estudiante:'',
-        url:'',
-        eurl:'',
-        curso:''};
-      datos.curso = curso;
-      datos.certificado = certificado;
-      datos.url = `../database/certificados/${curso.id+'-'+element_estudianteID}.pdf`;
-      datos.eurl = `../database/certificados/e-${curso.id+'-'+element_estudianteID}.pdf`;
-      const estudiante = users.filter(user => user.id == element_estudianteID)[0];
-      
-      datos.estudiante = estudiante;
-      // Crear una nueva fecha con la fecha original
-      let fechaOriginal = new Date(curso.final);
-  
-      // Crear una nueva fecha a partir de la fecha original, sumando dos años
-      let nuevaFecha = new Date(fechaOriginal);
-      nuevaFecha.setFullYear(fechaOriginal.getFullYear() + 2);
-      
-      
-      let anio = nuevaFecha.getFullYear();
-      let mes = String(nuevaFecha.getMonth() + 1).padStart(2, '0');
-      let dia = String(nuevaFecha.getDate()).padStart(2, '0');
-      let fechaFormateada = `${anio}-${mes}-${dia}`;
-      
-      //console.log(fechaFormateada);
-      datos.curso.expira = fechaFormateada;
-      courses.push(datos);
-    });
+    if(element_certificado.finalizado) {
+      certificado = null;
+      certificado = element_certificado;
+      curso = null;
+      curso = cursos.filter(curso => curso.id == element_certificado.courseID)[0];
+      element_certificado.estudiantes.forEach(element_estudianteID => {
+        let datos = {
+          certificado:'',
+          estudiante:'',
+          url:'',
+          eurl:'',
+          curso:''};
+        datos.curso = curso;
+        datos.certificado = certificado;
+        datos.url = `../database/certificados/${curso.id+'-'+element_estudianteID}.pdf`;
+        datos.eurl = `../database/certificados/e-${curso.id+'-'+element_estudianteID}.pdf`;
+        const estudiante = users.filter(user => user.id == element_estudianteID)[0];
+        
+        datos.estudiante = estudiante;
+        // Crear una nueva fecha con la fecha original
+        let fechaOriginal = new Date(curso.final);
+    
+        // Crear una nueva fecha a partir de la fecha original, sumando dos años
+        let nuevaFecha = new Date(fechaOriginal);
+        nuevaFecha.setFullYear(fechaOriginal.getFullYear() + 2);
+        
+        
+        let anio = nuevaFecha.getFullYear();
+        let mes = String(nuevaFecha.getMonth() + 1).padStart(2, '0');
+        let dia = String(nuevaFecha.getDate()).padStart(2, '0');
+        let fechaFormateada = `${anio}-${mes}-${dia}`;
+        
+        //console.log(fechaFormateada);
+        datos.curso.expira = fechaFormateada;
+        courses.push(datos);
+      });
+    }
   });
   let headerCourses = findActiveCourses();
   for (const key in headerCourses) {
@@ -1277,6 +1167,10 @@ router.post('/profile/student/unsubscribe', async function(req, res, next) {
   const codigoError = 0;
   const cursosText = await findBD('cursos.json');
   let cursos = JSON.parse(cursosText);
+  
+  const evaluacionesText = await findBD('evaluaciones.json');
+  let evaluaciones = JSON.parse(evaluacionesText);
+  
   const usersText = await findBD('users.json');
   const users = JSON.parse(usersText);
   let encontrado = false;
@@ -1313,7 +1207,9 @@ router.post('/profile/student/unsubscribe', async function(req, res, next) {
       }
     }
   });
+  const newEvaluaciones = evaluaciones.filter(eva => eva.userID != userID);
   await writeBD('certificados.json',certificados);
+  await writeBD('evaluaciones.json',newEvaluaciones);
 
   await writeBD('cursos.json',cursos);
   cursos.forEach(element => {
@@ -1735,20 +1631,26 @@ router.post('/profile/admin/courses/delete', async function(req, res, next) {
   const cursosText = await findBD('cursos.json');
   const cursos = JSON.parse(cursosText);
   //await writeBD('cursos.json',cursos);
-  let Newcursos = [];
-  cursos.forEach(element => {
-    if(cid != element.id) {
-      Newcursos.push(element);
-    }
-  });
+  let Newcursos = cursos.filter(cur => cur.id != cid);
+
   const usersText = await findBD('users.json');
   const users = JSON.parse(usersText);
   let user = users.filter(user => user.id == id)[0];
   nombreCompleto = `${user.nombre} ${user.apellidos}`;
   const courses = findActiveCourses();
+
   const certificadosText = await findBD('certificados.json');
   const certificados = JSON.parse(certificadosText);
+  
+  const evaluacionesText = await findBD('evaluaciones.json');
+  const evaluaciones = JSON.parse(evaluacionesText);
+  
+  let newEvaluationes = evaluaciones.filter(eva => eva.courseID != cid);
+  let newCertificados = certificados.filter(cer => cer.courseID != cid);
   await writeBD('cursos.json',Newcursos);
+  await writeBD('certificados.json',newCertificados);
+  await writeBD('evaluaciones.json',newEvaluationes);
+
   Newcursos.forEach(element => {
     user = users.filter(user => user.id == element.instructor)[0];
     if(user) {
@@ -1978,31 +1880,52 @@ router.post('/profile/admin/courses/students/delete', async function(req, res, n
   const cursosText = await findBD('cursos.json');
   let cursos = JSON.parse(cursosText);
   cursos.forEach(element => {
-    if(cid == element.id) {
-      parseInt(element.inscritos)--;
+    if (cid == element.id) {
+      // Verificamos si element.inscritos es un número
+      const inscritos = Number(element.inscritos);
+      
+      if (Number.isInteger(inscritos) && inscritos > 0) {
+          // Decrementamos solo si inscritos es un entero positivo
+          element.inscritos = inscritos - 1; // Actualizamos directamente
+      } else {
+        element.inscritos = parseInt(element.inscritos) - 1;
+        console.log("No se puede decrementar, inscritos no es un entero válido o ya es 0");
+      }
     }
   });
+
   const curso = cursos.filter(cursox => cursox.id == cid)[0];
   
   const certificadosText = await findBD('certificados.json');
-  const certificados = JSON.parse(certificadosText);
-  const certificado = certificados.filter(certificado => certificado.courseID == curso.id)[0];
+  let certificados = JSON.parse(certificadosText);
+  //let certificado = certificados.filter(certificado => certificado.courseID == curso.id)[0];
   let listaIdEstudiantes = [];
-  certificado.estudiantes.forEach(element => {
-    if(eid != element) {
-      listaIdEstudiantes.push(element);
+  certificados.forEach(certificado => {
+    if(certificado.courseID == curso.id) {
+      let indexToDelete = 0;
+      certificado.estudiantes.forEach(element => {
+        //console.log()
+        if(eid == element) {
+          //listaIdEstudiantes.push(element);
+          certificado.estudiantes.splice(indexToDelete, 1);
+          certificado.verificado.splice(indexToDelete, 1);
+        }
+        indexToDelete++;
+      })
     }
-  })
-
-  //console.log(certificados)
+  });
+  const evaluacionesText = await findBD('evaluaciones.json');
+  let evaluaciones = JSON.parse(evaluacionesText);
+  let newEvaluationes = evaluaciones.filter(eva => eva.userID != eid);
+  console.log(certificados)
   const usersText = await findBD('users.json');
   
   const users = JSON.parse(usersText);
 
-  certificado.estudiantes = listaIdEstudiantes;
-  await writeBD('certificados.json',listaIdEstudiantes);
+  //certificado.estudiantes = listaIdEstudiantes;
+  await writeBD('certificados.json',certificados);
+  await writeBD('evaluaciones.json',newEvaluationes);
   await writeBD('cursos.json',cursos);
-  
   let listaEstudiantes = [];
   listaIdEstudiantes.forEach(element => {
     const estudiante = users.filter(user => user.id == element)[0];
