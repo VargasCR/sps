@@ -3632,7 +3632,7 @@ thead th {
         <img src="data:image/png;base64,${base64Image}" style="width: 15%;" alt="Certificate Logo">
     </div>
     <h2 style="text-align: center;">${courseName}</h2>
-    <h2 style="text-align: center;">Evaluation of World Raft Federation</h2>
+    <h2 style="text-align: center;">Evaluation of Sarapiqui Paddle Sports</h2>
     <div style="display: flex;align-items: center;justify-content: center;width: 100%;">
         <table style="width: 50%;">
             <tbody>
