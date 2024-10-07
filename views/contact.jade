@@ -28,23 +28,13 @@ html(lang="en")
                       .dropdown
                         button(onclick="myFunction('myDropdown')" class="dropbtn" style="padding:0;") Education
                         #myDropdown.dropdown-content
-                          //button(class="subDropdown dropbtn" onclick="openSubDropdown('instructors')") Instructors
-                          #instructors.subdropdown.hidden
-                            each headerCourse in headerCourses
-                              a(class="dropbtn subdropbtn" href=`/instructor-course?id=${headerCourse.index}`) #{headerCourse.name}
-                          
                           button(class="subDropdown dropbtn" onclick="openSubDropdown('students')") Students
                           #students.subdropdowm.hidden
                             a(class="subDropdown dropbtn" href="/login") Login
                             //a(class="dropbtn subdropbtn" href=`/student-list`) List
                             a(class="dropbtn subdropbtn" href=`/courses-list`) COURSES
-                            
                           button(class="subDropdown dropbtn" onclick="openSubDropdown('sport')") Sport
                           #sport.subdropdown.hidden
-                            //button(class="dropbtn subdropbtn" onclick="") Sport #1
-                            //button(class="dropbtn subdropbtn" onclick="") Sport #2
-                            //button(class="dropbtn subdropbtn" onclick="") Sport #3
-
                     li
                       .dropdown
                         button(onclick="myFunction('myDropdown2')" class="dropbtn" style="padding:0;") Trips
@@ -60,7 +50,6 @@ html(lang="en")
                       a(href="/gallery") Gallery
                     li
                       a(href="/contact") Contact Us
-
     br
     br
     br
@@ -78,7 +67,6 @@ html(lang="en")
             textarea(name="text", placeholder="Message")
           .form-group(style="display:flex;justify-content:center;")
             button(type="submit" style="width: 50%;") Submit
-
         .follow-us
           h3 Follow Us
           ul.social-links
@@ -91,7 +79,6 @@ html(lang="en")
             li
               a(href="https://www.youtube.com", target="_blank")
                 i.fab.fa-youtube
-
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
       img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
     footer
@@ -128,7 +115,6 @@ html(lang="en")
           .col-12
             .copy-right
               p © 2024 Sarapiqui Paddle Sports
-
   script(src="/assets/js/jquery-3.2.1.min.js")
   script(src="/assets/js/popper.min.js")
   script(src="/assets/js/bootstrap.min.js")

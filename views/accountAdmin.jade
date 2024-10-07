@@ -30,8 +30,7 @@ html(lang="en")
                     li
                       a(href=`/profile/admin/users?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Usuarios
                     li
-                      a(href=`/login`) - Salir
-                    
+                      a(href=`/login`) - Salir                    
                     li.img-profile(style="")
                       form(action="/upload", method="post", enctype="multipart/form-data" style="width:60px;")
                         input(type="hidden", name="id", value=id)
@@ -44,8 +43,6 @@ html(lang="en")
     br
     br
     br
-    
-    
     div(class="account-container")
       .container-profile
         .main-content
@@ -82,21 +79,12 @@ html(lang="en")
                         td
                           p.tableInfoField Inscritos: 
                           = curso.inscritos
-                        //td.actions
-                          form(action="", method="post")
-                            input(type="hidden", name="id" value=curso.id)
-                            button(type="submit") Estudiantes
-                          form(action="", method="post")
-                            input(type="hidden", name="id" value=curso.id)
-                            button(type="submit") Borrar
                   if found == '0'
                     tr
                       td(style="text-align:center;" colspan="4") No hay cursos disponibles
                 else
                   tr
                     td(style="text-align:center;" colspan="4") No hay cursos disponibles
-
-
     //- ====================== Footer Section started======================
     input(type="hidden" id="errorfield" value=error)
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
@@ -134,7 +122,6 @@ html(lang="en")
           .col-12
             .copy-right
               p © 2024 Sarapiqui Paddle Sports
-
   script(src="/assets/js/jquery-3.2.1.min.js")
   script(src="/assets/js/popper.min.js")
   script(src="/assets/js/bootstrap.min.js")

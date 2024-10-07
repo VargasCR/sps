@@ -28,22 +28,14 @@ html(lang="en")
                     li
                       .dropdown
                         button(onclick="myFunction('myDropdown')" class="dropbtn" style="padding:0;") Education
-                        #myDropdown.dropdown-content
-                          //button(class="subDropdown dropbtn" onclick="openSubDropdown('instructors')") Instructors
-                          
-                          
+                        #myDropdown.dropdown-content              
                           button(class="subDropdown dropbtn" onclick="openSubDropdown('students')") Students
                           #students.subdropdowm.hidden
                             a(class="subDropdown dropbtn" href="/login") Login
                             //a(class="dropbtn subdropbtn" href=`/student-list`) List
                             a(class="dropbtn subdropbtn" href=`/courses-list`) COURSES
-                            
                           button(class="subDropdown dropbtn" onclick="openSubDropdown('sport')") Sport
                           #sport.subdropdowm.hidden
-                            //button(class="dropbtn subdropbtn" onclick="") Sport #1
-                            //button(class="dropbtn subdropbtn" onclick="") Sport #2
-                            //button(class="dropbtn subdropbtn" onclick="") Sport #3
-
                     li
                       .dropdown
                         button(onclick="myFunction('myDropdown2')" class="dropbtn" style="padding:0;") Trips
@@ -65,54 +57,44 @@ html(lang="en")
     br
     br
     section.team
-      .container
-        .heading
-          h2 OUR TEAM
-        .item
-          .team-card
-            .image-team
-              img(src="images/index/img-21.jpg")
-            .team-content
-              h3 Stanley Esquivel
-              p(style="padding: 0;margin: 0;") Lead Instructor
-              //ol
-                li(style="margin:0 0.5rem;")
-                  
-                //li(style="margin:0 0.5rem;")
-                  i.fab.fa-facebook-f(style="font-size:1rem;")
-                //li(style="margin:0 0.5rem;")
-                  i.fab.fa-instagram(style="font-size:1rem;")
-                //li(style="margin:0 0.5rem;")
-                  i.fab.fa-linkedin-in(style="font-size:1rem;")
-                //li(style="margin:0 0.5rem;")
-                  i.fab.fa-pinterest-p(style="font-size:1rem;")
-              p Stanley Esquivel Mesen is a highly experienced and internationally certified instructor in swiftwater rescue, whitewater rafting, and kayaking. With numerous certifications from the American Canoe Association and extensive experience guiding and instructing in Costa Rica and abroad, Stanley brings unparalleled expertise to Sarapiquí Paddle Sports.
-              p Stanley has contributed to the book *Chasing Jaguars*, which focuses on whitewater opportunities in Costa Rica. He is certified by the [American Canoe Association](https://americancanoe.org/) as a swiftwater rescue instructor, raft paddle technical instructor, and river guide instructor.
-              p As a member of the [World Rafting Federation](https://worldraftingfederation.com/structure/commissions/24-wrf-training-guide-program-commission/67-stanley-esquivel-mesen), his passion for the sport and sharing adventures is reflected in his company, which offers options for exploring 37 different rivers in Costa Rica.
-              // "Show More" Button
-              // Hidden Details Section
-              .details(style="display:none;" id="stanley-details")
-                ul
-                  li(style="color: #444444;") Swiftwater Rescue Level 4 Instructor, American Canoe Association
-                  li(style="color: #444444;") Whitewater Rafting-Paddle Level 4 Instructor, American Canoe Association
-                  li(style="color: #444444;") Chair holder of Safety Educational Instructional Committee-Rescue, American Canoe Association
-                  li(style="color: #444444;") Director of Education, Federacion Costarricense de Rafting
-                  li(style="color: #444444;") First Aid and CPR Certifications, Up to Date
-                p His accomplishments include:
-                ul
-                  li(style="color: #444444;") First Place, Chorro Race 2018 (Master Men)
-                  li(style="color: #444444;") 3rd Place Overall, World Championships, Neuquén, Argentina 2018 (Master Mens, R4)
-                  li(style="color: #444444;") Multiple National Championships in Freestyle and Extreme Kayak
-                p Stanley has also participated in over 200 freestyle kayaking events worldwide and contributed to the book *Chasing Jaguars*, which highlights Costa Rica's whitewater options.
-                p For more details, contact Stanley:
-                ul
-                  li(style="color: #444444;")
-                    a(href="https://www.facebook.com/share/1AkwntBr2o/?mibextid=qi2Omg", target="_blank") Facebook
-                  li(style="color: #444444;") Email: sarapiquipaddless@gmail.com
-                  li(style="color: #444444;") Phone: +(506) 6043 7366
-                  li(style="color: #444444;") Location: Sarapiquí, Costa Rica
-              button.btn.btn-primary(onclick="toggleDetails('stanley-details')") Show More
-
+          .container
+            .heading
+              h2 OUR TEAM
+            .item
+              .team-card
+                .image-team
+                  img(src="images/index/img-21.jpg")
+                .team-content
+                  h3 Stanley Esquivel
+                  p(style="padding: 0;margin: 0;") Lead Instructor
+                  p Stanley Esquivel Mesen is a highly experienced and internationally certified instructor in swiftwater rescue, whitewater rafting, and kayaking. With numerous certifications from the American Canoe Association and extensive experience guiding and instructing in Costa Rica and abroad, Stanley brings unparalleled expertise to Sarapiquí Paddle Sports.
+                  p Stanley has contributed to the book *Chasing Jaguars*, which focuses on whitewater opportunities in Costa Rica. He is certified by the
+                  a(href="https://americancanoe.org/") American Canoe Association
+                  | as a swiftwater rescue instructor, raft paddle technical instructor, and river guide instructor.
+                  p As a member of the 
+                  a(href="https://worldraftingfederation.com/structure/commissions/24-wrf-training-guide-program-commission/67-stanley-esquivel-mesen") World Rafting Federation
+                  |, his passion for the sport and sharing adventures is reflected in his company, which offers options for exploring 37 different rivers in Costa Rica.
+                  .details(style="display:none;" id="stanley-details")
+                    ul
+                      li(style="color: #444444;") Swiftwater Rescue Level 4 Instructor, American Canoe Association
+                      li(style="color: #444444;") Whitewater Rafting-Paddle Level 4 Instructor, American Canoe Association
+                      li(style="color: #444444;") Chair holder of Safety Educational Instructional Committee-Rescue, American Canoe Association
+                      li(style="color: #444444;") Director of Education, Federacion Costarricense de Rafting
+                      li(style="color: #444444;") First Aid and CPR Certifications, Up to Date
+                    p His accomplishments include:
+                    ul
+                      li(style="color: #444444;") First Place, Chorro Race 2018 (Master Men)
+                      li(style="color: #444444;") 3rd Place Overall, World Championships, Neuquén, Argentina 2018 (Master Mens, R4)
+                      li(style="color: #444444;") Multiple National Championships in Freestyle and Extreme Kayak
+                    p Stanley has also participated in over 200 freestyle kayaking events worldwide and contributed to the book *Chasing Jaguars*, which highlights Costa Rica's whitewater options.
+                    p For more details, contact Stanley:
+                    ul
+                      li(style="color: #444444;")
+                        a(href="https://www.facebook.com/share/1AkwntBr2o/?mibextid=qi2Omg", target="_blank") Facebook
+                      li(style="color: #444444;") Email: sarapiquipaddless@gmail.com
+                      li(style="color: #444444;") Phone: +(506) 6043 7366
+                      li(style="color: #444444;") Location: Sarapiquí, Costa Rica
+                  button.btn.btn-primary(onclick="toggleDetails('stanley-details')") Show More          
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
       img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
     footer
@@ -149,8 +131,6 @@ html(lang="en")
           .col-12
             .copy-right
               p © 2024 Sarapiqui Paddle Sports
-
-
   script(src="/assets/js/jquery-3.2.1.min.js")
   script(src="/assets/js/popper.min.js")
   script(src="/assets/js/bootstrap.min.js")

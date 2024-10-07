@@ -14,30 +14,6 @@ html(lang="en")
     br
     br
     br
-
-    //- ======================header started======================
-    //header(style="background: rgba(0, 33, 71, 0.9) !important;")
-      .my-nav(style="background: rgba(0, 33, 71, 0.9) !important;")
-        .container
-          .row
-            .nav-items
-              .menu-toggle
-              .logo
-                img(src="assets/images/logo-01.png")
-              .menu-items
-                .menu
-                  ul
-                    li
-                      a(href="/") Home
-                    li
-                      a(href="/about") About Us
-                    li
-                      a(href="services.html") Services
-                    li
-                      a(href="blog.html") Blog
-                    li
-                      a(href="/contact") Contact Us
-
     div(style="display:flex;justify-content:center;aling-items:center;")
             form.form_main(action="/login" method="POST")
                 img(width="150rem" src="images/logo.png", alt="")
@@ -49,82 +25,16 @@ html(lang="en")
                   div.alert.reject
                     p USUARIO NO ENCONTRADO
                 div.inputContainer
-                
                     label(style="margin:0;") DNI:
-
                     input.inputField(name="cedula" type="text", id="cedula", placeholder="Digite su DNI")
-
                 div.inputContainer
                     label(style="margin:0;") Password:
                     input.inputField(name="pass" type="password", id="password", placeholder="Password")
-
                 button#button(type="submit") Submit
                 div.signupContainer
                     p Don't have any account?
                     a(href="/singup") Sign up
                     a(href="/pdf/tutorial_sps_0.1.pdf" target="_blank") Instructions
-    //- ====================== Footer Section started======================
-      a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
-      img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
-    //footer
-      .container
-        .row
-          .col-lg-3.col-md-3.col-sm-6.col-12
-            .__kl_de_w
-              h3 SARAPIQUI PADDLE SPORT
-              p Come discover the best water adventures in Costa Rica with Sarapiquí Paddle Sports.
-          .col-lg-3.col-md-3.col-sm-6.col-12
-            .__kl_de_w
-              h3 Quick Links
-              ol
-                li
-                  i.fa-solid.fa-angle-right
-                  |  home
-                li
-                  i.fa-solid.fa-angle-right
-                  |  About Us
-                li
-                  i.fa-solid.fa-angle-right
-                  |  Services
-                li
-                  i.fa-solid.fa-angle-right
-                  |  Blog
-                li.last
-                  i.fa-solid.fa-angle-right
-                  |  Contact Us
-          .col-lg-3.col-md-3.col-sm-6.col-12
-            .__kl_de_w
-              h3 Courses
-              ol
-                li
-                  i.fa-solid.fa-angle-right
-                  |  Canoeing
-                li
-                  i.fa-solid.fa-angle-right
-                  |  Introduction to Paddling
-                li
-                  i.fa-solid.fa-angle-right
-                  |  Rafting
-                li
-                  i.fa-solid.fa-angle-right
-                  |  River Kayaking
-                li.last
-                  i.fa-solid.fa-angle-right
-                  |  Safety & Rescue
-          .col-lg-3.col-md-3.col-sm-6.col-12
-            .__kl_de_w
-              h3 Contact Us
-              form#emailForm
-                .form-group
-                  input(type="email", name="email", placeholder="Your Email", required)
-                .form-group
-                  textarea(name="text", placeholder="Message")
-                .form-group  
-                  button(type="submit") Submit
-          .col-12
-            .copy-right
-              p © 2024 Sarapiqui Paddle Sports
-
   script(src="/assets/js/jquery-3.2.1.min.js")
   script(src="/assets/js/popper.min.js")
   script(src="/assets/js/bootstrap.min.js")

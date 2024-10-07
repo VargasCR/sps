@@ -44,8 +44,6 @@ html(lang="en")
     br
     br
     br
-    
-    
     a(href=`/profile/admin?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") BACK 
     if instructorsVerified.length == 0
       if instructorsNoVerified.length == 0
@@ -70,7 +68,6 @@ html(lang="en")
                 th Telefono
                 th Sangre
                 th Acciones
-                  th.tableInfoField
             tbody
                 each item in instructorsVerified
                   tr

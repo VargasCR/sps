@@ -1624,8 +1624,8 @@ footer .col-lg-3 {
 }
 
 .d-block.img-slider {
-  max-height: 1000px;
-  height: 1000px;
+  max-height: 800px;
+  height: 800px;
   background-size: cover; /* cubrir el contenedor sin distorsionar */
     background-position: center; /* centrar la imagen */
 }

@@ -910,6 +910,7 @@ router.get('/instructor-student-list', async function(req, res, next) {
       certificado = null;
       certificado = element_certificado;
       curso = null;
+      console.log(cursos)
       curso = cursos.filter(curso => curso.id == element_certificado.courseID)[0];
       element_certificado.estudiantes.forEach(element_estudianteID => {
         let datos = {
@@ -920,6 +921,7 @@ router.get('/instructor-student-list', async function(req, res, next) {
           curso:''};
         datos.curso = curso;
         datos.certificado = certificado;
+        console.log(curso)
         datos.url = `../database/certificados/${curso.id+'-'+element_estudianteID}.pdf`;
         datos.eurl = `../database/certificados/e-${curso.id+'-'+element_estudianteID}.pdf`;
         const estudiante = users.filter(user => user.id == element_estudianteID)[0];

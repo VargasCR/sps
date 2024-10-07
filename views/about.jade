@@ -28,22 +28,14 @@ html(lang="en")
                     li
                       .dropdown
                         button(onclick="myFunction('myDropdown')" class="dropbtn" style="padding:0;") Education
-                        #myDropdown.dropdown-content
-                          //button(class="subDropdown dropbtn" onclick="openSubDropdown('instructors')") Instructors
-                          
-                          
+                        #myDropdown.dropdown-content                
                           button(class="subDropdown dropbtn" onclick="openSubDropdown('students')") Students
                           #students.subdropdowm.hidden
                             a(class="subDropdown dropbtn" href="/login") Login
                             //a(class="dropbtn subdropbtn" href=`/student-list`) List
                             a(class="dropbtn subdropbtn" href=`/courses-list`) COURSES
-                            
                           button(class="subDropdown dropbtn" onclick="openSubDropdown('sport')") Sport
                           #sport.subdropdowm.hidden
-                            //button(class="dropbtn subdropbtn" onclick="") Sport #1
-                            //button(class="dropbtn subdropbtn" onclick="") Sport #2
-                            //button(class="dropbtn subdropbtn" onclick="") Sport #3
-
                     li
                       .dropdown
                         button(onclick="myFunction('myDropdown2')" class="dropbtn" style="padding:0;") Trips
@@ -64,17 +56,17 @@ html(lang="en")
     br
     br
     br
-    section.section-concern
-      h2 About Us
-      div(class="about-container")
-        div(style="width:100%;")
-          //p At Sarapiquí Paddle Sports, our mission is to provide top-tier education and training in water sports, ensuring safe and thrilling experiences for all. We emphasize respect for nature, teamwork, and personal growth, helping participants discover their potential while enjoying Costa Rica's natural beauty.
-          //p Our founder, Stanley Esquivel Mesen, is an internationally certified instructor with extensive experience in rafting, kayaking, and swift water rescue. His passion and expertise have guided hundreds of enthusiasts, from beginners to professionals, bringing a deep understanding of water safety and environmental preservation to Sarapiquí.
-          //p We offer a wide range of courses and tours for all skill levels, from peaceful river rides to challenging whitewater adventures. Our programs, led by experienced instructors, include rigorous swift water rescue courses designed to prepare participants for emergency situations in aquatic environments.
+section.section-concern
+  h2 About Us
+  div(class="about-container")
+    div(style="width:100%;")
+      p Though Sarapiquí Paddle Sports has been paddling since 1993 and operating since 2017, we constantly strive to improve to provide you with the best adventure tour Costa Rica has to offer. We are dedicated to offering fully guided adventure trips while maintaining the highest standards of safety, professional equipment, personalized customer service, and trip activity quality.
+      p We are committed to remaining an independent source of adventure travel by providing our own guides and equipment, ensuring our high standards of quality without relying on outsourced companies. Additionally, we will continue to improve our employees' professional skills to serve you better.
+      p We believe in supporting and developing our local communities by donating to the local orphanage and supporting local businesses whenever possible.
+
 
         div(class="about-text-container" style="padding:1rem;width:100%;")
           img(src="images/index/img-18.jpg", alt="")
-
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
       img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
     footer
@@ -111,8 +103,6 @@ html(lang="en")
           .col-12
             .copy-right
               p © 2024 Sarapiqui Paddle Sports
-
-
   script(src="/assets/js/jquery-3.2.1.min.js")
   script(src="/assets/js/popper.min.js")
   script(src="/assets/js/bootstrap.min.js")

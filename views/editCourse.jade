@@ -31,7 +31,6 @@ html(lang="en")
                       a(href=`/profile/admin/users?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Usuarios
                     li
                       a(href=`/login`) - Salir
-                    
                     li.img-profile(style="")
                       form(action="/upload", method="post", enctype="multipart/form-data" style="width:60px;")
                         input(type="hidden", name="id", value=id)
@@ -59,8 +58,6 @@ html(lang="en")
         if codigoError == 0
           div.alert.resolve
             p CURSO ACTUALIZADO CORRECTAMENTE
-
-        // Campo para Nombre cursos
         div.inputContainer
           label Curso:
           select.inputField(name="curso")
@@ -69,34 +66,28 @@ html(lang="en")
                 option(value=cursox.id selected) #{cursox.nombre}
               else
                 option(value=cursox.id) #{cursox.nombre}
-
         div.inputContainer
           label ¿Curso de Instructor?
           select.inputField(name="isInstructor")
             option(value="false" selected=curso.isInstructor == 'false') No
             option(value="true" selected=curso.isInstructor == 'true') Sí
-
         div.inputContainer
           label ¿Curso Publico?
           select.inputField(name="isPublic")
             option(value="false" selected=curso.isPublic == 'false') No
             option(value="true" selected=curso.isPublic == 'true') Sí
-
         div.inputContainer
           label Titulo:
           input.inputField(name="titulo" type="text" placeholder="Titulo" value=curso.titulo)
-
         div.inputContainer
           label Imagen Actual:
           if curso.file
             img(src=`/uploads/${curso.file}`, alt="Imagen actual", style="width: 150px;")
           else
             p No hay imagen
-
         div.inputContainer
           label Cambiar Imagen:
           input.inputField(type="file" name="file")
-
         div.inputContainer
           label Instructor:
           select.inputField(name="instructor")
@@ -105,15 +96,12 @@ html(lang="en")
                 option(value=instructor.id selected) #{instructor.nombre} #{instructor.apellidos}
               else
                 option(value=instructor.id) #{instructor.nombre} #{instructor.apellidos}
-
         div.inputContainer
           label Fecha de Inicio:
           input.inputField(name="inicio" type="date" value=curso.inicio)
-
         div.inputContainer
           label Fecha de Finalización:
           input.inputField(name="final" type="date" value=curso.final)
-
         div.inputContainer
           label Ubicación:
           input.inputField(name="location" type="text" placeholder="Ubicación" value=curso.location)
@@ -121,7 +109,6 @@ html(lang="en")
             label Description:
             textarea.inputField(name="desc" type="textarea" style="height: 120px;" placeholder="Description") #{curso.desc}
         button#button(type="submit") Guardar
-
     //- ====================== Footer Section started======================
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
       img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
@@ -158,7 +145,6 @@ html(lang="en")
           .col-12
             .copy-right
               p © 2024 Sarapiqui Paddle Sports
-
   script(src="/assets/js/jquery-3.2.1.min.js")
   script(src="/assets/js/popper.min.js")
   script(src="/assets/js/bootstrap.min.js")

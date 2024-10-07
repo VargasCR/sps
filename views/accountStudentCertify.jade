@@ -30,8 +30,7 @@ html(lang="en")
                     li
                       a(href=`/profile/student/courses/certificates?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Cerficados
                     li
-                      a(href=`/login`) - Salir
-                    
+                      a(href=`/login`) - Salir     
                     li.img-profile(style="")
                       form(action="/upload", method="post", enctype="multipart/form-data" style="width:60px;")
                         input(type="hidden", name="id", value=id)
@@ -44,8 +43,6 @@ html(lang="en")
     br
     br
     br
-    
-    
     div(class="account-container")
       .container-profile
         .main-content
@@ -79,8 +76,7 @@ html(lang="en")
                       p.tableInfoField Evaluacion:
                       form(action="/download", method="post")
                         input(type="hidden", name="link" value=certificado.elink)
-                        button(type="submit" class="btn-nav") Download
-                
+                        button(type="submit" class="btn-nav") Download          
               else
                 tr
                   td(style="text-align:center;" colspan="4") No hay certificados disponibles

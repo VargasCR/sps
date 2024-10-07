@@ -29,7 +29,6 @@ html(lang="en")
                       a(href=`/profile/student/courses/certificates?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Cerficados
                     li
                       a(href=`/login`) - Salir
-
                     li.img-profile(style="")
                       form(action="/upload", method="post", enctype="multipart/form-data" style="width:60px;")
                         input(type="hidden", name="id", value=id)
@@ -42,8 +41,6 @@ html(lang="en")
     br
     br
     br
-    
-    
     div(class="account-container")
       .container-profile
         .main-content
@@ -59,7 +56,6 @@ html(lang="en")
                 th Final
                 th Ubicacion
                 th Acciones
-                  th.tableInfoField
             tbody
               if cursos.length > 0
                 - var found = '0'
@@ -98,8 +94,6 @@ html(lang="en")
               else
                 tr
                   td(style="text-align:center;" colspan="5") No hay cursos disponibles
-
-
     //- ====================== Footer Section started======================
     input(type="hidden" id="errorfield" value=error)
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
@@ -140,7 +134,6 @@ html(lang="en")
           .col-12
             .copy-right
               p © 2024 Sarapiqui Paddle Sports
-
   script(src="/assets/js/jquery-3.2.1.min.js")
   script(src="/assets/js/popper.min.js")
   script(src="/assets/js/bootstrap.min.js")

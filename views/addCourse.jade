@@ -30,8 +30,7 @@ html(lang="en")
                     li
                       a(href=`/profile/admin/users?ee11cbb19052e40b07aac0ca060c23ee=${id}`) - Usuarios
                     li
-                      a(href=`/login`) - Salir
-                    
+                      a(href=`/login`) - Salir    
                     li.img-profile(style="")
                       form(action="/upload", method="post", enctype="multipart/form-data" style="width:60px;")
                         input(type="hidden", name="id", value=id)
@@ -44,8 +43,6 @@ html(lang="en")
     br
     br
     br
-    
-    
     a(href=`/profile/admin/courses?ee11cbb19052e40b07aac0ca060c23ee=${id}` class="btn-nav") BACK 
     div(style="display:flex;justify-content:center;aling-items:center;")
       form.form_main(enctype="multipart/form-data" action=`/profile/admin/courses/add`, method="POST")
@@ -57,7 +54,6 @@ html(lang="en")
         if codigoError == 0
           div.alert.resolve
             p CURSO REGISTRADO CORRECTAMENTE
-        // Campo para Nombre cursos
         div.inputContainer
             label Curso:
             select.inputField(name="curso")
@@ -79,7 +75,6 @@ html(lang="en")
         div.inputContainer
             label Imagen:
             input.inputField(type="file" name="file")
-        // Campo para Apellidos
         div.inputContainer
             label Instructor:
             select.inputField(name="instructor")
@@ -91,16 +86,13 @@ html(lang="en")
         div.inputContainer
             label Fecha Finalzacion:
             input.inputField(name="final" type="date")
-        // Campo para Sangre opcional
         div.inputContainer
             label Ubicación:
             input.inputField(name="location" type="text" placeholder="Ubicación")
         div.inputContainer
             label Description:
             textarea.inputField(name="desc" type="textarea" style="height: 120px;" placeholder="Description")
-        // Botón de Envío
         button#button(type="submit") Guardar
-
     //- ====================== Footer Section started======================
     a(href="https://api.whatsapp.com/send?phone=50660437366", class="btnWhatsapp", id="btnWhatsapp", target="_blank")
       img(src="https://www.freepnglogos.com/uploads/whatsapp-logo-png-transparent-33.png", style="width:100%", alt="whatsapp button")
@@ -137,7 +129,6 @@ html(lang="en")
           .col-12
             .copy-right
               p © 2024 Sarapiqui Paddle Sports
-
   script(src="/assets/js/jquery-3.2.1.min.js")
   script(src="/assets/js/popper.min.js")
   script(src="/assets/js/bootstrap.min.js")
